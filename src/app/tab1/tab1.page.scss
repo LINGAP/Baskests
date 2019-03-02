@@ -1,4 +1,13 @@
-.welcome-card ion-img {
-  max-height: 35vh;
-  overflow: hidden;
+#addItem{
+  margin-right: 0;
+}
+#addItemButton{
+  margin-top: 3vh;
+}
+.itemlist{
+  outline: 1px solid red;
+}
+.input-wrapper{
+  background: transparent;
+  outline:1px solid green;
 }
