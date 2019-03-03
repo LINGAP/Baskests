@@ -6,11 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  items:array<{name:string,bought:boolean,amount:any,note:string}>;
+  newItem:any;
+  items:Array<{name:string,bought:boolean,amount:any,note:string}>;
   constructor(){this.items=[]}
 
   addNewItem(newitem:string){
-    let item={name:newitem,bought:false};
+    let item={name:newitem,bought:false,amount:1,note:'N/A'};
     this.items.push(item);
     this.newItem='';
   }
@@ -20,10 +21,10 @@ export class Tab1Page {
     console.log(item.bought);
   }
 
-  delete(item){
+  delete($event,item){
     console.log('try to delete sth');
-    let delIndex=items.indexOf(item);
-    items.splice(delIndex,1);
+    let delIndex=this.items.indexOf(item);
+    this.items.splice(delIndex,1);
     console.log('probably didnt succeed.')
   }
 }
