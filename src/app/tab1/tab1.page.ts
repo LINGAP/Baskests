@@ -8,20 +8,22 @@ import { Component } from '@angular/core';
 export class Tab1Page {
   newItem:any;
   items:Array<{name:string,bought:boolean,amount:any,note:string}>;
-  constructor(){this.items=[]}
+  constructor(){this.items=[];this.newItem='';}
 
   addNewItem(newitem:string){
-    let item={name:newitem,bought:false,amount:1,note:'N/A'};
-    this.items.push(item);
-    this.newItem='';
+    if(newitem!=''){
+      let item={name:newitem,bought:false,amount:1,note:'N/A'};
+      this.items.push(item);
+      this.newItem='';
+    }
   }
 
   bought(item){
     item.bought=!item.bought;
-    console.log(item.bought);
+    console.log(item.bought);//debug
   }
 
-  delete($event,item){
+ delete(item){
     console.log('try to delete sth');
     let delIndex=this.items.indexOf(item);
     this.items.splice(delIndex,1);
