@@ -1,13 +1,21 @@
+ion-content{
+  position: relative;
+}
+
 #addItem{
   margin-right: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+#addItem ion-icon{
+  height: 100%;
+  width: 5vh;
 }
 #addItemButton{
   margin-top: 3vh;
 }
-.itemlist{
-  outline: 1px solid red;
-}
+
 .input-wrapper{
   background: transparent;
-  outline:1px solid green;
 }

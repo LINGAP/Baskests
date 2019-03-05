@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import "hammerjs";
 
 @Component({
   selector: 'app-tab1',
@@ -10,6 +11,7 @@ export class Tab1Page {
   items:Array<{name:string,bought:boolean,amount:any,note:string}>;
   constructor(){this.items=[];this.newItem='';}
 
+  //Add a new Item
   addNewItem(newitem:string){
     if(newitem!=''){
       let item={name:newitem,bought:false,amount:1,note:'N/A'};
@@ -18,15 +20,19 @@ export class Tab1Page {
     }
   }
 
+  //check box - bought
   bought(item){
     item.bought=!item.bought;
-    console.log(item.bought);//debug
   }
 
  delete(item){
-    console.log('try to delete sth');
     let delIndex=this.items.indexOf(item);
     this.items.splice(delIndex,1);
-    console.log('probably didnt succeed.')
   }
+
+  swipeLeftEvent($event){
+    console.log('swiperight')
+  }
+
+
 }

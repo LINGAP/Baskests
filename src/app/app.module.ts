@@ -6,19 +6,19 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule,routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {ItemDetailComponent} from './item-detail/item-detail.component'
 
 @NgModule({
-  declarations: [AppComponent,ItemDetailComponent],
+  declarations: [AppComponent,routingComponents],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+//    {provide: HAMMER_GESTURE_CONFIG, useClass: HammerService}
   ],
   bootstrap: [AppComponent]
 })
