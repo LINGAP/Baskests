@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ItemDetailPage } from './item-detail.page';
+import { ExpandableDetailPage } from './expandable-detail.page';
 
-describe('ItemDetailPage', () => {
-  let component: ItemDetailPage;
-  let fixture: ComponentFixture<ItemDetailPage>;
+describe('ExpandableDetailPage', () => {
+  let component: ExpandableDetailPage;
+  let fixture: ComponentFixture<ExpandableDetailPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ItemDetailPage ],
+      declarations: [ ExpandableDetailPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemDetailPage);
+    fixture = TestBed.createComponent(ExpandableDetailPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

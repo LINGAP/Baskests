@@ -1,10 +1,43 @@
+
 <ion-header>
-  <ion-toolbar>
-    <ion-title>aboutUs</ion-title>
-  </ion-toolbar>
+<ion-toolbar>
+    <ion-title>
+      <ion-icon name="cart"></ion-icon>
+    </ion-title>
+</ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  Project for comp225.
+<ion-content>
+
+    <ion-searchbar></ion-searchbar>
+
+
+
+<ion-item *ngFor='let item of items'  class='itemlist'>
+  <ion-item-sliding>
+    <ion-item>
+      <ion-label (swipe)='swipeLeftEvent($event)'   (click)='bought(item)' >{{item.name}}</ion-label>
+      <ion-checkbox slot='start' color='light' (click)='bought(item)'></ion-checkbox>
+    </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option color='danger' (click)='delete(item)' ><ion-icon name='trash'></ion-icon></ion-item-option>
+    </ion-item-options>
+</ion-item-sliding>
+</ion-item>
+
+
+<ion-item id="addItem">
+  <ion-item>
+    <ion-label position="floating">Add an item</ion-label>
+    <ion-input autocomplete="on" autofocus="true" [(ngModel)]="newItem" (keyup.enter)='addNewItem(newItem)'></ion-input>
+  </ion-item>
+    <ion-icon slot="end" name="add-circle" (click)="addNewItem(newItem)"></ion-icon>
+</ion-item>
+
+
+
+
+
+
 
 </ion-content>
