@@ -18,15 +18,23 @@
 
 
 <!--actual list-->
-<ion-item *ngFor='let item of items'  class='itemlist'>
+<ion-list >
+  <li  *ngFor='let item of items'>
+  <ion-item  class='itemlist'>
 
-    <ion-item (swipeLeftEvent)='swipeLeftEvent($event)' >
-      <ion-checkbox slot='start' color='light' (click)='select(item)'></ion-checkbox>
-      <ion-label (click)='displayDetail(item)' >{{item.name}}</ion-label>
-        <app-expandable-detail></app-expandable-detail>
-    </ion-item>
+      <ion-item (swipeLeftEvent)='swipeLeftEvent($event)' >
+        <ion-checkbox slot='start' color='light' (click)='select(item)'></ion-checkbox>
+        <ion-label  >{{item.name}}</ion-label>
+      </ion-item>
 
-</ion-item>
+      <ion-item (click)='displayDetail(item)' style="width:100%;" >
+        <ion-icon name="arrow-dropdown" slot='end'></ion-icon>
+      </ion-item>
+
+  </ion-item>
+  <app-expandable-detail [expandHeight]=detailExpandHeight [expanded]='item.expanding' class='itemDetail'></app-expandable-detail>
+  </li>
+</ion-list>
 
 
 <ion-item id="addItem">

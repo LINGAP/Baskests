@@ -1,0 +1,11 @@
+
+  .expand-wrapper{
+    height: 0;
+    transition: 0.2s linear;
+    overflow: hidden;
+  }
+
+
+  .expanded{
+    height: 200px;
+  }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController} from '@ionic/angular';
+import { ExpandableDetailComponent } from '../components/expandable-detail/expandable-detail.component';
 import "hammerjs";
 
 @Component({
@@ -8,19 +10,21 @@ import "hammerjs";
 })
 export class Tab1Page {
   newItem:any;
-  items:Array<{name:string,bought:boolean,amount:any,note:string,selected:boolean}>;
-  public expandDetail:boolean;
-  example:any={name:'example',bought:false,amount:2,note:'dont forgot',selected:false};
-  constructor(){
+  items:Array<{name:string,bought:boolean,amount:any,note:string,selected:boolean,expanding:boolean,tags:Array<String>}>;
+
+  example:any={
+    name:'example',bought:false,amount:2,note:'dont forgot',selected:false, expanding:false,tags:['weekly','Lorde']
+  };
+  detailExpandHeight:number=200;
+  constructor(public modalController:ModalController){
     this.items=[];
     this.newItem='';
-    this.expandDetail=false;
   }
 
   //Add a new Item
   addNewItem(newitem:string){
     if(newitem.trim().length!=0){
-      let item={name:newitem.trim(),bought:false,amount:1,note:'N/A',selected:false};
+      let item={name:newitem.trim(),bought:false,amount:1,note:'N/A',selected:false,expanding:false,tags:[]};
       this.items.push(item);
     }
     this.newItem='';
@@ -40,11 +44,11 @@ export class Tab1Page {
    }
   }
 
-displayDetail(item){
+async displayDetail(item){
   console.log('want to expand');
-  this.expandDetail=!this.expandDetail;
+  item.expanding=!item.expanding;
 }
-  swipeLeftEvent($event){
+  swipeLeftEvent(){
     console.log('swiperight');
   }
 
