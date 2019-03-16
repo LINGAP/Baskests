@@ -16,6 +16,7 @@ export class Tab1Page {
     name:'example',bought:false,amount:2,note:'dont forgot',selected:false, expanding:false,tags:['weekly','Lorde']
   };
   detailExpandHeight:number=200;
+
   constructor(public modalController:ModalController){
     this.items=[];
     this.newItem='';
@@ -35,7 +36,7 @@ export class Tab1Page {
     item.selected=!item.selected;
   }
 
-//delete selected items
+ //delete selected items
  delete(){
    for(var i=this.items.length-1;i>=0;i--){
      if(this.items[i].selected){
@@ -44,8 +45,13 @@ export class Tab1Page {
    }
   }
 
+  //moveToHistory
+  moveToHistory(){
+
+  }
+
+//expand detail
 async displayDetail(item){
-  console.log('want to expand');
   item.expanding=!item.expanding;
 }
   swipeLeftEvent(){

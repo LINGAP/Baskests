@@ -7,48 +7,43 @@
 </ion-toolbar>
 </ion-header>
 
-<!--search bar-->
+  <!--search bar-->
 <ion-content>
-  <ion-grid id='searchbar'>
-    <ion-row>
-      <ion-col size='10'>
-    <ion-searchbar ></ion-searchbar></ion-col><ion-col  size='2'><ion-icon name='trash' (click)='delete()'></ion-icon></ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-grid id='searchbar'>
+      <ion-row>
+        <ion-col size='10'><ion-searchbar ></ion-searchbar></ion-col>
+        <ion-col size='1'><ion-icon name="checkmark-circle-outline" (click)='moveToHistory()'></ion-icon></ion-col>
+        <ion-col  size='1'><ion-icon name='trash' (click)='delete()'></ion-icon></ion-col>
+      </ion-row>
+    </ion-grid>
 
 
-<!--actual list-->
-<ion-list >
-  <li  *ngFor='let item of items'>
-  <ion-item  class='itemlist'>
+  <!--actual list-->
+  <ion-list >
+    <li  *ngFor='let item of items'>
+    <ion-item  class='itemlist'>
 
-      <ion-item (swipeLeftEvent)='swipeLeftEvent($event)' >
-        <ion-checkbox slot='start' color='light' (click)='select(item)'></ion-checkbox>
-        <ion-label  >{{item.name}}</ion-label>
-      </ion-item>
+        <ion-item (swipeLeftEvent)='swipeLeftEvent($event)' >
+          <ion-checkbox slot='start' color='light' (click)='select(item)'></ion-checkbox>
+          <ion-label  >{{item.name}}</ion-label>
+        </ion-item>
 
-      <ion-item (click)='displayDetail(item)' style="width:100%;" >
-        <ion-icon name="arrow-dropdown" slot='end'></ion-icon>
-      </ion-item>
+        <ion-item (click)='displayDetail(item)' style="width:100%;" >
+          <ion-icon name="arrow-dropdown" slot='end'></ion-icon>
+        </ion-item>
 
+    </ion-item>
+    <app-expandable-detail [expandHeight]=detailExpandHeight [expanded]='item.expanding' class='itemDetail'></app-expandable-detail>
+    </li>
+  </ion-list>
+
+
+  <ion-item id="addItem">
+    <ion-item>
+      <ion-label position="floating">Add an item</ion-label>
+      <ion-input autocomplete="on" autofocus="true" [(ngModel)]="newItem" (keyup.enter)='addNewItem(newItem)'></ion-input>
+    </ion-item>
+      <ion-icon slot="end" name="add-circle" (click)="addNewItem(newItem)"></ion-icon>
   </ion-item>
-  <app-expandable-detail [expandHeight]=detailExpandHeight [expanded]='item.expanding' class='itemDetail'></app-expandable-detail>
-  </li>
-</ion-list>
-
-
-<ion-item id="addItem">
-  <ion-item>
-    <ion-label position="floating">Add an item</ion-label>
-    <ion-input autocomplete="on" autofocus="true" [(ngModel)]="newItem" (keyup.enter)='addNewItem(newItem)'></ion-input>
-  </ion-item>
-    <ion-icon slot="end" name="add-circle" (click)="addNewItem(newItem)"></ion-icon>
-</ion-item>
-
-
-
-
-
-
 
 </ion-content>

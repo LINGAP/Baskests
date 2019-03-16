@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ModalController} from '@ionic/angular';
 @Component({
   selector: 'app-about-us',
   templateUrl: './about-us.page.html',
@@ -10,30 +10,52 @@ export class AboutUsPage implements OnInit {
   }
 
   newItem:any;
-  items:Array<{name:string,bought:boolean,amount:any,note:string}>;
-  constructor(){this.items=[];this.newItem='';}
+  historyItems:{[name:string]:{bought:boolean,date:string,selected:boolean,expanding:boolean,tags:Array<String>}}
+
+  example:any={
+    name:'example',bought:false,amount:2,note:'dont forgot',selected:false, expanding:false,tags:['weekly','Lorde']
+  };
+  detailExpandHeight:number=200;
+
+  constructor(public modalController:ModalController){
+    this.historyItems={};
+    this.newItem='';
+  }
 
   //Add a new Item
   addNewItem(newitem:string){
-    if(newitem!=''){
-      let item={name:newitem,bought:false,amount:1,note:'N/A'};
-      this.items.push(item);
-      this.newItem='';
+    if(newitem.trim().length!=0){
+      let item={bought:false,date:'--/--/--',selected:false,expanding:false,tags:[]};
+      this.historyItems[newitem.trim()]=item;
     }
+    this.newItem='';
   }
 
-  //check box - bought
-  bought(item){
-    item.bought=!item.bought;
+  //when checkbox was selected
+  select(item){
+    item['value']['selected']=!item['value']['selected'];
   }
 
- delete(item){
-    let delIndex=this.items.indexOf(item);
-    this.items.splice(delIndex,1);
+ //delete selected historyItems
+ delete(){
+   for(var i in this.historyItems){
+     if(this.historyItems[i].selected){
+       delete this.historyItems[i];
+     }
+   }
   }
 
-  swipeLeftEvent($event){
-    console.log('swiperight')
+  //moveToHistory
+  moveToHistory(){
+
+  }
+
+//expand detail
+async displayDetail(item){
+  item.value.expanding=!item.value.expanding;
+}
+  swipeLeftEvent(){
+    console.log('swiperight');
   }
 
 }
