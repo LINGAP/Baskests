@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController} from '@ionic/angular';
 import { ExpandableDetailComponent } from '../components/expandable-detail/expandable-detail.component';
+import { ItemDataService } from '../services/item-data.service'
 import "hammerjs";
 
 @Component({
@@ -10,53 +11,38 @@ import "hammerjs";
 })
 export class Tab1Page {
   newItem:any;
-  items:Array<{name:string,bought:boolean,amount:any,note:string,selected:boolean,expanding:boolean,tags:Array<String>}>;
+  //items:Array<{name:string,bought:boolean,amount:any,note:string,selected:boolean,expanding:boolean,tags:Array<String>}>;
 
   example:any={
     name:'example',bought:false,amount:2,note:'dont forgot',selected:false, expanding:false,tags:['weekly','Lorde']
   };
-  detailExpandHeight:number=200;
+  detailExpandHeight:number=100;
 
-  constructor(public modalController:ModalController){
-    this.items=[];
+  constructor(public modalController:ModalController,private itemData:ItemDataService){
     this.newItem='';
   }
 
   //Add a new Item
   addNewItem(newitem:string){
-    if(newitem.trim().length!=0){
-      let item={name:newitem.trim(),bought:false,amount:1,note:'N/A',selected:false,expanding:false,tags:[]};
-      this.items.push(item);
-    }
+    this.itemData.addNewItem(newitem,this.itemData.getShoppingListItems());
     this.newItem='';
   }
 
   //when checkbox was selected
   select(item){
-    item.selected=!item.selected;
+    this.itemData.select(item);
   }
 
  //delete selected items
  delete(){
-   for(var i=this.items.length-1;i>=0;i--){
-     if(this.items[i].selected){
-       this.items.splice(i,1);
-     }
-   }
-  }
-
-  //moveToHistory
-  moveToHistory(){
-
+   this.itemData.delete(this.itemData.getShoppingListItems());
   }
 
 //expand detail
 async displayDetail(item){
-  item.expanding=!item.expanding;
+  this.itemData.displayDetail(item);
 }
-  swipeLeftEvent(){
-    console.log('swiperight');
-  }
+
 
 
 }

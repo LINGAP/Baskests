@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { AboutUsPage } from './about-us.page';
 import { ComponentsModule } from '../components/components.module'
+import { Tab1PageModule } from '../tab1/tab1.module'
 
 const routes: Routes = [
   {

@@ -20,12 +20,12 @@
 
   <!--actual list-->
   <ion-list >
-    <li  *ngFor='let item of items'>
+    <li  *ngFor='let item of itemData.getShoppingListItems()|keyvalue'>
     <ion-item  class='itemlist'>
 
-        <ion-item (swipeLeftEvent)='swipeLeftEvent($event)' >
+        <ion-item  >
           <ion-checkbox slot='start' color='light' (click)='select(item)'></ion-checkbox>
-          <ion-label  >{{item.name}}</ion-label>
+          <ion-label  >{{item.key}}</ion-label>
         </ion-item>
 
         <ion-item (click)='displayDetail(item)' style="width:100%;" >
@@ -33,7 +33,7 @@
         </ion-item>
 
     </ion-item>
-    <app-expandable-detail [expandHeight]=detailExpandHeight [expanded]='item.expanding' class='itemDetail'></app-expandable-detail>
+    <app-expandable-detail [expandHeight]=detailExpandHeight [expanded]='item.value.expanding' class='itemDetail'></app-expandable-detail>
     </li>
   </ion-list>
 
