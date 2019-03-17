@@ -1,0 +1,20 @@
+<ion-toolbar>
+  <ion-title>{{itemName}}</ion-title>
+</ion-toolbar>
+<ion-item>
+<ion-input placeholder='Make your own tag ...' [(ngModel)]='newTag' ></ion-input >
+  <ion-icon name="add-circle-outline" (click)='addNewTag()'></ion-icon>
+</ion-item>
+
+<ion-list class='tags-wrapper'>
+  <li *ngFor='let tag of tags'>
+  <ion-chip>
+    <ion-label>{{tag}}</ion-label>
+    <ion-icon name="close-circle-outline" (click)='deleteTag(tag)'></ion-icon>
+  </ion-chip>
+  </li>
+</ion-list>
+<ion-item>
+  <ion-button>Save</ion-button>
+  <ion-button (click)='dismiss()'>Cancel</ion-button>
+</ion-item>

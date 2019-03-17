@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController} from '@ionic/angular';
-import { ExpandableDetailComponent } from '../components/expandable-detail/expandable-detail.component';
 import { ItemDataService } from '../services/item-data.service'
+import { InputDetailComponent } from '../components/input-detail/input-detail.component'
 import "hammerjs";
 
 @Component({
@@ -26,6 +26,15 @@ export class Tab1Page {
   addNewItem(newitem:string){
     this.itemData.addNewItem(newitem,this.itemData.getShoppingListItems());
     this.newItem='';
+  }
+
+  async addNewItemDetail(newItem:string){
+    const modal = await this.modalController.create({
+     component: InputDetailComponent,
+     componentProps: { itemName:newItem },
+     cssClass: 'input-detail-modal'
+    });
+    return await modal.present();
   }
 
   //when checkbox was selected

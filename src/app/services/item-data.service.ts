@@ -25,6 +25,10 @@ export class ItemDataService {
     }
   }
 
+  addNewItemDetail(newitem:string,list:any){
+
+  }
+
   //when checkbox was selected
   select(item){
     item.value.selected=!item.value.selected;
@@ -50,6 +54,7 @@ export class ItemDataService {
        if(this.shoppingList[key].selected){
          this.historyItems[key]=this.shoppingList[key];
          this.updateDate(key);
+         this.historyItems[key].selected=false;
          delete this.shoppingList[key];
        }
      }

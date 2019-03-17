@@ -37,12 +37,13 @@
   </ion-list>
 
 
+
   <ion-item id="addItem">
     <ion-item>
       <ion-label position="floating">Add an item</ion-label>
       <ion-input autocomplete="on" autofocus="true" [(ngModel)]="newItem" (keyup.enter)='addNewItem(newItem)'></ion-input>
     </ion-item>
-      <ion-icon slot="end" name="add-circle" (click)="addNewItem(newItem)"></ion-icon>
+      <ion-icon slot="end" name="add-circle" (click)="addNewItemDetail(newItem)"></ion-icon>
   </ion-item>
 
 </ion-content>

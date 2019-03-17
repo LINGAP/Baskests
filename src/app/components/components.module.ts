@@ -2,13 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ExpandableDetailComponent } from './expandable-detail/expandable-detail.component'
-
+import { InputDetailComponent } from './input-detail/input-detail.component'
+import { FormsModule } from '@angular/forms';
 @NgModule({
-  declarations: [ExpandableDetailComponent],
+  declarations: [ExpandableDetailComponent, InputDetailComponent],
   imports: [
     CommonModule,
     IonicModule,
+    FormsModule
   ],
-  exports:[ExpandableDetailComponent]
+  exports:[ExpandableDetailComponent, InputDetailComponent],
+  entryComponents:[InputDetailComponent]
 })
 export class ComponentsModule { }
