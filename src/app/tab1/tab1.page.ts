@@ -43,6 +43,10 @@ async displayDetail(item){
   this.itemData.displayDetail(item);
 }
 
+moveToHistory(){
+  this.itemData.moveToHistory();
+}
+
 
 
 }

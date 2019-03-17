@@ -44,6 +44,23 @@ export class ItemDataService {
     }
    }
 
+   //move the selected items to historyItems
+   moveToHistory(){
+     for(var key in this.shoppingList){
+       if(this.shoppingList[key].selected){
+         this.historyItems[key]=this.shoppingList[key];
+         this.updateDate(key);
+         delete this.shoppingList[key];
+       }
+     }
+   }
+   //helper func to moveToHistory
+   updateDate(key){
+     var now = new Date();
+     var updatedDate=(now.getMonth()+1).toString()+'/'+now.getDate().toString()+'/'+now.getFullYear().toString().substring(2);
+     this.historyItems[key].date=updatedDate;
+   }
+
 
 
 }

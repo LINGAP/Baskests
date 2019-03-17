@@ -8,7 +8,7 @@ import { ModalController} from '@ionic/angular';
   styleUrls: ['./expandable-detail.component.scss'],
 })
 export class ExpandableDetailComponent implements OnInit {
-//  @Input('item') item:any;
+
   amount:number;
   tags:Array<string>;
   @Input('expanded') expanded;
@@ -20,8 +20,6 @@ export class ExpandableDetailComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.expanded);
-    console.log(this.expandHeight);
-
   }
 
 }
