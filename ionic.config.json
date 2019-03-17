@@ -1,6 +1,8 @@
 {
   "name": "Cart",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "f35473ba"
 }
