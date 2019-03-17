@@ -61,6 +61,15 @@ export class ItemDataService {
      this.historyItems[key].date=updatedDate;
    }
 
+   moveToShoppingList(){
+     for(var key in this.historyItems){
+       if(this.historyItems[key].selected){
+         this.shoppingList[key]=this.historyItems[key];
+         this.shoppingList[key].selected=false;
+       }
+     }
+   }
+
 
 
 }

@@ -12,7 +12,7 @@
     <ion-grid id='searchbar'>
       <ion-row>
         <ion-col size='10'><ion-searchbar ></ion-searchbar></ion-col>
-        <ion-col size='1'><ion-icon name="basket" ></ion-icon></ion-col>
+        <ion-col size='1'><ion-icon name="basket" (click)='moveToShoppingList()' ></ion-icon></ion-col>
         <ion-col  size='1'><ion-icon name='trash' (click)='delete()'></ion-icon></ion-col>
       </ion-row>
     </ion-grid>
@@ -21,7 +21,7 @@
   <!--actual list-->
   <ion-list>
     <li  *ngFor='let item of itemData.getHistoryItems()|keyvalue'>
-      
+
       <ion-grid>
         <ion-row >
           <ion-col size='2'><ion-checkbox color='light' (click)='select(item)'></ion-checkbox></ion-col>

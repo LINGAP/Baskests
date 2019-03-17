@@ -27,14 +27,16 @@ export class AboutUsPage implements OnInit {
     this.itemData.select(item);
   }
 
- delete(){
-   this.itemData.delete(this.itemData.getHistoryItems());
+  delete(){
+    this.itemData.delete(this.itemData.getHistoryItems());
   }
 
+   async displayDetail(item){
+    this.itemData.displayDetail(item);
+   }
 
- async displayDetail(item){
-   this.itemData.displayDetail(item);
-}
-
+   moveToShoppingList(){
+     this.itemData.moveToShoppingList();
+   }
 
 }
