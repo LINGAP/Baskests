@@ -1,8 +1,12 @@
 <ion-toolbar>
   <ion-title>{{itemName}}</ion-title>
 </ion-toolbar>
+
+<ion-input placeholder='date' [(ngModel)]='date'></ion-input>
+
+
 <ion-item>
-<ion-input placeholder='Make your own tag ...' [(ngModel)]='newTag' ></ion-input >
+<ion-input placeholder='Make your own tag ...(optional)' [(ngModel)]='newTag' ></ion-input >
   <ion-icon name="add-circle-outline" (click)='addNewTag()'></ion-icon>
 </ion-item>
 
@@ -15,6 +19,6 @@
   </li>
 </ion-list>
 <ion-item>
-  <ion-button>Save</ion-button>
+  <ion-button (click)='save()'>Save</ion-button>
   <ion-button (click)='dismiss()'>Cancel</ion-button>
 </ion-item>

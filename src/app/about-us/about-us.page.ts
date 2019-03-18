@@ -10,9 +10,7 @@ export class AboutUsPage implements OnInit {
   ngOnInit() {
   }
   newItem:any;
-  example:any={
-    name:'example',bought:false,amount:2,note:'dont forgot',selected:false, expanding:false,tags:['weekly','Lorde']
-  };
+  page:number=1;
   detailExpandHeight:number=100;
   constructor(private itemData:ItemDataService){
     this.newItem='';

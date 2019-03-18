@@ -9,12 +9,17 @@ export class InputDetailComponent implements OnInit {
   @Input('itemName')itemName:string;
   newTag:string;
   tags:Array<any>;
+  date:string='--/--/';
   constructor(public modalController:ModalController) {this.tags=[]; }
 
   ngOnInit() {}
 
   dismiss(){
     this.modalController.dismiss();
+  }
+
+  save(){
+    this.modalController.dismiss({tagArray:this.tags,date:this.date});
   }
 
   addNewTag(){

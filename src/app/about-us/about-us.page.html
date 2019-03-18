@@ -32,7 +32,7 @@
         </ion-row>
       </ion-grid>
 
-      <app-expandable-detail [expandHeight]=detailExpandHeight [expanded]='item.value.expanding' class='itemDetail'></app-expandable-detail>
+      <app-expandable-detail [expandItem]='item' [curPage]='page' class='itemDetail'></app-expandable-detail>
     </li>
   </ion-list>
 

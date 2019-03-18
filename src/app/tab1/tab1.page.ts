@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ModalController} from '@ionic/angular';
 import { ItemDataService } from '../services/item-data.service'
 import { InputDetailComponent } from '../components/input-detail/input-detail.component'
+
+import { Storage } from '@ionic/storage';
+
 import "hammerjs";
 
 @Component({
@@ -11,13 +14,7 @@ import "hammerjs";
 })
 export class Tab1Page {
   newItem:any;
-  //items:Array<{name:string,bought:boolean,amount:any,note:string,selected:boolean,expanding:boolean,tags:Array<String>}>;
-
-  example:any={
-    name:'example',bought:false,amount:2,note:'dont forgot',selected:false, expanding:false,tags:['weekly','Lorde']
-  };
-  detailExpandHeight:number=100;
-
+  page:number=0;
   constructor(public modalController:ModalController,private itemData:ItemDataService){
     this.newItem='';
   }
@@ -33,6 +30,10 @@ export class Tab1Page {
      component: InputDetailComponent,
      componentProps: { itemName:newItem },
      cssClass: 'input-detail-modal'
+    });
+    modal.onDidDismiss().then((data)=>{
+      this.itemData.addNewItem(newItem,this.itemData.getShoppingListItems(),data.data.date,data.data.tagArray);
+      this.newItem='';
     });
     return await modal.present();
   }

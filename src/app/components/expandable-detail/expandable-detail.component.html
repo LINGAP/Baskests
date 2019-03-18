@@ -1,7 +1,14 @@
-<!-- <ion-label>Last bought date:</ion-label>
-<ion-label>Amount:{{amount}}</ion-label>
-<ion-label>Tag:{{tags}}</ion-label> -->
-
-<div class="expand-wrapper" [class.expanded]='expanded'>
-<ion-content>{{expandHeight}}</ion-content>
+<div class="expand-wrapper" [class.expanded]='item.value.expanding'>
+<ion-content>
+  <ion-label>Last bought Date:{{item.value.date}}</ion-label>
+  <ion-input placeholder='add new tag...' [(ngModel)]='newDate' (ionChange)='changeDate(newDate)'></ion-input>
+  <ion-list class='tags-wrapper'>
+    <li *ngFor='let tag of item.value.tags'>
+    <ion-chip>
+      <ion-label>{{tag}}</ion-label>
+      <ion-icon name="close-circle-outline" (click)='deleteTag(tag)'></ion-icon>
+    </ion-chip>
+    </li>
+  </ion-list>
+</ion-content>
 </div>

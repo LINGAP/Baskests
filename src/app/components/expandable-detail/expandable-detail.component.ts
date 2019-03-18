@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Input} from '@angular/core';
 import { NavParams } from '@ionic/angular';
-import { ModalController} from '@ionic/angular';
+import { ItemDataService } from '../../services/item-data.service'
 
 @Component({
   selector: 'app-expandable-detail',
@@ -8,18 +8,21 @@ import { ModalController} from '@ionic/angular';
   styleUrls: ['./expandable-detail.component.scss'],
 })
 export class ExpandableDetailComponent implements OnInit {
-
-  amount:number;
+  newDate:string;
   tags:Array<string>;
-  @Input('expanded') expanded;
-  @Input('expandHeight') expandHeight;
+  @Input('expandItem') item;
+  @Input('curPage')curPage;
   currentHeight:number=0;
-  constructor() {
-
+  constructor(private itemData:ItemDataService) {
   }
 
-  ngOnInit() {
-    console.log(this.expanded);
+  ngOnInit() {console.log('received:'+this.item.value.tags);}
+
+  deleteTag(tag){
+    this.itemData.deleteTag(this.curPage,this.item.key,tag);
   }
 
+  changeDate(newDate){
+    this.itemData.changeDate(this.item.key,newDate);
+  }
 }

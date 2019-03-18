@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ItemDataService {
-
+  //list = index of Tab
   historyItems:{[name:string]:{bought:boolean,date:string,selected:boolean,expanding:boolean,tags:Array<String>}}
   shoppingList:{[name:string]:{bought:boolean,date:string,selected:boolean,expanding:boolean,tags:Array<String>}}
 
@@ -18,16 +18,13 @@ export class ItemDataService {
     return this.shoppingList;
   }
   //add new item from input form
-  addNewItem(newitem:string,list:any){
+  addNewItem(newitem:string,list:any,date:string='--/--/--',tags:Array<string>=[]){
     if(newitem.trim().length!=0){
-      let item={bought:false,date:'--/--/--',selected:false,expanding:false,tags:[]};
+      let item={bought:false,date:date,selected:false,expanding:false,tags:tags};
       list[newitem.trim()]=item;
     }
   }
 
-  addNewItemDetail(newitem:string,list:any){
-
-  }
 
   //when checkbox was selected
   select(item){
@@ -73,6 +70,29 @@ export class ItemDataService {
          this.shoppingList[key].selected=false;
        }
      }
+   }
+
+   deleteTag(list,key,tag){
+     if(list===0){
+       this.deleteTagHelper(this.shoppingList,this.historyItems,key,tag);
+     }else{
+       this.deleteTagHelper(this.historyItems,this.shoppingList,key,tag);
+     }
+   }
+
+   deleteTagHelper(s1,s2,key,tag){
+     var index=s1[key].tags.indexOf(tag);
+     s1[key].tags.splice(index,1);
+     if(s2[key]){
+       index=s2[key].tags.indexOf(tag);
+       s2[key].tags.splice(index,1);
+     }
+   }
+
+//// BUG: haven't changed yet
+   changeDate(key,newDate){
+     this.historyItems[key].date=newDate;
+     this.shoppingList[key].date=newDate;
    }
 
 
