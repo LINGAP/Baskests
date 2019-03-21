@@ -37,4 +37,8 @@ export class AboutUsPage implements OnInit {
      this.itemData.moveToShoppingList();
    }
 
+   swipeToshoppingList($event,key){
+     this.itemData.swipeToshoppingList(key);
+   }
+
 }

@@ -57,6 +57,12 @@ moveToHistory(){
   this.itemData.moveToHistory();
 }
 
+swipeToHistory($event,key){
+  console.log('!')
+  this.itemData.swipeToHistory(key);
+}
+
+
 
 
 }

@@ -29,6 +29,7 @@ export class ItemDataService {
   //when checkbox was selected
   select(item){
     item.value.selected=!item.value.selected;
+    console.log('now:'+item.value.selected);
   }
 
   //expand detail or not
@@ -49,12 +50,23 @@ export class ItemDataService {
    moveToHistory(){
      for(var key in this.shoppingList){
        if(this.shoppingList[key].selected){
-         this.historyItems[key]=this.shoppingList[key];
+         this.swipe(key,this.shoppingList,this.historyItems);
          this.updateDate(key);
-         this.historyItems[key].selected=false;
          delete this.shoppingList[key];
        }
      }
+   }
+
+   swipeToHistory(key){
+     this.swipe(key,this.shoppingList,this.historyItems);
+     this.updateDate(key);
+     delete this.shoppingList[key];
+   }
+
+   swipe(key:string,s1,s2){
+     s2[key]=s1[key];
+     s2[key].selected=false;
+     console.log('after swipe,s1 is '+s1[key].selected);
    }
    //helper func to moveToHistory
    updateDate(key){
@@ -66,10 +78,13 @@ export class ItemDataService {
    moveToShoppingList(){
      for(var key in this.historyItems){
        if(this.historyItems[key].selected){
-         this.shoppingList[key]=this.historyItems[key];
-         this.shoppingList[key].selected=false;
+         this.swipe(key,this.historyItems,this.shoppingList);
        }
      }
+   }
+
+   swipeToshoppingList(key){
+     this.swipe(key,this.historyItems,this.shoppingList);
    }
 
    deleteTag(list,key,tag){

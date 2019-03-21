@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -10,7 +10,7 @@ import { AppRoutingModule} from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 
-//import { ComponentsModule } from './components/components.module'
+import { HammerService } from './services/hammer.service'
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +20,11 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-  //  { provide: HAMMER_GESTURE_CONFIG, useClass: HammerService }
+    {
+            provide: HAMMER_GESTURE_CONFIG,
+            useClass: HammerService
+        }
+
   ],
   bootstrap: [AppComponent]
 })

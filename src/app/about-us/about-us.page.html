@@ -23,7 +23,7 @@
     <li  *ngFor='let item of itemData.getHistoryItems()|keyvalue'>
 
       <ion-grid>
-        <ion-row >
+        <ion-row (swipeleft)='swipeToshoppingList($event,item.key)'>
           <ion-col size='2'><ion-checkbox color='light' (click)='select(item)'></ion-checkbox></ion-col>
           <ion-col size='6' (click)='displayDetail(item)'><ion-label  >{{item.key}}</ion-label></ion-col>
 
