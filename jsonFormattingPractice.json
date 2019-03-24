@@ -1,0 +1,21 @@
+{
+  "listType" : "History",
+  "itemList" : [
+    {
+      "itemName" : "xxx",
+      "lastBoughtDate" : "--/--/--",
+      "checked" : FALSE
+    },
+    {
+      "itemName" : "yyy",
+      "lastBoughtDate" : "--/--/--",
+      "checked" : FALSE
+    },
+    {
+      "itemName" : "zzz",
+      "lastBoughtDate" : "--/--/--",
+      "checked" : FALSE
+    }
+  ],
+  "color" : "BLUE"
+}
