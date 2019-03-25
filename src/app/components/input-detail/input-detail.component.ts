@@ -15,11 +15,11 @@ export class InputDetailComponent implements OnInit {
   ngOnInit() {}
 
   dismiss(){
-    this.modalController.dismiss();
+    this.modalController.dismiss({},'cancel');
   }
 
   save(){
-    this.modalController.dismiss({tagArray:this.tags,date:this.date});
+    this.modalController.dismiss({tagArray:this.tags,date:this.date},'save');
   }
 
   addNewTag(){

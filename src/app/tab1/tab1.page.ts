@@ -32,7 +32,10 @@ export class Tab1Page {
      cssClass: 'input-detail-modal'
     });
     modal.onDidDismiss().then((data)=>{
-      this.itemData.addNewItem(newItem,this.itemData.getShoppingListItems(),data.data.date,data.data.tagArray);
+      if(data.role=='save'){
+        this.itemData.addNewItem(newItem,this.itemData.getShoppingListItems(),data.data.date,data.data.tagArray);
+        this.newItem='';
+      }
       this.newItem='';
     });
     return await modal.present();

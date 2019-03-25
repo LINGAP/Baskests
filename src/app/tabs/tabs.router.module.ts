@@ -26,9 +26,13 @@ const routes: Routes = [
         ]
       },
       {
-        path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
+        path: 'share',
+        children:[
+          {
+            path:'',
+            loadChildren:'../share/share.module#SharePageModule'
+          }
+        ]
       }
     ]
   },

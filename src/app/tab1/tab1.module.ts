@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ComponentsModule } from '../components/components.module'
-import { AboutUsPage } from '../about-us/about-us.page'
 
 @NgModule({
   imports: [
