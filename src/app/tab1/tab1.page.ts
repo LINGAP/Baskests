@@ -21,34 +21,32 @@ export class Tab1Page {
 
   //Add a new Item
   addNewItem(newitem:string){
-    this.itemData.addNewItem(newitem,this.itemData.getShoppingListItems());
+    this.itemData.addNewItem(newitem,this.itemData.shoppingList);
     this.newItem='';
   }
 
   async addNewItemDetail(newItem:string){
-    const modal = await this.modalController.create({
-     component: InputDetailComponent,
-     componentProps: { itemName:newItem },
-     cssClass: 'input-detail-modal'
-    });
-    modal.onDidDismiss().then((data)=>{
-      if(data.role=='save'){
-        this.itemData.addNewItem(newItem,this.itemData.getShoppingListItems(),data.data.date,data.data.tagArray);
+    if(newItem!=''){
+      const modal = await this.modalController.create({
+       component: InputDetailComponent,
+       componentProps: { itemName:newItem },
+       cssClass: 'input-detail-modal'
+      });
+      modal.onDidDismiss().then((data)=>{
+        if(data.role=='save'){
+          this.itemData.addNewItem(newItem,this.itemData.shoppingList,data.data.date,data.data.tagArray);
+          this.newItem='';
+        }
         this.newItem='';
-      }
-      this.newItem='';
-    });
-    return await modal.present();
+      });
+      return await modal.present();
+    }
   }
 
-  //when checkbox was selected
-  select(item){
-    this.itemData.select(item);
-  }
 
  //delete selected items
  delete(){
-   this.itemData.delete(this.itemData.getShoppingListItems());
+   this.itemData.delete(this.itemData.shoppingList);
   }
 
 //expand detail
@@ -60,8 +58,7 @@ moveToHistory(){
   this.itemData.moveToHistory();
 }
 
-swipeToHistory($event,key){
-  console.log('!')
+swipeToHistory(key){
   this.itemData.swipeToHistory(key);
 }
 

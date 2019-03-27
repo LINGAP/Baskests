@@ -1,14 +1,17 @@
 <div class="expand-wrapper" [class.expanded]='item.value.expanding'>
-<ion-content>
-  <ion-label>Last bought Date:{{item.value.date}}</ion-label>
-  <ion-input placeholder='add new tag...' [(ngModel)]='newDate' (ionChange)='changeDate(newDate)'></ion-input>
-  <ion-list class='tags-wrapper'>
-    <li *ngFor='let tag of item.value.tags'>
-    <ion-chip>
-      <ion-label>{{tag}}</ion-label>
-      <ion-icon name="close-circle-outline" (click)='deleteTag(tag)'></ion-icon>
-    </ion-chip>
-    </li>
-  </ion-list>
-</ion-content>
+  <ion-content>
+    <ion-label (dblclick)='editDate()' *ngIf='!dateEditing'>
+      Last bought Date:{{item.value.date}}
+      <ion-input *ngIf='dateEditing' [(ngModel)]='newDate' value="item.value.date" (ionBlur)='changeDate()'></ion-input>
+    </ion-label>
+    <ion-input placeholder='add new tag (enter to save)' [(ngModel)]='newTag' (keyup.enter)='addTag()'></ion-input>
+    <ion-list class='tags-wrapper'>
+      <li *ngFor='let tag of item.value.tags'>
+      <ion-chip>
+        <ion-label>{{tag}}</ion-label>
+        <ion-icon name="close-circle-outline" (click)='deleteTag(tag)'></ion-icon>
+      </ion-chip>
+      </li>
+    </ion-list>
+  </ion-content>
 </div>
