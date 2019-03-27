@@ -17,7 +17,7 @@ export class AboutUsPage implements OnInit {
   }
 
   addNewItem(newitem:string){
-    this.itemData.addNewItem(newitem,this.itemData.getHistoryItems());
+    this.itemData.addNewItem(newitem,this.itemData.historyItems);
     this.newItem='';
   }
 
@@ -26,7 +26,7 @@ export class AboutUsPage implements OnInit {
   }
 
   delete(){
-    this.itemData.delete(this.itemData.getHistoryItems());
+    this.itemData.delete(this.itemData.historyItems);
   }
 
    async displayDetail(item){
@@ -37,7 +37,7 @@ export class AboutUsPage implements OnInit {
      this.itemData.moveToShoppingList();
    }
 
-   swipeToshoppingList($event,key){
+   swipeToshoppingList(key){
      this.itemData.swipeToshoppingList(key);
    }
 

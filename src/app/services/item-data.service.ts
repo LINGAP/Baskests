@@ -10,13 +10,6 @@ export class ItemDataService {
 
   constructor() { this.historyItems={}; this.shoppingList={} }
 
-  getHistoryItems(){
-    return this.historyItems;
-  }
-
-  getShoppingListItems(){
-    return this.shoppingList;
-  }
   //add new item from input form
   addNewItem(newitem:string,list:any,date:string='--/--/--',tags:Array<string>=[]){
     if(newitem.trim().length!=0){
@@ -66,7 +59,6 @@ export class ItemDataService {
    swipe(key:string,s1,s2){
      s2[key]=s1[key];
      s2[key].selected=false;
-     console.log('after swipe,s1 is '+s1[key].selected);
    }
    //helper func to moveToHistory
    updateDate(key){
@@ -87,6 +79,21 @@ export class ItemDataService {
      this.swipe(key,this.historyItems,this.shoppingList);
    }
 
+   addTag(list,key,tag){
+     if(list===0){
+       this.addTagHelper(this.shoppingList,this.historyItems,key,tag);
+     }else{
+       this.addTagHelper(this.historyItems,this.shoppingList,key,tag);
+     }
+   }
+
+   addTagHelper(s1,s2,key,tag){
+     s1[key].tags.push(tag);
+     if(s2[key]){
+       s2[key].tags.push(tag);
+     }
+   }
+
    deleteTag(list,key,tag){
      if(list===0){
        this.deleteTagHelper(this.shoppingList,this.historyItems,key,tag);
@@ -104,11 +111,15 @@ export class ItemDataService {
      }
    }
 
-//// BUG: haven't changed yet
    changeDate(key,newDate){
-     this.historyItems[key].date=newDate;
-     this.shoppingList[key].date=newDate;
-   }
+      }
+
+      changeDateHelper(s1,s2,key,newDate){
+        s1[key].date=newDate;
+        if(s2[key]){
+          s2[key].date=newDate;
+        }
+      }
 
 
 
