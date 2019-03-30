@@ -17,16 +17,13 @@ export class AboutUsPage implements OnInit {
   }
 
   addNewItem(newitem:string){
-    this.itemData.addNewItem(newitem,this.itemData.historyItems);
+    this.itemData.addNewItem(newitem,1);
     this.newItem='';
   }
 
-  select(item){
-    this.itemData.select(item);
-  }
 
   delete(){
-    this.itemData.delete(this.itemData.historyItems);
+    this.itemData.delete();
   }
 
    async displayDetail(item){
@@ -39,6 +36,10 @@ export class AboutUsPage implements OnInit {
 
    swipeToshoppingList(key){
      this.itemData.swipeToshoppingList(key);
+   }
+
+   trackByListType(index:number,item){
+     return item.key+item.value.list;
    }
 
 }

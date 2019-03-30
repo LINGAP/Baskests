@@ -20,8 +20,8 @@
 
   <!--actual list-->
   <ion-list>
-    <li  *ngFor='let item of itemData.historyItems|keyvalue'>
-
+    <li  *ngFor='let item of itemData.shoppingList|keyvalue; trackBy:trackByListType'>
+      <div *ngIf='item.value.list==1'>
       <ion-grid>
         <ion-row (swipeleft)='swipeToshoppingList(item.key)'>
           <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected'></ion-checkbox></ion-col>
@@ -31,8 +31,8 @@
           <ion-col size='1' (click)='displayDetail(item)'><ion-icon name="arrow-dropdown" ></ion-icon></ion-col>
         </ion-row>
       </ion-grid>
-
       <app-expandable-detail [expandItem]='item' [curPage]='page' class='itemDetail'></app-expandable-detail>
+      </div>
     </li>
   </ion-list>
 

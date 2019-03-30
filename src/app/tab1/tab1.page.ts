@@ -21,7 +21,7 @@ export class Tab1Page {
 
   //Add a new Item
   addNewItem(newitem:string){
-    this.itemData.addNewItem(newitem,this.itemData.shoppingList);
+    this.itemData.addNewItem(newitem,0);
     this.newItem='';
   }
 
@@ -34,7 +34,7 @@ export class Tab1Page {
       });
       modal.onDidDismiss().then((data)=>{
         if(data.role=='save'){
-          this.itemData.addNewItem(newItem,this.itemData.shoppingList,data.data.date,data.data.tagArray);
+          this.itemData.addNewItem(newItem,0,data.data.date,data.data.tagArray);
           this.newItem='';
         }
         this.newItem='';
@@ -46,7 +46,7 @@ export class Tab1Page {
 
  //delete selected items
  delete(){
-   this.itemData.delete(this.itemData.shoppingList);
+   this.itemData.delete();
   }
 
 //expand detail
@@ -60,6 +60,10 @@ moveToHistory(){
 
 swipeToHistory(key){
   this.itemData.swipeToHistory(key);
+}
+
+trackByListType(index:number,item){
+  return item.key+item.value.list;
 }
 
 
