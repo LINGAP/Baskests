@@ -6,21 +6,27 @@ import { Injectable } from '@angular/core';
 export class ItemDataService {
   //list = index of Tab: 0->shoppingList; 1->pantrylist
   shoppingList:{[name:string]:{list:number,date:string,selected:boolean,expanding:boolean,tags:Array<String>}}
+  expandingItem:any={expanding:true};//dummy
 
   constructor() { this.shoppingList={} }
 
   //add new item from input form
   addNewItem(newitem:string,list:number,date:string='--/--/--',tags:Array<string>=[]){
     if(newitem.trim().length!=0){
-      let item={list:list,date:date,selected:false,expanding:true,tags:tags};
+      let item={list:list,date:date,selected:false,expanding:false,tags:tags};
       this.shoppingList[newitem.trim()]=item;
+      this.displayDetail(item);
     }
   }
 
 
   //expand detail or not
   async displayDetail(item){
-    item.value.expanding=!item.value.expanding;
+    if(this.expandingItem!==item){
+      this.expandingItem.expanding=false;
+      this.expandingItem=item;
+    }
+    item.expanding=!item.expanding;
  }
 
   //delete the selected items
@@ -40,7 +46,6 @@ export class ItemDataService {
        }
      }
    }
-
 
    swipeToHistory(key){
      this.swipe(key,1);

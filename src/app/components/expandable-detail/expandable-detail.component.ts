@@ -21,11 +21,11 @@ export class ExpandableDetailComponent implements OnInit {
   ngOnInit() {this.newDate='';this.newTag='';}
 
   addTag(){
-    this.itemData.addTag(this.curPage,this.item.key,this.newTag);
+    this.itemData.addTag(this.item.key,this.newTag);
   }
 
   deleteTag(tag){
-    this.itemData.deleteTag(this.curPage,this.item.key,tag);
+    this.itemData.deleteTag(this.item.key,tag);
   }
 
   changeDate(newDate){

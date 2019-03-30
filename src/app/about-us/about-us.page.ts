@@ -27,7 +27,7 @@ export class AboutUsPage implements OnInit {
   }
 
    async displayDetail(item){
-    this.itemData.displayDetail(item);
+    this.itemData.displayDetail(item.value);
    }
 
    moveToShoppingList(){
@@ -39,7 +39,7 @@ export class AboutUsPage implements OnInit {
    }
 
    trackByListType(index:number,item){
-     return item.key+item.value.list;
+     return item.key+item.value.list+item.value.expanding;
    }
 
 }

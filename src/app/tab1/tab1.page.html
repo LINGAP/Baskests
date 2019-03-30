@@ -20,7 +20,7 @@
 
   <!--actual list-->
   <ion-list >
-    <li  *ngFor='let item of itemData.shoppingList|keyvalue; trackBy:trackByListType'>
+    <li  *ngFor='let item of itemData.shoppingList|keyvalue;trackBy:trackByListType'>
       <div  *ngIf='item.value.list==0'>
       <ion-grid >
         <ion-row (swiperight)='swipeToHistory(item.key)'>

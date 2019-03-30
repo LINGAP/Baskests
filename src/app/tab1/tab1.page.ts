@@ -51,7 +51,7 @@ export class Tab1Page {
 
 //expand detail
 async displayDetail(item){
-  this.itemData.displayDetail(item);
+  this.itemData.displayDetail(item.value);
 }
 
 moveToHistory(){
@@ -62,8 +62,8 @@ swipeToHistory(key){
   this.itemData.swipeToHistory(key);
 }
 
-trackByListType(index:number,item){
-  return item.key+item.value.list;
+trackByListType(index:number,item:any){
+  return item.key;
 }
 
 
