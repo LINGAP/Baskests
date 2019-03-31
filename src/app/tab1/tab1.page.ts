@@ -49,6 +49,22 @@ export class Tab1Page {
    this.itemData.delete();
   }
 
+//determines whether the item has been tapped once or twice
+async displayOrEdit($event, key, newItem, item, num){
+  if($event.tapCount==2){
+    if(num==0){
+      this.editName(key, newItem);
+    }
+    if(num==1){
+      this.editDate(key, newItem);
+    }
+  }
+  else{
+    this.displayDetail(item);
+  }
+
+}
+
 //expand detail
 async displayDetail(item){
   this.itemData.displayDetail(item.value);
@@ -66,7 +82,13 @@ trackByListType(index:number,item:any){
   return item.key;
 }
 
+async editDate(key, newItem){
+     this.itemData.changeDate(key, newItem);
+}
 
+async editName(key, newItem){
+  this.itemData.changeName(key, newItem);
+}
 
 
 }

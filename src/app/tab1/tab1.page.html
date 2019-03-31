@@ -25,9 +25,8 @@
       <ion-grid >
         <ion-row (swiperight)='swipeToHistory(item.key)'>
           <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected'></ion-checkbox></ion-col>
-          <ion-col size='6' (click)='displayDetail(item)'><ion-label  >{{item.key}}</ion-label></ion-col>
-
-          <ion-col size='3' (click)='displayDetail(item)'><ion-label> {{item.value.date}}</ion-label></ion-col>
+          <ion-col size='6' (tap)='displayOrEdit($event, item.key, newItem, item, 0)'><ion-label>{{item.key}}</ion-label></ion-col>
+          <ion-col size='3' (tap)='displayOrEdit($event, item.key, newItem, item, 1)'><ion-label> {{item.value.date}}</ion-label></ion-col>
           <ion-col size='1' (click)='displayDetail(item)'><ion-icon name="arrow-dropdown" ></ion-icon></ion-col>
         </ion-row>
       </ion-grid>

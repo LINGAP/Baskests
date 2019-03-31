@@ -84,9 +84,15 @@ export class ItemDataService {
      this.shoppingList[key].tags.splice(index,1);
    }
 
+// we'll have to decide if we're okay w/ the mutating data
+   async changeName(key, newItem){
+     this.shoppingList[newItem] = this.shoppingList[key];
+     delete this.shoppingList[key];
+   }
 
-   changeDate(key,newDate){
-      }
+   async changeDate(key, newItem){
+     this.shoppingList[key].date = newItem;
+   }
 
 
 
