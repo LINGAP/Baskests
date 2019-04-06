@@ -32,11 +32,15 @@ export class ItemDataService {
 
   //add new item from input form
   addNewItem(newitem:string,list:number,date:string='--/--/--',tags:Array<string>=[]){
-    if(newitem.trim().length!=0){
-
-      let item={list:list,date:date,selected:false,expanding:false,tags:tags};
-      this.shoppingList[newitem.trim()]=item;
-      this.displayDetail(item);
+    newitem=newitem.trim();
+    if(newitem.length!=0){
+      if(this.shoppingList[newitem]){
+        this.shoppingList[newitem].list=list;
+      }else{
+        let item={list:list,date:date,selected:false,expanding:false,tags:tags};
+        this.shoppingList[newitem]=item;
+      }
+      this.displayDetail(this.shoppingList[newitem]);
     }
   }
 
