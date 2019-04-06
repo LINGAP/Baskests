@@ -11,10 +11,14 @@
 <ion-content>
     <ion-grid id='searchbar'>
       <ion-row>
-        <ion-col size='10'><ion-searchbar ></ion-searchbar></ion-col>
-        <ion-col size='1'><ion-icon name="basket" (click)='moveToShoppingList()' ></ion-icon></ion-col>
-        <ion-col  size='1'><ion-icon name='trash' (click)='delete()'></ion-icon></ion-col>
+        <ion-col size='12'><ion-searchbar ></ion-searchbar></ion-col>
       </ion-row>
+      <ion-row *ngIf='itemData.selectedCount1>0'>
+        <ion-col size='6'><span (click)='moveToShoppingList()' >move to shoppingList</span></ion-col>
+        <ion-col size='1'></ion-col>
+        <ion-col  size='4'><span (click)='delete()'>delete</span></ion-col>
+        <ion-col size='1'></ion-col>
+        </ion-row>
     </ion-grid>
 
 
@@ -24,7 +28,7 @@
       <div *ngIf='item.value.list==1'>
       <ion-grid>
         <ion-row (swipeleft)='swipeToshoppingList(item.key)'>
-          <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected'></ion-checkbox></ion-col>
+          <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected' (click)='checkSelect(item)'></ion-checkbox></ion-col>
           <ion-col size='6' (click)='displayDetail(item)'><ion-label  >{{item.key}}</ion-label></ion-col>
 
           <ion-col size='3' (click)='displayDetail(item)'><ion-label> {{item.value.date}}</ion-label></ion-col>

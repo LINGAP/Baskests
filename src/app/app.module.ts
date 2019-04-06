@@ -11,20 +11,17 @@ import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { HammerService } from './services/hammer.service'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(),IonicStorageModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, BrowserAnimationsModule,IonicModule.forRoot(),IonicStorageModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    {
-            provide: HAMMER_GESTURE_CONFIG,
-            useClass: HammerService
-        }
-
+    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerService}
   ],
   bootstrap: [AppComponent]
 })

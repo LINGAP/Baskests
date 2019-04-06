@@ -1,23 +1,47 @@
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemDataService {
   //list = index of Tab: 0->shoppingList; 1->pantrylist
-  shoppingList:{[name:string]:{list:number,date:string,selected:boolean,expanding:boolean,tags:Array<String>}}
+  shoppingList:any;
+  selectedCount0:number=0;
+  selectedCount1:number=0;
+  //{[name:string]:{list:number,date:string,selected:boolean,expanding:boolean,tags:Array<String>}}
   expandingItem:any={expanding:true};//dummy
 
-  constructor() { this.shoppingList={} }
+  constructor(public storage: Storage) {
+    this.shoppingList= {};
+  }
+
+  //storage
+  storeSet(settingName,value){
+    return this.storage.set(`setting:${ settingName }`,value);
+  }
+
+  async storeGet(settingName){
+    return await this.storage.get(`setting:${ settingName}`);
+  }
+
+  async storeRemove(settingName){
+    return await this.storage.remove(`setting:${ settingName}`);
+  }
+
 
   //add new item from input form
   addNewItem(newitem:string,list:number,date:string='--/--/--',tags:Array<string>=[]){
     if(newitem.trim().length!=0){
+
       let item={list:list,date:date,selected:false,expanding:false,tags:tags};
       this.shoppingList[newitem.trim()]=item;
       this.displayDetail(item);
     }
   }
+
+
+
 
 
   //expand detail or not
@@ -27,27 +51,37 @@ export class ItemDataService {
       this.expandingItem=item;
     }
     item.expanding=!item.expanding;
- }
+  }
 
   //delete the selected items
-  delete(){
+  delete(list:number){
     for(var i in this.shoppingList){
-      if(this.shoppingList[i].selected){
+      if(this.shoppingList[i].selected && this.shoppingList[i].list==list){
         delete this.shoppingList[i];
+        if(list==0){
+          this.selectedCount0-=1;
+        }else{this.selectedCount1-=1;
+        // console.log('1: '+this.selectedCount1)
+        }
       }
     }
    }
 
    moveToHistory(){
      for(var key in this.shoppingList){
-       if(this.shoppingList[key].selected){
+       if(this.shoppingList[key].selected  && this.shoppingList[key].list==0){
          this.swipe(key,1);
          this.shoppingList[key].date= this.updateDate();
+         this.selectedCount0-=1;
+         // console.log('0: '+this.selectedCount0)
        }
      }
    }
 
    swipeToHistory(key){
+     if(this.shoppingList[key].selected && this.shoppingList[key].list==0){
+       this.selectedCount0-=1;
+     }
      this.swipe(key,1);
      this.shoppingList[key].date=this.updateDate();
    }
@@ -65,13 +99,18 @@ export class ItemDataService {
 
    moveToShoppingList(){
      for(var key in this.shoppingList){
-       if(this.shoppingList[key].selected){
+       if(this.shoppingList[key].selected  && this.shoppingList[key].list==1){
          this.swipe(key,0);
+         this.selectedCount1-=1;
+         // console.log('1: '+this.selectedCount1)
        }
      }
    }
 
    swipeToshoppingList(key){
+     if(this.shoppingList[key].selected && this.shoppingList[key].list==1){
+       this.selectedCount1-=1;
+     }
      this.swipe(key,0);
    }
 
@@ -84,6 +123,26 @@ export class ItemDataService {
      this.shoppingList[key].tags.splice(index,1);
    }
 
+   checkSelect(item,list){
+     if(list==0){
+       this.selectedCount0= this.helperCheck(item,this.selectedCount0);
+       // console.log('0: '+this.selectedCount0)
+     }else{
+       this.selectedCount1= this.helperCheck(item,this.selectedCount1);
+       // console.log('1: '+this.selectedCount1)
+     }
+   }
+
+   helperCheck(item,list){
+     if(item.value.selected){
+       list-=1;
+     }else{
+       list+=1;
+     }
+     return list;
+   }
+
+
 // we'll have to decide if we're okay w/ the mutating data
    async changeName(key, newItem){
      this.shoppingList[newItem] = this.shoppingList[key];
@@ -93,7 +152,6 @@ export class ItemDataService {
    async changeDate(key, newItem){
      this.shoppingList[key].date = newItem;
    }
-
 
 
 

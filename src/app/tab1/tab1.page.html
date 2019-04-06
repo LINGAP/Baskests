@@ -11,20 +11,25 @@
 <ion-content>
     <ion-grid id='searchbar'>
       <ion-row>
-        <ion-col size='10'><ion-searchbar ></ion-searchbar></ion-col>
-        <ion-col size='1'><ion-icon name="checkmark-circle-outline" (click)='moveToHistory()'></ion-icon></ion-col>
-        <ion-col  size='1'><ion-icon name='trash' (click)='delete()'></ion-icon></ion-col>
+        <ion-col size='12'><ion-searchbar ></ion-searchbar></ion-col>
       </ion-row>
+      <ion-row *ngIf='itemData.selectedCount0>0'>
+        <ion-col size='1'></ion-col>
+        <ion-col size='4'><span (click)='moveToHistory()' >move to history</span></ion-col>
+        <ion-col size='2'></ion-col>
+        <ion-col  size='4'><span (click)='delete()'>delete</span></ion-col>
+        <ion-col size='1'></ion-col>
+        </ion-row>
     </ion-grid>
 
 
   <!--actual list-->
   <ion-list >
-    <li  *ngFor='let item of itemData.shoppingList|keyvalue;trackBy:trackByListType'>
+    <li  *ngFor='let item of itemData.shoppingList|keyvalue;trackBy:trackByListType' [@itemState]='item.value.list==1? "leave":"*"'>
       <div  *ngIf='item.value.list==0'>
       <ion-grid >
         <ion-row (swiperight)='swipeToHistory(item.key)'>
-          <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected'></ion-checkbox></ion-col>
+          <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected' (click)='checkSelect(item)'></ion-checkbox></ion-col>
           <ion-col size='6' (tap)='displayOrEdit($event, item.key, newItem, item, 0)'><ion-label>{{item.key}}</ion-label></ion-col>
           <ion-col size='3' (tap)='displayOrEdit($event, item.key, newItem, item, 1)'><ion-label> {{item.value.date}}</ion-label></ion-col>
           <ion-col size='1' (click)='displayDetail(item)'><ion-icon name="arrow-dropdown" ></ion-icon></ion-col>
