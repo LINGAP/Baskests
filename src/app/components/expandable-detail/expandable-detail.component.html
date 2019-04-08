@@ -4,14 +4,14 @@
       Last bought Date:{{item.value.date}}
       <ion-input *ngIf='dateEditing' [(ngModel)]='newDate' value="item.value.date" (ionBlur)='changeDate()'></ion-input>
     </ion-label>
-    <ion-input placeholder='add new tag (enter to save)' [(ngModel)]='newTag' (keyup.enter)='addTag()'></ion-input>
-    <ion-list class='tags-wrapper'>
+    <div class='tags-wrapper'>
       <li *ngFor='let tag of item.value.tags'>
       <ion-chip>
         <ion-label>{{tag}}</ion-label>
         <ion-icon name="close-circle-outline" (click)='deleteTag(tag)'></ion-icon>
       </ion-chip>
       </li>
-    </ion-list>
+      <ion-input onkeypress="this.style.width = ((this.value.length + 5) * 8) + 'px';" placeholder='enter tag here' autofocus="true" [(ngModel)]='newTag' (keyup.enter)='addTag()'></ion-input>
+    </div>
   </ion-content>
 </div>

@@ -14,9 +14,9 @@
         <ion-col size='12'><ion-searchbar ></ion-searchbar></ion-col>
       </ion-row>
       <ion-row *ngIf='itemData.selectedCount1>0'>
-        <ion-col size='6'><span (click)='moveToShoppingList()' >move to shoppingList</span></ion-col>
+        <ion-col size='6'><button (click)='moveToShoppingList()' >move to shoppingList</button></ion-col>
         <ion-col size='1'></ion-col>
-        <ion-col  size='4'><span (click)='delete()'>delete</span></ion-col>
+        <ion-col  size='4'><button (click)='delete()'>delete</button></ion-col>
         <ion-col size='1'></ion-col>
         </ion-row>
     </ion-grid>

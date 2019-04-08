@@ -18,11 +18,11 @@ ion-searchbar{
 #searchbar ion-row:nth-child(2) ion-col{
   padding: 0;
 }
-#searchbar span{
+#searchbar button{
   background-color: rgba(255, 179, 102,.3);
   border-radius: 2px;
 }
-#searchbar span:active{
+#searchbar button:active{
   background-color: rgba(255, 179, 102,.8);
 }
 #addItem{

@@ -5,13 +5,17 @@
     overflow: hidden;
   }
 
-
   .expanded{
     height: 100px;
   }
+ion-input{
+  max-width: 100%;
+  background-color: rgb(255,255,255);
+}
+  .tags-wrapper li, ion-input{
+   display: inline-block;
+   margin: 0;
+   float: left;
 
-  .tags-wrapper li{
-    display: block;
-    margin: 0;
-    float: left;
+
   }

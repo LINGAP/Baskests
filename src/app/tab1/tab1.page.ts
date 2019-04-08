@@ -14,23 +14,14 @@ import "hammerjs";
   animations: [//https://www.joshmorony.com/animating-from-the-void-enter-and-exit-animations-in-ionic/
     //https://www.joshmorony.com/twitter-style-heart-like-animation-with-angular-animations-in-ionic/
     trigger('itemState', [
-        state('leave', style({
-          transform: 'translateX(100%)'})),
-        state('delete', style({
-          opacity: '0',
-        })),
-        state('normal',style({})),
-        transition('void => normal', [
+        transition(':enter', [
             style({transform: 'translateY(100%)'}),
             animate('500ms ease-out')
         ]),
-        transition('normal => leave', [
+        transition(':leave', [
             animate('500ms ease-in'),
             style({transform: 'translateX(100%)'}),
         ]),
-        transition('normal => void',[
-          animate('300ms')
-        ])
     ])
     ]
 })
@@ -38,7 +29,8 @@ export class Tab1Page {
   newItem:any;
   page:number=0;
   itemState:string;
-  constructor(public modalController:ModalController,private itemData:ItemDataService,private changeDetector: ChangeDetectorRef){
+  searchTag:string;
+  constructor(public modalController:ModalController,public itemData:ItemDataService,private changeDetector: ChangeDetectorRef){
     this.newItem='';
   }
 
@@ -118,6 +110,10 @@ export class Tab1Page {
 
   async editName(key, newItem){
     this.itemData.changeName(key, newItem);
+  }
+
+  searchInputChange(){
+    console.log(this.searchTag)
   }
 
 

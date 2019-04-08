@@ -9,11 +9,21 @@ export class ItemDataService {
   shoppingList:any;
   selectedCount0:number=0;
   selectedCount1:number=0;
+  itemKeys:Array<string>;
   //{[name:string]:{list:number,date:string,selected:boolean,expanding:boolean,tags:Array<String>}}
   expandingItem:any={expanding:true};//dummy
 
   constructor(public storage: Storage) {
     this.shoppingList= {};
+    this.itemKeys=[];
+    this.storage.get('shoppingList').then((val)=>{
+      console.log(val)
+      if(val!=null){
+        this.shoppingList=val;
+      }
+    }
+  )
+  //  if(this.storage.get('shoppingList'))
   }
 
   //storage
@@ -39,9 +49,14 @@ export class ItemDataService {
       }else{
         let item={list:list,date:date,selected:false,expanding:false,tags:tags};
         this.shoppingList[newitem]=item;
+        this.itemKeys.push(newitem);
       }
       this.displayDetail(this.shoppingList[newitem]);
     }
+    this.storeSet('shoppingList',this.shoppingList);
+    this.storeGet('shoppingList').then((val)=>{
+      console.log(val)
+    })
   }
 
 
