@@ -9,14 +9,12 @@ export class ItemDataService {
   shoppingList:any;
   selectedCount0:number=0;
   selectedCount1:number=0;
-  itemKeys:Array<string>;
   //{[name:string]:{list:number,date:string,selected:boolean,expanding:boolean,tags:Array<String>}}
   expandingItem:any={expanding:true};//dummy
   count:number;
 
   constructor(public storage: Storage) {
     this.shoppingList= {};
-    this.itemKeys=[];
     this.count = 0;
     this.storage.get('shoppingList').then((val)=>{
       console.log(val)
@@ -46,33 +44,34 @@ export class ItemDataService {
   addNewItem(newitem:string,list:number,date:string='--/--/--',tags:Array<string>=[]){
     newitem=newitem.trim();
     if(newitem.length!=0){
-      var original = this.grabExisting(newitem, list);
-      if(original == null){
-        original={name: newitem, list:list,date:date,selected:false,expanding:false,tags:tags};
+      var key=this.grabExist(newitem, list);
+      if(key==null){
+        var original={name: newitem, list:list,date:date,selected:false,expanding:false,tags:tags};
+        key=this.count.toString();
+        this.shoppingList[key]=original;
         this.count += 1;
       }
-      this.shoppingList[this.count.toString()]=original;
-
-      this.displayDetail(this.shoppingList[this.count.toString()]);
+      this.displayDetail(this.shoppingList[key]);
     }
+
+    
     this.storeSet('shoppingList',this.shoppingList);
     this.storeGet('shoppingList').then((val)=>{
       console.log(val)
     })
   }
 
-  grabExisting(newInput: string, whichList: number){
+  grabExist(newInput: string, whichList: number){
     for(var i in this.shoppingList){
       if(this.shoppingList[i].name.toLowerCase() == newInput.toLowerCase()){
         this.shoppingList[i].list = whichList;
-        return this.shoppingList[i];
+        return i;
       }
     }
   }
 
   //expand detail or not
   async displayDetail(item){
-    console.log(item)
     if(this.expandingItem!==item){
       this.expandingItem.expanding=false;
       this.expandingItem=item;

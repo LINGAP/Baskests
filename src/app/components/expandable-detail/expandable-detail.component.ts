@@ -18,7 +18,9 @@ export class ExpandableDetailComponent implements OnInit {
   constructor(private itemData:ItemDataService) {
   }
 
-  ngOnInit() {this.newDate='';this.newTag='';}
+  ngOnInit() {this.newDate='';this.newTag='';
+  var inputField=document.querySelector("ion-input");
+  inputField.setFocus();}
 
   addTag(){
     if(this.newTag.trim()!=''){
