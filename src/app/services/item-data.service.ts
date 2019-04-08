@@ -5,20 +5,26 @@ import { Injectable } from '@angular/core';
 })
 export class ItemDataService {
   //list = index of Tab: 0->shoppingList; 1->pantrylist
-  shoppingList:{[name:string]:{list:number,date:string,selected:boolean,expanding:boolean,tags:Array<String>}}
+  shoppingList:{[index:string]:{name: string, list:number,date:string,selected:boolean,expanding:boolean, editing: boolean, tags:Array<String>}}
   expandingItem:any={expanding:true};//dummy
+  count:number;
 
-  constructor() { this.shoppingList={} }
+
+  constructor() {
+    this.shoppingList={},
+    this.count = 0;
+  }
 
   //add new item from input form
   addNewItem(newitem:string,list:number,date:string='--/--/--',tags:Array<string>=[]){
     if(newitem.trim().length!=0){
-      let item={list:list,date:date,selected:false,expanding:false,tags:tags};
-      this.shoppingList[newitem.trim()]=item;
+      let item={name: newitem.trim(), list:list,date:date,selected:false,expanding:false,editing:false,tags:tags};
+      this.shoppingList[this.count.toString()]=item;
+      console.log(this.shoppingList);
+      this.count += 1;
       this.displayDetail(item);
     }
   }
-
 
   //expand detail or not
   async displayDetail(item){
@@ -85,13 +91,14 @@ export class ItemDataService {
    }
 
 // we'll have to decide if we're okay w/ the mutating data
-   async changeName(key, newItem){
-     this.shoppingList[newItem] = this.shoppingList[key];
-     delete this.shoppingList[key];
+   async changeName(currEditItem, newContent){
+     this.shoppingList[newContent] = this.shoppingList[currEditItem];
+     //delete this.shoppingList[currEditItem];
    }
 
-   async changeDate(key, newItem){
-     this.shoppingList[key].date = newItem;
+   async changeDate(currEditItem, newContent){
+     this.shoppingList[currEditItem].date = newContent;
+     console.log(currEditItem);
    }
 
 

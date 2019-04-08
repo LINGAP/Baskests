@@ -14,15 +14,22 @@ import "hammerjs";
 })
 export class Tab1Page {
   newItem:any;
+  newName:any;
+  newDate:any;
   page:number=0;
+  itemEditing:boolean;
+  // implement ionBlur here so that it doesn't sync up all the things
   constructor(public modalController:ModalController,private itemData:ItemDataService){
     this.newItem='';
+    this.itemEditing=false;
   }
 
   //Add a new Item
   addNewItem(newitem:string){
     this.itemData.addNewItem(newitem,0);
     this.newItem='';
+    this.newName= '';
+    this.newDate='--/--/--';
   }
 
   async addNewItemDetail(newItem:string){
@@ -49,21 +56,24 @@ export class Tab1Page {
    this.itemData.delete();
   }
 
-//determines whether the item has been tapped once or twice
-async displayOrEdit($event, key, newItem, item, num){
-  if($event.tapCount==2){
-    if(num==0){
-      this.editName(key, newItem);
-    }
-    if(num==1){
-      this.editDate(key, newItem);
-    }
-  }
-  else{
-    this.displayDetail(item);
-  }
-
-}
+//determines whether the item has been tapped once or twice and which edit
+//
+// async displayOrEdit($event, item, type){
+//   if($event.tapCount == 2){
+//     if(type==0){
+//       this.itemData.changeName(item.key, this.newName);
+//       this.newName = item.key;
+//     }
+//     if(type==1){
+//       this.itemData.changeDate(item.key, this.newDate);
+//       this.newDate = item.value.date;
+//     }
+//     this.itemEditing=true;
+//   }
+//   else{
+//     this.displayDetail(item);
+//   }
+// }
 
 //expand detail
 async displayDetail(item){
@@ -79,16 +89,26 @@ swipeToHistory(key){
 }
 
 trackByListType(index:number,item:any){
-  return item.key;
+  return item.value.name+item.value.list;
 }
 
-async editDate(key, newItem){
-     this.itemData.changeDate(key, newItem);
+async edit(item, field){
+    if(field == 0){
+      this.itemData.changeName(item.key, this.newName);
+      item.key = this.newName;
+      this.newName = '';
+    }
+    if(field == 1){
+      this.itemData.changeDate(item.key, this.newDate);
+      item.value.date = this.newDate;
+      this.newDate = '';
+
+    }
+    item.value.editing = true;
 }
 
-async editName(key, newItem){
-  this.itemData.changeName(key, newItem);
+async focusTest(){
+  console.log("You did it!")
 }
-
 
 }
