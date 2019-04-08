@@ -7,9 +7,23 @@ ion-header ion-icon{
   margin-top: 1vh;
 }
 
-#searchbar ion-icon{
-  height: 80%;
-  width: 80%;
+ion-searchbar{
+  padding: 0;
+  height: 3.5vh;
+}
+#searchbar ion-row:nth-child(2){
+  height: 2.8vh;
+  padding: 0;
+}
+#searchbar ion-row:nth-child(2) ion-col{
+  padding: 0;
+}
+#searchbar button{
+  background-color: rgba(255, 179, 102,.3);
+  border-radius: 2px;
+}
+#searchbar button:active{
+  background-color: rgba(255, 179, 102,.8);
 }
 #addItem{
   margin-right: 0;

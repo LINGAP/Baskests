@@ -21,7 +21,10 @@ export class ExpandableDetailComponent implements OnInit {
   ngOnInit() {this.newDate='';this.newTag='';}
 
   addTag(){
-    this.itemData.addTag(this.item.key,this.newTag);
+    if(this.newTag.trim()!=''){
+      this.itemData.addTag(this.item.key,this.newTag.trim());
+      this.newTag='';
+    }
   }
 
   deleteTag(tag){

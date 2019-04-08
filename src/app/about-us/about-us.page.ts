@@ -12,7 +12,8 @@ export class AboutUsPage implements OnInit {
   newItem:any;
   page:number=1;
   detailExpandHeight:number=100;
-  constructor(private itemData:ItemDataService){
+
+  constructor(public itemData:ItemDataService){
     this.newItem='';
   }
 
@@ -23,7 +24,7 @@ export class AboutUsPage implements OnInit {
 
 
   delete(){
-    this.itemData.delete();
+    this.itemData.delete(1);
   }
 
    async displayDetail(item){
@@ -40,6 +41,10 @@ export class AboutUsPage implements OnInit {
 
    trackByListType(index:number,item){
      return item.key+item.value.list+item.value.expanding;
+   }
+
+   checkSelect(item){
+     this.itemData.checkSelect(item,1);
    }
 
 }

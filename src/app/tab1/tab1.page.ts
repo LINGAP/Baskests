@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ModalController} from '@ionic/angular';
 import { ItemDataService } from '../services/item-data.service'
 import { InputDetailComponent } from '../components/input-detail/input-detail.component'
-
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Storage } from '@ionic/storage';
 
 import "hammerjs";
@@ -10,16 +10,29 @@ import "hammerjs";
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  styleUrls: ['tab1.page.scss'],
+  animations: [//https://www.joshmorony.com/animating-from-the-void-enter-and-exit-animations-in-ionic/
+    //https://www.joshmorony.com/twitter-style-heart-like-animation-with-angular-animations-in-ionic/
+    trigger('itemState', [
+        transition(':enter', [
+            style({transform: 'translateY(100%)'}),
+            animate('500ms ease-out')
+        ]),
+        transition(':leave', [
+            animate('500ms ease-in'),
+            style({transform: 'translateX(100%)'}),
+        ]),
+    ])
+    ]
 })
 export class Tab1Page {
   newItem:any;
   newName:any;
   newDate:any;
   page:number=0;
-  itemEditing:boolean;
-  // implement ionBlur here so that it doesn't sync up all the things
-  constructor(public modalController:ModalController,private itemData:ItemDataService){
+  itemState:string;
+  searchTag:string;
+  constructor(public modalController:ModalController,public itemData:ItemDataService,private changeDetector: ChangeDetectorRef){
     this.newItem='';
     this.itemEditing=false;
   }
@@ -53,40 +66,44 @@ export class Tab1Page {
 
  //delete selected items
  delete(){
-   this.itemData.delete();
+   this.itemData.delete(0);
   }
 
-//determines whether the item has been tapped once or twice and which edit
-//
-// async displayOrEdit($event, item, type){
-//   if($event.tapCount == 2){
-//     if(type==0){
-//       this.itemData.changeName(item.key, this.newName);
-//       this.newName = item.key;
-//     }
-//     if(type==1){
-//       this.itemData.changeDate(item.key, this.newDate);
-//       this.newDate = item.value.date;
-//     }
-//     this.itemEditing=true;
-//   }
-//   else{
-//     this.displayDetail(item);
-//   }
-// }
+  //determines whether the item has been tapped once or twice
+  async displayOrEdit($event, key, newItem, item, num){
+    if($event.tapCount==2){
+      if(num==0){
+        this.edit(key, newItem);
+      }
+      if(num==1){
+        this.edit(key, newItem);
+      }
+    }
+    else{
+      this.displayDetail(item);
+    }
+  }
 
-//expand detail
-async displayDetail(item){
-  this.itemData.displayDetail(item.value);
-}
+  checkSelect(item){
+    this.itemData.checkSelect(item,0);
+  }
 
-moveToHistory(){
-  this.itemData.moveToHistory();
-}
+  //expand detail
+  async displayDetail(item){
+    this.itemData.displayDetail(item.value);
+  }
 
-swipeToHistory(key){
-  this.itemData.swipeToHistory(key);
-}
+  moveToHistory(){
+    this.itemData.moveToHistory();
+  }
+
+  async swipeToHistory(key){
+    console.log(this.itemData.shoppingList[key].list)
+
+    this.itemData.swipeToHistory(key);
+    this.changeDetector.detectChanges();
+    console.log(this.itemData.shoppingList[key].list)
+  }
 
 trackByListType(index:number,item:any){
   return item.value.name+item.value.list;
@@ -105,6 +122,10 @@ async edit(item, field){
 
     }
     item.value.editing = true;
+}
+
+searchInputChange(){
+  console.log(this.searchTag);
 }
 
 async focusTest(){

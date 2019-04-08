@@ -11,21 +11,26 @@
 <ion-content>
     <ion-grid id='searchbar'>
       <ion-row>
-        <ion-col size='10'><ion-searchbar ></ion-searchbar></ion-col>
-        <ion-col size='1'><ion-icon name="checkmark-circle-outline" (click)='moveToHistory()'></ion-icon></ion-col>
-        <ion-col  size='1'><ion-icon name='trash' (click)='delete()'></ion-icon></ion-col>
+        <ion-col size='12'><ion-searchbar [(ngModel)]='searchTag' (ionChange)='searchInputChange()'  ></ion-searchbar></ion-col>
       </ion-row>
+      <ion-row *ngIf='itemData.selectedCount0>0'>
+        <ion-col size='1'></ion-col>
+        <ion-col size='4'><button (click)='moveToHistory()' >move to history</button></ion-col>
+        <ion-col size='2'></ion-col>
+        <ion-col  size='4'><button (click)='delete()'>delete</button></ion-col>
+        <ion-col size='1'></ion-col>
+        </ion-row>
     </ion-grid>
 
   <!--actual list-->
   <ion-list >
-    <li  *ngFor='let item of itemData.shoppingList|keyvalue;trackBy:trackByListType'>
+    <li  *ngFor='let item of itemData.shoppingList|keyvalue;trackBy:trackByListType' @itemState>
       <div  *ngIf='item.value.list==0'>
       <ion-grid >
         <ion-row (swiperight)='swipeToHistory(item.key)'>
           <!-- prev: [(ngModel)] = 'newName' and *ngIf = 'itemEditing' in ion-input first tag for name and [(ngModel)] = 'newDate'
             as well as *ngIf = 'itemEditing' in ion-input first tag for date-->
-          <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected'></ion-checkbox></ion-col>
+          <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected' (click)='checkSelect(item)'></ion-checkbox></ion-col>
           <ion-col size='6' (tap)='edit(item, 0)'><span *ngIf='!item.value.editing' >{{item.value.name}}</span><ion-input *ngIf='item.value.editing'  [(ngModel)]='newName'></ion-input></ion-col>
           <ion-col size='3' (tap)='edit(item, 1)'><span *ngIf='!item.value.editing' >{{item.value.date}}</span><ion-input *ngIf='item.value.editing'   [(ngModel)]='newDate'> </ion-input></ion-col>
           <ion-col size='1' (click)='displayDetail(item)'><ion-icon name="arrow-dropdown" ></ion-icon></ion-col>
@@ -43,7 +48,7 @@
       <ion-label position="floating">Add an item</ion-label>
       <ion-input autocomplete="on" autofocus="true" [(ngModel)]="newItem" (keyup.enter)='addNewItem(newItem)'></ion-input>
     </ion-item>
-      <ion-icon slot="end" name="add-circle" (click)="addNewItemDetail(newItem)"></ion-icon>
+      <ion-icon slot="end" name="add-circle" (click)="addNewItem(newItem)"></ion-icon>
   </ion-item>
 
 </ion-content>
