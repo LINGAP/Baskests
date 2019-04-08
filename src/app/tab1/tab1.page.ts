@@ -34,7 +34,6 @@ export class Tab1Page {
   searchTag:string;
   constructor(public modalController:ModalController,public itemData:ItemDataService,private changeDetector: ChangeDetectorRef){
     this.newItem='';
-    this.itemEditing=false;
   }
 
   //Add a new Item

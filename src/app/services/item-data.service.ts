@@ -17,6 +17,7 @@ export class ItemDataService {
   constructor(public storage: Storage) {
     this.shoppingList= {};
     this.itemKeys=[];
+    this.count = 0;
     this.storage.get('shoppingList').then((val)=>{
       console.log(val)
       if(val!=null){
@@ -45,14 +46,14 @@ export class ItemDataService {
   addNewItem(newitem:string,list:number,date:string='--/--/--',tags:Array<string>=[]){
     newitem=newitem.trim();
     if(newitem.length!=0){
-      if(this.shoppingList[newitem]){
-        this.shoppingList[newitem].list=list;
-      }else{
-        let item={list:list,date:date,selected:false,expanding:false,tags:tags};
-        this.shoppingList[newitem]=item;
-        this.itemKeys.push(newitem);
+      var original = this.grabExisting(newitem, list);
+      if(original == null){
+        original={name: newitem, list:list,date:date,selected:false,expanding:false,tags:tags};
+        this.count += 1;
       }
-      this.displayDetail(this.shoppingList[newitem]);
+      this.shoppingList[this.count.toString()]=original;
+
+      this.displayDetail(this.shoppingList[this.count.toString()]);
     }
     this.storeSet('shoppingList',this.shoppingList);
     this.storeGet('shoppingList').then((val)=>{
@@ -60,12 +61,18 @@ export class ItemDataService {
     })
   }
 
-
-
-
+  grabExisting(newInput: string, whichList: number){
+    for(var i in this.shoppingList){
+      if(this.shoppingList[i].name.toLowerCase() == newInput.toLowerCase()){
+        this.shoppingList[i].list = whichList;
+        return this.shoppingList[i];
+      }
+    }
+  }
 
   //expand detail or not
   async displayDetail(item){
+    console.log(item)
     if(this.expandingItem!==item){
       this.expandingItem.expanding=false;
       this.expandingItem=item;
