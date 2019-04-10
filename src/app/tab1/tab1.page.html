@@ -24,15 +24,24 @@
 
   <!--actual list-->
   <ion-list >
-    <li  *ngFor='let item of itemData.shoppingList|keyvalue;trackBy:trackByListType' @itemState>
+    <li  *ngFor='let item of itemData.shoppingList|keyvalue;trackBy:trackByListType' >
+    <!-- removed @itemState may need to replace -->
       <div  *ngIf='item.value.list==0'>
       <ion-grid >
         <ion-row (swiperight)='swipeToHistory(item.key)'>
+
           <!-- prev: [(ngModel)] = 'newName' and *ngIf = 'itemEditing' in ion-input first tag for name and [(ngModel)] = 'newDate'
             as well as *ngIf = 'itemEditing' in ion-input first tag for date-->
-          <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected'></ion-checkbox></ion-col>
-          <ion-col size='6' (tap)='edit(item, 0)'><span *ngIf='!item.value.editing' >{{item.value.name}}</span><ion-input *ngIf='item.value.editing'  [(ngModel)]='newName'></ion-input></ion-col>
-          <ion-col size='3' (tap)='edit(item, 1)'><span *ngIf='!item.value.editing' >{{item.value.date}}</span><ion-input *ngIf='item.value.editing'   [(ngModel)]='newDate'> </ion-input></ion-col>
+          <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected' (click)='checkSelect(item)'></ion-checkbox></ion-col>
+          <ion-col size='6' (tap)='edit(item, 0)'>
+            <span *ngIf='!item.value.editing' >{{item.value.name}}</span>
+            <ion-input *ngIf='item.value.editing' [(ngModel)]='item.value.name' value='{{item.value.name}}'></ion-input>
+          </ion-col>
+          <ion-col size='3' (tap)='edit(item, 1)'>
+            <span *ngIf='!item.value.editing' >{{item.value.date}}</span>
+            <ion-input *ngIf='item.value.editing'   [(ngModel)]='item.value.date'> </ion-input>
+          </ion-col>
+
           <ion-col size='1' (click)='displayDetail(item)'><ion-icon name="arrow-dropdown" ></ion-icon></ion-col>
         </ion-row>
       </ion-grid>

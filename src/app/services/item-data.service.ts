@@ -47,11 +47,6 @@ export class ItemDataService {
       }
       this.displayDetail(this.shoppingList[key]);
     }
-
-    // this.storeSet('shoppingList',this.shoppingList);
-    // this.storeGet('shoppingList').then((val)=>{
-    //   console.log(val)
-    // })
   }
 
   //If an item exists, grab it to the current page
@@ -134,7 +129,6 @@ export class ItemDataService {
      }
      return false;
    }
-
 
 
 

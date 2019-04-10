@@ -11,27 +11,27 @@ import "hammerjs";
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  animations: [//https://www.joshmorony.com/animating-from-the-void-enter-and-exit-animations-in-ionic/
-    //https://www.joshmorony.com/twitter-style-heart-like-animation-with-angular-animations-in-ionic/
-    trigger('itemState', [
-        transition(':enter', [
-            style({transform: 'translateY(100%)'}),
-            animate('500ms ease-out')
-        ]),
-        transition(':leave', [
-            animate('500ms ease-in'),
-            style({transform: 'translateX(100%)'}),
-        ]),
-    ])
-    ]
+  // animations: [//https://www.joshmorony.com/animating-from-the-void-enter-and-exit-animations-in-ionic/
+  //   //https://www.joshmorony.com/twitter-style-heart-like-animation-with-angular-animations-in-ionic/
+  //   trigger('itemState', [
+  //       transition(':enter', [
+  //           style({transform: 'translateY(100%)'}),
+  //           animate('500ms ease-out')
+  //       ]),
+  //       transition(':leave', [
+  //           animate('500ms ease-in'),
+  //           style({transform: 'translateX(100%)'}),
+  //       ]),
+  //   ])
+  //   ]
 })
 export class Tab1Page {
   newItem:any;
   newName:any;
   newDate:any;
   page:number=0;
-  itemState:string;
   searchTag:string;
+
   constructor(public modalController:ModalController,public itemData:ItemDataService,private changeDetector: ChangeDetectorRef){
     this.newItem='';
     this.newItem='';
@@ -65,6 +65,7 @@ export class Tab1Page {
 
  //delete selected items
  delete(){
+console.log("-------> delete!!")
    this.itemData.delete(0);
   }
 
@@ -102,6 +103,10 @@ export class Tab1Page {
   }
 
 async edit(item, field){
+console.log("-------> started edit")
+    item.value.editing = true;
+    this.newName = '';
+    this.newDate = '';
     if(field == 0){
     //  this.itemData.changeName(item.key, this.newName);
       item.key = this.newName;
@@ -113,7 +118,7 @@ async edit(item, field){
       this.newDate = '';
 
     }
-    item.value.editing = true;
+console.log("-------> ended edit")
 }
 
 searchInputChange(){
