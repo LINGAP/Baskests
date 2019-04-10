@@ -54,7 +54,7 @@ export class ItemDataService {
       this.displayDetail(this.shoppingList[key]);
     }
 
-    
+
     this.storeSet('shoppingList',this.shoppingList);
     this.storeGet('shoppingList').then((val)=>{
       console.log(val)
@@ -170,9 +170,8 @@ export class ItemDataService {
 
 
 // we'll have to decide if we're okay w/ the mutating data
-   async changeName(currEditItem, newContent){
-     this.shoppingList[newContent] = this.shoppingList[currEditItem];
-     //delete this.shoppingList[currEditItem];
+   async changeName(key, newName){
+     this.shoppingList[key].name = newName;
    }
 
    async changeDate(currEditItem, newContent){
