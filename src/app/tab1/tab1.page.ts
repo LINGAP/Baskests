@@ -34,14 +34,15 @@ export class Tab1Page {
   searchTag:string;
   constructor(public modalController:ModalController,public itemData:ItemDataService,private changeDetector: ChangeDetectorRef){
     this.newItem='';
-  }
-
-  //Add a new Item
-  addNewItem(newitem:string){
-    this.itemData.addNewItem(newitem,0);
     this.newItem='';
     this.newName= '';
     this.newDate='--/--/--';
+  }
+
+  //Add a new Item
+  addNewItem(){
+    this.itemData.addNewItem(0,this.newItem);
+    this.newItem='';
   }
 
   async addNewItemDetail(newItem:string){
@@ -53,7 +54,7 @@ export class Tab1Page {
       });
       modal.onDidDismiss().then((data)=>{
         if(data.role=='save'){
-          this.itemData.addNewItem(newItem,0,data.data.date,data.data.tagArray);
+          this.itemData.addNewItem(0,newItem,data.data.date,data.data.tagArray);
           this.newItem='';
         }
         this.newItem='';
@@ -61,7 +62,6 @@ export class Tab1Page {
       return await modal.present();
     }
   }
-
 
  //delete selected items
  delete(){
@@ -83,9 +83,6 @@ export class Tab1Page {
     }
   }
 
-  checkSelect(item){
-    this.itemData.checkSelect(item,0);
-  }
 
   //expand detail
   async displayDetail(item){
@@ -93,29 +90,25 @@ export class Tab1Page {
   }
 
   moveToHistory(){
-    this.itemData.moveToHistory();
+    this.itemData.massMoveItem(0);
   }
 
   async swipeToHistory(key){
-    console.log(this.itemData.shoppingList[key].list)
-
-    this.itemData.swipeToHistory(key);
-    this.changeDetector.detectChanges();
-    console.log(this.itemData.shoppingList[key].list)
+    this.itemData.__swipe(key,1);
   }
 
-trackByListType(index:number,item:any){
-  return item.value.name+item.value.list;
-}
+  trackByListType(index:number,item:any){
+    return item.value.name+item.value.list;
+  }
 
 async edit(item, field){
     if(field == 0){
-      this.itemData.changeName(item.key, this.newName);
+    //  this.itemData.changeName(item.key, this.newName);
       item.key = this.newName;
       this.newName = '';
     }
     if(field == 1){
-      this.itemData.changeDate(item.key, this.newDate);
+  //    this.itemData.changeDate(item.key, this.newDate);
       item.value.date = this.newDate;
       this.newDate = '';
 

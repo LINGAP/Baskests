@@ -24,16 +24,16 @@ export class ExpandableDetailComponent implements OnInit {
 
   addTag(){
     if(this.newTag.trim()!=''){
-      this.itemData.addTag(this.item.key,this.newTag.trim());
+      this.itemData.updateItem(this.item.key,undefined,undefined,this.newTag);
       this.newTag='';
     }
   }
 
   deleteTag(tag){
-    this.itemData.deleteTag(this.item.key,tag);
+    this.itemData.updateItem(this.item.key,undefined,undefined,undefined,tag);
   }
 
   changeDate(newDate){
-    this.itemData.changeDate(this.item.key,newDate);
+    this.itemData.updateItem(this.item.key,undefined,newDate);
   }
 }

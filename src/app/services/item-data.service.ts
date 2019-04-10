@@ -7,70 +7,64 @@ import { Storage } from '@ionic/storage';
 export class ItemDataService {
   //list = index of Tab: 0->shoppingList; 1->pantrylist
   shoppingList:any;
-  selectedCount0:number=0;
-  selectedCount1:number=0;
-  //{[name:string]:{list:number,date:string,selected:boolean,expanding:boolean,tags:Array<String>}}
+  //{[key:string]:{name: newName, list:list, date:newDate,selected:false,expanding:false,tags:tags}}
   expandingItem:any={expanding:true};//dummy
-  count:number;
+  count:number;//keep track of total number of items, serves as the key for next item.
 
   constructor(public storage: Storage) {
-    this.shoppingList= {};
-    this.count = 0;
-    this.storage.get('shoppingList').then((val)=>{
-      console.log(val)
-      if(val!=null){
-        this.shoppingList=val;
+      this.shoppingList= {};
+      this.count = 0;
+      this.storage.get('shoppingList').then((val)=>{
+        console.log(val)
+        if(val!=null){
+          this.shoppingList=val;
+        }
       }
+    )
+  }
+
+  //validating list index to be 1 or 0
+  __validateList(list:number){
+    try{
+      if(list!=0 && list!=1) throw " doesn't exist!"
     }
-  )
-  //  if(this.storage.get('shoppingList'))
-  }
-
-  //storage
-  storeSet(settingName,value){
-    return this.storage.set(`setting:${ settingName }`,value);
-  }
-
-  async storeGet(settingName){
-    return await this.storage.get(`setting:${ settingName}`);
-  }
-
-  async storeRemove(settingName){
-    return await this.storage.remove(`setting:${ settingName}`);
+    catch(err){
+      console.log('list'+list+err)
+    }
   }
 
 
   //add new item from input form
-  addNewItem(newitem:string,list:number,date:string='--/--/--',tags:Array<string>=[]){
-    newitem=newitem.trim();
-    if(newitem.length!=0){
-      var key=this.grabExist(newitem, list);
+  addNewItem(list: number, newName:string, newDate:string='--/--/--', tags:Array<string>=[]){
+    this.__validateList(list);
+    newName=newName.trim();
+    if(newName.length!=0){
+      var key=this.__grabExist(newName, list);
       if(key==null){
-        var original={name: newitem, list:list,date:date,selected:false,expanding:false,tags:tags};
         key=this.count.toString();
-        this.shoppingList[key]=original;
+        this.shoppingList[key]=this.shoppingList[key]={name: newName, list:list,date:newDate,selected:false,expanding:false,tags:tags};
         this.count += 1;
       }
       this.displayDetail(this.shoppingList[key]);
     }
 
-    
-    this.storeSet('shoppingList',this.shoppingList);
-    this.storeGet('shoppingList').then((val)=>{
-      console.log(val)
-    })
+    // this.storeSet('shoppingList',this.shoppingList);
+    // this.storeGet('shoppingList').then((val)=>{
+    //   console.log(val)
+    // })
   }
 
-  grabExist(newInput: string, whichList: number){
+  //If an item exists, grab it to the current page
+  __grabExist(newInput: string, list: number){
     for(var i in this.shoppingList){
       if(this.shoppingList[i].name.toLowerCase() == newInput.toLowerCase()){
-        this.shoppingList[i].list = whichList;
+        this.shoppingList[i].list = list;
         return i;
       }
     }
   }
 
-  //expand detail or not
+  //Making sure at most one item expands at a time
   async displayDetail(item){
     if(this.expandingItem!==item){
       this.expandingItem.expanding=false;
@@ -79,106 +73,68 @@ export class ItemDataService {
     item.expanding=!item.expanding;
   }
 
-  //delete the selected items
+  //delete the selected items given list index
   delete(list:number){
     for(var i in this.shoppingList){
       if(this.shoppingList[i].selected && this.shoppingList[i].list==list){
         delete this.shoppingList[i];
-        if(list==0){
-          this.selectedCount0-=1;
-        }else{this.selectedCount1-=1;
-        // console.log('1: '+this.selectedCount1)
-        }
       }
     }
    }
 
-   moveToHistory(){
+   //move selected items to another page given current page
+   massMoveItem(curList:number){
+     this.__validateList(curList);
      for(var key in this.shoppingList){
-       if(this.shoppingList[key].selected  && this.shoppingList[key].list==0){
-         this.swipe(key,1);
-         this.shoppingList[key].date= this.updateDate();
-         this.selectedCount0-=1;
-         // console.log('0: '+this.selectedCount0)
+       if(this.shoppingList[key].selected && this.shoppingList[key].list==curList){
+         let dest=Math.abs(curList-1);
+         this.__swipe(key,dest);
+         if(curList==0){
+           this.shoppingList[key].date=this.__updateDate();
+         }
        }
      }
    }
 
-   swipeToHistory(key){
-     if(this.shoppingList[key].selected && this.shoppingList[key].list==0){
-       this.selectedCount0-=1;
-     }
-     this.swipe(key,1);
-     this.shoppingList[key].date=this.updateDate();
-   }
-
-   swipe(key:string,destiList:number){
+   //swipe a single item to another page
+   __swipe(key:string,destiList:number){
      this.shoppingList[key].list=destiList;
      this.shoppingList[key].selected=false;
    }
-   //helper func to moveToHistory
-   updateDate(){
+
+   __updateDate(){
      var now = new Date();
      var updatedDate=(now.getMonth()+1).toString()+'/'+now.getDate().toString()+'/'+now.getFullYear().toString().substring(2);
      return updatedDate;
    }
 
-   moveToShoppingList(){
+   //update an item on its newName/newDate/change on tags
+   updateItem(key:string,
+              newName:string=null,
+              newDate:string=null,
+              newTag:string=null,
+              delTag:string=null){
+     let item=this.shoppingList[key];
+     if(newName){item.name=newName;}
+     if(newDate){item.date=newDate;}
+     if(newTag){item.tags.push(newTag);}
+     if(delTag){
+       var index=item.tags.indexOf(delTag);
+       item.tags.splice(index,1);
+     }
+   }
+
+   //check if any items are selected on the current page
+   checkSelect(list:number){
+     this.__validateList(list);
      for(var key in this.shoppingList){
-       if(this.shoppingList[key].selected  && this.shoppingList[key].list==1){
-         this.swipe(key,0);
-         this.selectedCount1-=1;
-         // console.log('1: '+this.selectedCount1)
+       if(this.shoppingList[key].selected && this.shoppingList[key].list==list){
+         return true;
        }
      }
+     return false;
    }
 
-   swipeToshoppingList(key){
-     if(this.shoppingList[key].selected && this.shoppingList[key].list==1){
-       this.selectedCount1-=1;
-     }
-     this.swipe(key,0);
-   }
-
-   addTag(key,tag){
-     this.shoppingList[key].tags.push(tag);
-   }
-
-   deleteTag(key,tag){
-     var index=this.shoppingList[key].tags.indexOf(tag);
-     this.shoppingList[key].tags.splice(index,1);
-   }
-
-   checkSelect(item,list){
-     if(list==0){
-       this.selectedCount0= this.helperCheck(item,this.selectedCount0);
-       // console.log('0: '+this.selectedCount0)
-     }else{
-       this.selectedCount1= this.helperCheck(item,this.selectedCount1);
-       // console.log('1: '+this.selectedCount1)
-     }
-   }
-
-   helperCheck(item,list){
-     if(item.value.selected){
-       list-=1;
-     }else{
-       list+=1;
-     }
-     return list;
-   }
-
-
-// we'll have to decide if we're okay w/ the mutating data
-   async changeName(currEditItem, newContent){
-     this.shoppingList[newContent] = this.shoppingList[currEditItem];
-     //delete this.shoppingList[currEditItem];
-   }
-
-   async changeDate(currEditItem, newContent){
-     this.shoppingList[currEditItem].date = newContent;
-     console.log(currEditItem);
-   }
 
 
 

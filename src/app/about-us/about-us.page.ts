@@ -17,8 +17,8 @@ export class AboutUsPage implements OnInit {
     this.newItem='';
   }
 
-  addNewItem(newitem:string){
-    this.itemData.addNewItem(newitem,1);
+  addNewItem(){
+    this.itemData.addNewItem(1,this.newItem);
     this.newItem='';
   }
 
@@ -32,19 +32,16 @@ export class AboutUsPage implements OnInit {
    }
 
    moveToShoppingList(){
-     this.itemData.moveToShoppingList();
+     this.itemData.massMoveItem(1);
    }
 
    swipeToshoppingList(key){
-     this.itemData.swipeToshoppingList(key);
+     this.itemData.__swipe(key,0);
    }
 
    trackByListType(index:number,item){
      return item.key+item.value.list+item.value.expanding;
    }
 
-   checkSelect(item){
-     this.itemData.checkSelect(item,1);
-   }
 
 }
