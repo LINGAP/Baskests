@@ -96,6 +96,7 @@ console.log("-------> delete!!")
 
   async swipeToHistory(key){
     this.itemData.__swipe(key,1);
+    this.itemData.shoppingList[key].date= this.itemData.__updateDate();
   }
 
   trackByListType(index:number,item:any){
