@@ -52,7 +52,7 @@ export class ItemDataService {
   //If an item exists, grab it to the current page
   __grabExist(newInput: string, list: number){
     for(var i in this.shoppingList){
-      if(this.shoppingList[i].name.toLowerCase() == newInput.toLowerCase()){
+      if(this.shoppingList[i].name.toLowerCase() === newInput.toLowerCase()){
         this.shoppingList[i].list = list;
         return i;
       }
