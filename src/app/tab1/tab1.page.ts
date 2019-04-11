@@ -32,7 +32,6 @@ export class Tab1Page {
   page:number=0;
   searchTag:string;
 
-  sth:any;
 
   constructor(public modalController:ModalController,public itemData:ItemDataService,private changeDetector: ChangeDetectorRef){
     this.newItem='';
@@ -107,11 +106,17 @@ console.log("-------> delete!!")
 
 async edit(item, field){
     item.value.editing = true;
+    this.newName=item.value.name;
     console.log(item.value.name);
 }
 
 searchInputChange(){
   console.log(this.searchTag);
+}
+
+save(item){
+  item.value.name=this.newName;
+  item.value.editing=false;
 }
 
 async focusTest(){
