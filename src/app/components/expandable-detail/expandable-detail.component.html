@@ -1,9 +1,5 @@
 <div class="expand-wrapper" [class.expanded]='item.value.expanding'>
   <ion-content>
-    <ion-label (dblclick)='editDate()' *ngIf='!dateEditing'>
-      Last bought Date:{{item.value.date}}
-      <ion-input *ngIf='dateEditing' [(ngModel)]='newDate' value="item.value.date" (ionBlur)='changeDate()'></ion-input>
-    </ion-label>
     <div class='tags-wrapper'>
       <li *ngFor='let tag of item.value.tags'>
       <ion-chip>

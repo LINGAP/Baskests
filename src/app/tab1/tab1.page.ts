@@ -27,7 +27,6 @@ import "hammerjs";
 })
 export class Tab1Page {
   newItem:any;
-  newName:any;
   newDate:any;
   page:number=0;
   searchTag:string;
@@ -36,7 +35,6 @@ export class Tab1Page {
   constructor(public modalController:ModalController,public itemData:ItemDataService,private changeDetector: ChangeDetectorRef){
     this.newItem='';
     this.newItem='';
-    this.newName= '';
     this.newDate='--/--/--';
   }
 
@@ -97,13 +95,10 @@ searchInputChange(){
   console.log(this.searchTag);
 }
 
-save(item){
-  item.value.editing=false;
-}
+  save(item){
+    item.value.editing=false;
+  }
 
-async focusTest(){
-  console.log("You did it!")
-}
 
 
 }

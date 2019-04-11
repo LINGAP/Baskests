@@ -8,7 +8,6 @@ import { ItemDataService } from '../../services/item-data.service'
   styleUrls: ['./expandable-detail.component.scss'],
 })
 export class ExpandableDetailComponent implements OnInit {
-  newDate:string;
   newTag:string;
   tags:Array<string>;
   dateEditing:boolean;
@@ -18,7 +17,7 @@ export class ExpandableDetailComponent implements OnInit {
   constructor(private itemData:ItemDataService) {
   }
 
-  ngOnInit() {this.newDate='';this.newTag='';
+  ngOnInit() {this.newTag='';
   var inputField=document.querySelector("ion-input");
   inputField.setFocus();}
 
@@ -33,6 +32,7 @@ export class ExpandableDetailComponent implements OnInit {
     this.itemData.updateItem(this.item.key,null,null,null,tag);
   }
 
+  //modify this to pass in datepicker value
   changeDate(newDate){
     this.itemData.updateItem(this.item.key,null,newDate);
   }
