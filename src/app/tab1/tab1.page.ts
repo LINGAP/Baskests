@@ -11,19 +11,19 @@ import "hammerjs";
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  // animations: [//https://www.joshmorony.com/animating-from-the-void-enter-and-exit-animations-in-ionic/
-  //   //https://www.joshmorony.com/twitter-style-heart-like-animation-with-angular-animations-in-ionic/
-  //   trigger('itemState', [
-  //       transition(':enter', [
-  //           style({transform: 'translateY(100%)'}),
-  //           animate('500ms ease-out')
-  //       ]),
-  //       transition(':leave', [
-  //           animate('500ms ease-in'),
-  //           style({transform: 'translateX(100%)'}),
-  //       ]),
-  //   ])
-  //   ]
+  animations: [//https://www.joshmorony.com/animating-from-the-void-enter-and-exit-animations-in-ionic/
+    //https://www.joshmorony.com/twitter-style-heart-like-animation-with-angular-animations-in-ionic/
+    trigger('itemState', [
+        transition(':enter', [
+            style({transform: 'translateY(100%)'}),
+            animate('500ms ease-out')
+        ]),
+        transition(':leave', [
+            animate('500ms ease-in'),
+            style({transform: 'translateX(100%)'}),
+        ]),
+    ])
+    ]
 })
 export class Tab1Page {
   newItem:any;
@@ -70,21 +70,6 @@ console.log("-------> delete!!")
    this.itemData.delete(0);
   }
 
-  //determines whether the item has been tapped once or twice
-  async displayOrEdit($event, key, newItem, item, num){
-    if($event.tapCount==2){
-      if(num==0){
-        this.edit(key, newItem);
-      }
-      if(num==1){
-        this.edit(key, newItem);
-      }
-    }
-    else{
-      this.displayDetail(item);
-    }
-  }
-
 
   //expand detail
   async displayDetail(item){
@@ -101,13 +86,11 @@ console.log("-------> delete!!")
   }
 
   trackByListType(index:number,item:any){
-    return item.value.name+item.value.list;
+    return item.key+item.value.list;
   }
 
 async edit(item, field){
     item.value.editing = true;
-    this.newName=item.value.name;
-    console.log(item.value.name);
 }
 
 searchInputChange(){
@@ -115,7 +98,6 @@ searchInputChange(){
 }
 
 save(item){
-  item.value.name=this.newName;
   item.value.editing=false;
 }
 

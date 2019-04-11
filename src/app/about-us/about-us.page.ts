@@ -40,7 +40,7 @@ export class AboutUsPage implements OnInit {
    }
 
    trackByListType(index:number,item){
-     return item.key+item.value.list+item.value.expanding;
+     return item.key+item.value.list;
    }
 
 
