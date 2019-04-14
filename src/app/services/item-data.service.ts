@@ -35,14 +35,14 @@ export class ItemDataService {
 
 
   //add new item from input form
-  addNewItem(list: number, newName:string, newDate:string='--/--/--', tags:Array<string>=[]){
+  addNewItem(list: number, newName:string, newDate:string='', tags:Array<string>=[]){
     this.__validateList(list);
     newName=newName.trim();
     if(newName.length!=0){
       var key=this.__grabExist(newName, list);
       if(key==null){
         key=this.count.toString();
-        this.shoppingList[key]=this.shoppingList[key]={name: newName, list:list,date:newDate,selected:false,expanding:false,tags:tags};
+        this.shoppingList[key]=this.shoppingList[key]={name: newName, list:list, date: newDate,selected:false,expanding:false,tags:tags};
         this.count += 1;
       }
       this.displayDetail(this.shoppingList[key]);
@@ -99,8 +99,7 @@ export class ItemDataService {
 
    __updateDate(){
      var now = new Date();
-     var updatedDate=(now.getMonth()+1).toString()+'/'+now.getDate().toString()+'/'+now.getFullYear().toString().substring(2);
-     return updatedDate;
+     return now.toISOString();
    }
 
    //update an item on its newName/newDate/change on tags
@@ -128,6 +127,17 @@ export class ItemDataService {
        }
      }
      return false;
+   }
+
+   __now(){
+     let now=new Date();
+     var m=(now.getMonth()+1)<10? '0'+(now.getMonth()+1).toString():(now.getMonth()+1).toString();
+     return (now.getFullYear().toString()+'-'+m+'-'+now.getDate().toString());
+   }
+
+   __past(){
+     let now=new Date();
+     return (now.getFullYear()-5).toString();
    }
 
 

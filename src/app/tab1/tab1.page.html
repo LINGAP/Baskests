@@ -30,16 +30,14 @@
       <ion-grid >
         <ion-row (swiperight)='swipeToHistory(item.key)'>
 
-          <!-- prev: [(ngModel)] = 'newName' and *ngIf = 'itemEditing' in ion-input first tag for name and [(ngModel)] = 'newDate'
-            as well as *ngIf = 'itemEditing' in ion-input first tag for date-->
           <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected'></ion-checkbox></ion-col>
           <ion-col size='6' (tap)='edit(item, 0)'>
             <span *ngIf='!item.value.editing' >{{item.value.name}}</span>
             <ion-input *ngIf='item.value.editing' (ionBlur)='save(item)' [(ngModel)]='item.value.name' ></ion-input>
           </ion-col>
-          <ion-col size='3' (tap)='edit(item, 1)'>
-            <span *ngIf='!item.value.editing' >{{item.value.date}}</span>
-            <ion-input *ngIf='item.value.editing'   [(ngModel)]='item.value.date'> </ion-input>
+
+          <ion-col size='3' style='font-size:2vh;'>
+            <ion-datetime displayFormat="MM/DD/YY" [min]="itemData.__past()" [max]="itemData.__now()" [(ngModel)]='item.value.date' placeholder="yet to buy"></ion-datetime>
           </ion-col>
 
           <ion-col size='1' (click)='displayDetail(item)'><ion-icon name="arrow-dropdown" ></ion-icon></ion-col>

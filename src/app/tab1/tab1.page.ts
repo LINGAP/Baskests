@@ -27,15 +27,12 @@ import "hammerjs";
 })
 export class Tab1Page {
   newItem:any;
-  newDate:any;
   page:number=0;
   searchTag:string;
 
 
-  constructor(public modalController:ModalController,public itemData:ItemDataService,private changeDetector: ChangeDetectorRef){
+  constructor(public modalController:ModalController,public itemData:ItemDataService, private changeDetector: ChangeDetectorRef){
     this.newItem='';
-    this.newItem='';
-    this.newDate='--/--/--';
   }
 
   //Add a new Item
@@ -87,9 +84,9 @@ console.log("-------> delete!!")
     return item.key+item.value.list;
   }
 
-async edit(item, field){
-    item.value.editing = true;
-}
+  async edit(item, field){
+      item.value.editing = true;
+  }
 
 searchInputChange(){
   console.log(this.searchTag);
@@ -98,6 +95,9 @@ searchInputChange(){
   save(item){
     item.value.editing=false;
   }
+
+
+
 
 
 
