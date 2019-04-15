@@ -24,15 +24,6 @@ const routes: Routes = [
             loadChildren: '../about-us/about-us.module#AboutUsPageModule'
           }
         ]
-      },
-      {
-        path: 'share',
-        children:[
-          {
-            path:'',
-            loadChildren:'../share/share.module#SharePageModule'
-          }
-        ]
       }
     ]
   },
