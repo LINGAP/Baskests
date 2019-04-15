@@ -1,25 +1,20 @@
 
 <ion-header>
-<ion-toolbar>
-    <ion-title>
-      <ion-icon name="basket"></ion-icon>
+<ion-toolbar color="primary">
+    <ion-title align="center">
+      <ion-icon name="basket" color="light" size="large"></ion-icon>
     </ion-title>
 </ion-toolbar>
 </ion-header>
 
   <!--search bar-->
 <ion-content>
-    <ion-grid id='searchbar'>
-      <ion-row>
-        <ion-col size='12'><ion-searchbar placeholder = "Search for a tag" [(ngModel)]='searchTag' (ionChange)='searchInputChange()'  ></ion-searchbar></ion-col>
+    <ion-grid id='searchbar' padding="0">
+      <ion-row align-items-center justify-content-center nowrap>
+        <ion-col size='8'><ion-searchbar placeholder = "Search Tag" [(ngModel)]='searchTag' (ionChange)='searchInputChange()'></ion-searchbar></ion-col>
+        <ion-col size='2'><ion-button (click)='moveToHistory()' fill="clear" color="dark"><ion-icon name='checkbox' size="large"></ion-icon></ion-button></ion-col>
+        <ion-col  size='2'><ion-button (click)='delete()' fill="clear" color="dark"><ion-icon name='trash' size="large"></ion-icon></ion-button></ion-col>
       </ion-row>
-      <ion-row *ngIf='itemData.checkSelect(0)'>
-        <ion-col size='1'></ion-col>
-        <ion-col size='4'><button (click)='moveToHistory()' >move to history</button></ion-col>
-        <ion-col size='2'></ion-col>
-        <ion-col  size='4'><button (click)='delete()'>delete</button></ion-col>
-        <ion-col size='1'></ion-col>
-        </ion-row>
     </ion-grid>
 
   <!--actual list-->
