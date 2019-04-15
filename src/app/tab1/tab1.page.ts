@@ -61,7 +61,6 @@ export class Tab1Page {
 
  //delete selected items
  delete(){
-console.log("-------> delete!!")
    this.itemData.delete(0);
   }
 

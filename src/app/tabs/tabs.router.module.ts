@@ -25,15 +25,6 @@ const routes: Routes = [
           }
         ]
       },
-      {
-        path: 'share',
-        children:[
-          {
-            path:'',
-            loadChildren:'../share/share.module#SharePageModule'
-          }
-        ]
-      }
     ]
   },
   {
