@@ -12,8 +12,8 @@
     <ion-grid id='searchbar' padding="0">
       <ion-row align-items-center justify-content-center nowrap>
         <ion-col size='8'><ion-searchbar placeholder = "Search Tag" [(ngModel)]='searchTag' (ionChange)='searchInputChange()'></ion-searchbar></ion-col>
-        <ion-col size='2'><ion-button (click)='moveToHistory()' fill="clear" color="dark"><ion-icon name='checkbox' size="large"></ion-icon></ion-button></ion-col>
-        <ion-col  size='2'><ion-button (click)='delete()' fill="clear" color="dark"><ion-icon name='trash' size="large"></ion-icon></ion-button></ion-col>
+        <ion-col size='2'><ion-button [disabled]='!itemData.checkSelect(0)' (click)='moveToHistory()' fill="clear" color="dark"><ion-icon name='checkbox' size="large"></ion-icon></ion-button></ion-col>
+        <ion-col  size='2'><ion-button [disabled]='!itemData.checkSelect(0)' (click)='delete()' fill="clear" color="dark"><ion-icon name='trash' size="large"></ion-icon></ion-button></ion-col>
       </ion-row>
     </ion-grid>
 
