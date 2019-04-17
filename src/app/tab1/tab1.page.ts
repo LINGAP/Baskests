@@ -97,11 +97,5 @@ export class Tab1Page {
     this.shownItems = this.itemData.searchTag(0,this.searchText);
   }
 
-  endSearch(){
-    this.searchText = '';
-    this.shownItems = this.itemData.shoppingList;
-  }
-
-
 
 }

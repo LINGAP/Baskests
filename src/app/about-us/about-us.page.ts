@@ -48,10 +48,5 @@ export class AboutUsPage implements OnInit {
      this.shownItems = this.itemData.searchTag(1,this.searchText);
    }
 
-   endSearch(){
-     this.searchText = '';
-     this.shownItems = this.itemData.shoppingList;
-   }
-
 
 }

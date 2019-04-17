@@ -12,7 +12,7 @@
   <ion-grid id='searchbar' padding="0">
     <ion-row align-items-center justify-content-center nowrap>
       <ion-col size='8'>
-        <ion-searchbar placeholder = "Search a Tag" [(ngModel)]='searchText' (ionChange)='searchTag()' (ionBlur) = 'endSearch()'>
+        <ion-searchbar placeholder = "Search a Tag" [(ngModel)]='searchText' (ionChange)='searchTag()'>
         </ion-searchbar>
       </ion-col>
       <ion-col size='2'><ion-button [disabled]='!itemData.checkSelect(0)' (click)='moveToHistory()' fill="clear" color="dark"><ion-icon name='checkbox' size="large"></ion-icon></ion-button></ion-col>
