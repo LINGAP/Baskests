@@ -51,10 +51,10 @@ export class ItemDataService {
 
   //If an item exists, grab it to the current page
   __grabExist(newInput: string, list: number){
-    for(var i in this.shoppingList){
-      if(this.shoppingList[i].name.toLowerCase() === newInput.toLowerCase()){
-        this.shoppingList[i].list = list;
-        return i;
+    for(var key in this.shoppingList){
+      if(this.shoppingList[key].name.toLowerCase() === newInput.toLowerCase()){
+        this.shoppingList[key].list = list;
+        return key;
       }
     }
   }
@@ -140,6 +140,19 @@ export class ItemDataService {
      return (now.getFullYear()-5).toString();
    }
 
+   searchTag(list:number, searchText:string){
+     if (searchText == '') return this.shoppingList;
+     else {
+       var searchTextLower = searchText.toLowerCase();
+       let results = {};
+       for (let key in this.shoppingList){
+         if (this.shoppingList[key].tags.includes(searchTextLower) && this.shoppingList[key].list==list){
+           results[key] = this.shoppingList[key]
+         }
+       }
+       return results;
+     }
+   }
 
 
 }
