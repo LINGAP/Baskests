@@ -143,7 +143,7 @@ export class ItemDataService {
    searchTag(list:number, searchText:string){
      if (searchText == '') return this.shoppingList;
      else {
-       var searchTextLower = searchText.toLowerCase();
+       var searchTextLower = searchText.trim().toLowerCase();
        let results = {};
        for (let key in this.shoppingList){
          if (this.shoppingList[key].tags.includes(searchTextLower) && this.shoppingList[key].list==list){

@@ -64,6 +64,9 @@ export class Tab1Page {
  //delete selected items
  delete(){
    this.itemData.delete(0);
+   if(this.searchText.trim()!=''){
+     this.searchTag();
+   }
   }
 
 
