@@ -28,11 +28,13 @@ import "hammerjs";
 export class Tab1Page {
   newItem:any;
   page:number=0;
-  searchTag:string;
+  searchText:string;
+  shownItems:{};
 
 
   constructor(public modalController:ModalController,public itemData:ItemDataService, private changeDetector: ChangeDetectorRef){
     this.newItem='';
+    this.shownItems = this.itemData.shoppingList;
   }
 
   //Add a new Item
@@ -87,17 +89,13 @@ export class Tab1Page {
       item.value.editing = true;
   }
 
-searchInputChange(){
-  console.log(this.searchTag);
-}
-
   save(item){
     item.value.editing=false;
   }
 
-
-
-
+  searchTag(){
+    this.shownItems = this.itemData.searchTag(0,this.searchText);
+  }
 
 
 }

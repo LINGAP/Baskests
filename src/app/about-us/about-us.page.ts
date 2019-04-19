@@ -11,17 +11,18 @@ export class AboutUsPage implements OnInit {
   }
   newItem:any;
   page:number=1;
-  detailExpandHeight:number=100;
+  searchText:string;
+  shownItems:{};
 
   constructor(public itemData:ItemDataService){
     this.newItem='';
+    this.shownItems = this.itemData.shoppingList;
   }
 
   addNewItem(){
     this.itemData.addNewItem(1,this.newItem);
     this.newItem='';
   }
-
 
   delete(){
     this.itemData.delete(1);
@@ -41,6 +42,10 @@ export class AboutUsPage implements OnInit {
 
    trackByListType(index:number,item){
      return item.key+item.value.list;
+   }
+
+   searchTag(){
+     this.shownItems = this.itemData.searchTag(1,this.searchText);
    }
 
 

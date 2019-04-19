@@ -1,30 +1,29 @@
 
 <ion-header>
-<ion-toolbar>
-    <ion-title>
-      <ion-icon name="cart"></ion-icon>
+<ion-toolbar color="primary">
+    <ion-title align="center">
+      <ion-icon name="cart" color="light" size="large"></ion-icon>
     </ion-title>
 </ion-toolbar>
 </ion-header>
 
-  <!--search bar-->
+<!--search bar-->
 <ion-content>
-    <ion-grid id='searchbar'>
-      <ion-row>
-        <ion-col size='12'><ion-searchbar  placeholder = "Search for a tag"></ion-searchbar></ion-col>
-      </ion-row>
-      <ion-row *ngIf='itemData.checkSelect(1)'>
-        <ion-col size='6'><button (click)='moveToShoppingList()' >move to shoppingList</button></ion-col>
-        <ion-col size='1'></ion-col>
-        <ion-col  size='4'><button (click)='delete()'>delete</button></ion-col>
-        <ion-col size='1'></ion-col>
-        </ion-row>
-    </ion-grid>
+  <ion-grid id='searchbar' padding="0">
+    <ion-row align-items-center justify-content-center nowrap>
+      <ion-col size='8'>
+        <ion-searchbar placeholder = "Search a Tag" [(ngModel)]='searchText' (ionChange)='searchTag()'>
+        </ion-searchbar>
+      </ion-col>
+      <ion-col size='2'><ion-button [disabled]='!itemData.checkSelect(1)' (click)='moveToShoppingList()' fill="clear" color="dark"><ion-icon name='checkbox' size="large"></ion-icon></ion-button></ion-col>
+      <ion-col size='2'><ion-button [disabled]='!itemData.checkSelect(1)' (click)='delete()' fill="clear" color="dark"><ion-icon name='trash' size="large"></ion-icon></ion-button></ion-col>
+    </ion-row>
+  </ion-grid>
 
 
   <!--actual list-->
   <ion-list>
-    <li  *ngFor='let item of itemData.shoppingList|keyvalue;trackBy:trackByListType'>
+    <li  *ngFor='let item of shownItems|keyvalue;trackBy:trackByListType'>
       <div *ngIf='item.value.list==1'>
       <ion-grid>
         <ion-row (swipeleft)='swipeToshoppingList(item.key)'>
@@ -49,7 +48,7 @@
       <ion-label position="floating">Add an item</ion-label>
       <ion-input autocomplete="on" autofocus="true" [(ngModel)]="newItem" (keyup.enter)='addNewItem()'></ion-input>
     </ion-item>
-      <ion-icon slot="end" name="add-circle" (click)="addNewItem(newItem)"></ion-icon>
+    <ion-icon slot="end" name="add-circle" (click)="addNewItem(newItem)"></ion-icon>
   </ion-item>
 
 </ion-content>
