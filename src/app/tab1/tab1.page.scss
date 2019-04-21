@@ -9,15 +9,13 @@ ion-header ion-icon{
 
 ion-searchbar{
   padding: 0;
-  height: 3.5vh;
+  margin: 0;
 }
-#searchbar ion-row:nth-child(2){
-  height: 2.8vh;
+
+ion-grid{
   padding: 0;
 }
-#searchbar ion-row:nth-child(2) ion-col{
-  padding: 0;
-}
+
 #addItem{
   margin-right: 0;
   position: fixed;

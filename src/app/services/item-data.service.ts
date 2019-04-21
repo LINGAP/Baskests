@@ -9,10 +9,12 @@ export class ItemDataService {
   shoppingList:any;
   //{[key:string]:{name: newName, list:list, date:newDate,selected:false,expanding:false,tags:tags}}
   expandingItem:any={expanding:true};//dummy
+  undoList:any;
   count:number;//keep track of total number of items, serves as the key for next item.
 
   constructor(public storage: Storage) {
       this.shoppingList= {};
+      this.undoList=false;
       this.count = 0;
       this.storage.get('shoppingList').then((val)=>{
         console.log(val)
@@ -70,6 +72,8 @@ export class ItemDataService {
 
   //delete the selected items given list index
   delete(list:number){
+    this.__validateList(list);
+    this.undoList=Object.assign({},this.shoppingList);
     for(var i in this.shoppingList){
       if(this.shoppingList[i].selected && this.shoppingList[i].list==list){
         delete this.shoppingList[i];
@@ -78,23 +82,50 @@ export class ItemDataService {
    }
 
    //move selected items to another page given current page
-   massMoveItem(curList:number){
+  massMoveItem(curList:number){
      this.__validateList(curList);
-     for(var key in this.shoppingList){
-       if(this.shoppingList[key].selected && this.shoppingList[key].list==curList){
+     var that=this;
+     var promise=new Promise(function(resolve, reject){
+       that.undoList=Object.assign({},that.shoppingList);resolve(that.undoList);
+       console.log(that.undoList)
+     });
+
+
+     promise.then(function(r) {
+     for(var key in that.shoppingList){
+       if(that.shoppingList[key].selected && that.shoppingList[key].list==curList){
          let dest=Math.abs(curList-1);
-         this.__swipe(key,dest);
+         that.__swipe(key,dest);
          if(curList==0){
-           this.shoppingList[key].date=this.__updateDate();
+           that.shoppingList[key].date=that.__updateDate();
          }
        }
      }
+     })
+
+     console.log(this.shoppingList)
+   }
+
+   __copy(){
+     this.undoList = Object.assign({},this.shoppingList);
    }
 
    //swipe a single item to another page
    __swipe(key:string,destiList:number){
      this.shoppingList[key].list=destiList;
      this.shoppingList[key].selected=false;
+   }
+
+   __undo(){
+     try{
+       if(this.undoList==false) throw 'undoList is empty!'
+       this.shoppingList=Object.assign({},this.undoList);
+       this.undoList=false;
+        console.log('finish')
+        console.log(this.shoppingList)
+     }catch(err){
+       console.log('err when undo '+err)
+     }
    }
 
    __updateDate(){
@@ -143,7 +174,7 @@ export class ItemDataService {
    searchTag(list:number, searchText:string){
      if (searchText == '') return this.shoppingList;
      else {
-       var searchTextLower = searchText.trim().toLowerCase();
+       var searchTextLower = searchText.toLowerCase();
        let results = {};
        for (let key in this.shoppingList){
          if (this.shoppingList[key].tags.includes(searchTextLower) && this.shoppingList[key].list==list){

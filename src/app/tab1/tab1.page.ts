@@ -14,10 +14,6 @@ import "hammerjs";
   animations: [//https://www.joshmorony.com/animating-from-the-void-enter-and-exit-animations-in-ionic/
     //https://www.joshmorony.com/twitter-style-heart-like-animation-with-angular-animations-in-ionic/
     trigger('itemState', [
-        transition(':enter', [
-            style({transform: 'translateY(100%)'}),
-            animate('500ms ease-out')
-        ]),
         transition(':leave', [
             animate('500ms ease-in'),
             style({transform: 'translateX(100%)'}),
@@ -34,6 +30,7 @@ export class Tab1Page {
 
   constructor(public modalController:ModalController,public itemData:ItemDataService, private changeDetector: ChangeDetectorRef){
     this.newItem='';
+    this.searchText='';
     this.shownItems = this.itemData.shoppingList;
   }
 
@@ -65,7 +62,7 @@ export class Tab1Page {
  delete(){
    this.itemData.delete(0);
    if(this.searchText.trim()!=''){
-     this.searchTag();
+      this.searchTag();
    }
   }
 
@@ -88,7 +85,7 @@ export class Tab1Page {
     return item.key+item.value.list;
   }
 
-  async edit(item, field){
+  async edit(item){
       item.value.editing = true;
   }
 
@@ -97,7 +94,12 @@ export class Tab1Page {
   }
 
   searchTag(){
-    this.shownItems = this.itemData.searchTag(0,this.searchText);
+    this.shownItems = this.itemData.searchTag(0,this.searchText.trim());
+  }
+
+  undo(){
+    this.itemData.__undo();
+    this.shownItems=this.itemData.searchTag(0,this.searchText);
   }
 
 
