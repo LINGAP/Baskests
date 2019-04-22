@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController} from '@ionic/angular';
 import { ItemDataService } from '../services/item-data.service'
+import { ComboDetailComponent } from '../components/combo-detail/combo-detail.component'
 import { trigger, state, style, animate, transition } from '@angular/animations';
 @Component({
   selector: 'app-about-us',
@@ -11,7 +12,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     trigger('itemState', [
         transition(':leave', [
             animate('500ms ease-in'),
-            style({transform: 'translateX(100%)'}),
+            style({transform: 'translateX(-100%)'}),
         ]),
     ])
     ]
@@ -24,7 +25,7 @@ export class AboutUsPage implements OnInit {
   searchText:string;
   shownItems:{};
 
-  constructor(public itemData:ItemDataService){
+  constructor(public itemData:ItemDataService, public modalController:ModalController){
     this.newItem='';
     this.searchText='';
     this.shownItems = this.itemData.shoppingList;
@@ -65,6 +66,22 @@ export class AboutUsPage implements OnInit {
    undo(){
      this.itemData.__undo();
      this.shownItems=this.itemData.searchTag(1,this.searchText);
+   }
+
+  async createDish(){
+     const modal = await this.modalController.create({
+      component: ComboDetailComponent,
+      cssClass: 'combo-detail-modal'
+     });
+     modal.onDidDismiss().then((data)=>{
+       if(data.role=='save'){
+         console.log(data.data.materials)
+         // this.itemData.addNewItem(0,data.data.newItem,data.data.date,data.data.tagArray);
+         // this.newItem='';
+       }
+       this.newItem='';
+     });
+     return await modal.present();
    }
 
 

@@ -7,14 +7,15 @@ ion-header ion-icon{
   margin-top: 1vh;
 }
 
+ion-searchbar{
+  padding: 0;
+  margin: 0;
+}
+
 ion-grid{
   padding: 0;
 }
 
-ion-searchbar{
-  padding: 0;
-  height: 3.5vh;
-}
 #searchbar ion-row:nth-child(2){
   height: 2.8vh;
   padding: 0;
