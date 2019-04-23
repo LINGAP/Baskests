@@ -23,7 +23,6 @@ import "hammerjs";
 })
 export class Tab1Page {
   newItem:any;
-  page:number=0;
   searchText:string;
   shownItems:{};
 
@@ -67,11 +66,6 @@ export class Tab1Page {
   }
 
 
-  //expand detail
-  async displayDetail(item){
-    this.itemData.displayDetail(item.value);
-  }
-
   moveToHistory(){
     this.itemData.massMoveItem(0);
   }
@@ -85,13 +79,6 @@ export class Tab1Page {
     return item.key+item.value.list;
   }
 
-  async edit(item){
-      item.value.editing = true;
-  }
-
-  save(item){
-    item.value.editing=false;
-  }
 
   searchTag(){
     this.shownItems = this.itemData.searchTag(0,this.searchText.trim());

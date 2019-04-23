@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Input} from '@angular/core';
+import { Component, OnInit,  Input} from '@angular/core';
 import { ItemDataService } from '../../services/item-data.service'
 
 @Component({
@@ -16,9 +16,7 @@ export class ExpandableDetailComponent implements OnInit {
   constructor(private itemData:ItemDataService) {
   }
 
-  ngOnInit() {this.newTag='';
-  var inputField=document.querySelector("ion-input");
-  inputField.setFocus();}
+  ngOnInit() {this.newTag='';}
 
   addTag(){
     if(this.newTag.trim()!=''){
