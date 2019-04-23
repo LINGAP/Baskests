@@ -30,7 +30,7 @@
         <ion-row (swiperight)='swipeToHistory(item.key)'>
 
           <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected'></ion-checkbox></ion-col>
-          <ion-col size='6' (tap)='edit(item, 0)'>
+          <ion-col size='6' (tap)='edit(item)'>
             <span *ngIf='!item.value.editing' >{{item.value.name}}</span>
             <ion-input *ngIf='item.value.editing' (ionBlur)='save(item)' [(ngModel)]='item.value.name'  inputmode='text'></ion-input>
           </ion-col>

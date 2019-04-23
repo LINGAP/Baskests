@@ -59,6 +59,14 @@ export class AboutUsPage implements OnInit {
      return item.key+item.value.list;
    }
 
+   async edit(item){
+       item.value.editing = true;
+   }
+
+   save(item){
+     item.value.editing=false;
+   }
+
    searchTag(){
      this.shownItems = this.itemData.searchTag(1,this.searchText.trim());
    }
