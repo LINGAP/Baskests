@@ -171,19 +171,35 @@ export class ItemDataService {
      return (now.getFullYear()-5).toString();
    }
 
+   
    searchTag(list:number, searchText:string){
      if (searchText == '') return this.shoppingList;
-     else {
-       var searchTextLower = searchText.toLowerCase();
-       let results = {};
-       for (let key in this.shoppingList){
-         if (this.shoppingList[key].tags.includes(searchTextLower) && this.shoppingList[key].list==list){
-           results[key] = this.shoppingList[key]
+
+     var searchTags = searchText.split(',');
+     if(searchTags[searchTags.length-1]==''){searchTags.pop();}
+
+     let results = {};
+     for (var key in this.shoppingList){//loop items
+       var tags=this.shoppingList[key].tags;
+       var check=0;
+       for(var si=0;si<searchTags.length;si++){//loop target tags
+         var stag=searchTags[si].trim();
+
+         for(var tag of tags){
+           if((tag.indexOf(stag)==0 || tag[tag.indexOf(stag)-1]==' ')
+           && this.shoppingList[key].list==list){
+             check=check|(1<<si);
+           }
          }
        }
-       return results;
+       if(((1<<(searchTags.length))-1)==check){//if all target tags are hit, add this item
+         results[key]=this.shoppingList[key];
+       }
      }
+     return results;
    }
+
+
 
 
 }

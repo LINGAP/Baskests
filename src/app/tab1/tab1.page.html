@@ -12,7 +12,7 @@
   <ion-grid id='searchbar' padding="0">
     <ion-row align-items-center>
       <ion-col size='6'>
-        <ion-searchbar placeholder = "Search tags( , )" [(ngModel)]='searchText' debounce='300' (ionChange)='searchTag()'>
+        <ion-searchbar placeholder = "Search tags( , )" [(ngModel)]='searchText' debounce='500ms' (ionChange)='searchTag()'>
         </ion-searchbar>
       </ion-col>
       <ion-col size='2'><ion-button [disabled]='!itemData.undoList'  (click)='undo()' fill="clear" color="dark"><ion-icon name="undo" size='large' ></ion-icon></ion-button></ion-col>
