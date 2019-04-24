@@ -58,12 +58,11 @@ export class AboutUsPage implements OnInit {
 
 
    searchTag(){
-     this.shownItems = this.itemData.searchTag(1,this.searchText.trim());
+     this.itemData.searchTag(1,this.searchText.trim());
    }
 
    undo(){
      this.itemData.__undo();
-     this.shownItems=this.itemData.searchTag(1,this.searchText);
    }
 
   async createDish(){

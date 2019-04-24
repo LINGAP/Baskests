@@ -14,7 +14,7 @@ export class ItemDataService {
   count:number;//keep track of total number of items, serves as the key for next item.
 
   constructor(public storage: Storage) {
-    // this.storage.clear();
+     //this.storage.clear();
       this.shoppingList= {};
       this.undoList=false;
       this.undoPage=-1;
@@ -53,7 +53,7 @@ export class ItemDataService {
       var key=this.__grabExist(newName, list);
       if(key==null){
         key=this.count.toString();
-        this.shoppingList[key]=this.shoppingList[key]={name: newName, list:list, date: newDate,selected:false,expanding:false,tags:tags};
+        this.shoppingList[key]=this.shoppingList[key]={name: newName, list:list, date: newDate,selected:false,expanding:false, tags:tags, show:true};
         this.count += 1;
       }
       this.displayDetail(this.shoppingList[key]);
@@ -199,13 +199,9 @@ export class ItemDataService {
      }
    )
 
-
-     if (searchText == '') return this.shoppingList;
-
      var searchTags = searchText.split(',');
      if(searchTags[searchTags.length-1]==''){searchTags.pop();}
 
-     let results = {};
      for (var key in this.shoppingList){//loop items
        var tags=this.shoppingList[key].tags;
        var check=0;
@@ -219,13 +215,21 @@ export class ItemDataService {
            }
          }
        }
-       if(((1<<(searchTags.length))-1)==check){//if all target tags are hit, add this item
-         results[key]=this.shoppingList[key];
+       if(((1<<(searchTags.length))-1)!=check){//if all target tags are hit, add this item
+         this.shoppingList[key].show=false;
+       }
+     }
+
+     console.log('text is:' +searchText)
+     if(searchText==''){
+       console.log(this.shoppingList)
+       for(var key in this.shoppingList){
+         this.shoppingList[key].show=true;
        }
      }
 
      this.storage.set('search'+list,searchText);
-     return results;
+
    }
 
 

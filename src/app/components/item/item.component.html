@@ -1,4 +1,4 @@
-<div  *ngIf='item.value.list==page'>
+<div  *ngIf='item.value.list==page && item.value.show'>
 <ion-grid >
   <ion-row >
     <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected'></ion-checkbox></ion-col>

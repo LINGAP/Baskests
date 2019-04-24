@@ -81,12 +81,11 @@ export class Tab1Page {
 
 
   searchTag(){
-    this.shownItems = this.itemData.searchTag(0,this.searchText.trim());
+     this.itemData.searchTag(0,this.searchText.trim());
   }
 
   undo(){
     this.itemData.__undo();
-    this.shownItems=this.itemData.searchTag(0,this.searchText);
   }
 
 
