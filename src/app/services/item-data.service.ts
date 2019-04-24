@@ -14,7 +14,7 @@ export class ItemDataService {
   count:number;//keep track of total number of items, serves as the key for next item.
 
   constructor(public storage: Storage) {
-     this.storage.clear();
+    // this.storage.clear();
       this.shoppingList= {};
       this.undoList=false;
       this.undoPage=-1;
@@ -140,6 +140,7 @@ export class ItemDataService {
        if(this.undoList==false) throw 'undoList is empty!'
        this.shoppingList=Object.assign({},this.undoList);
        this.undoList=false;
+       this.undoPage=-1;
         console.log('finish')
         console.log(this.shoppingList)
      }catch(err){
@@ -191,7 +192,7 @@ export class ItemDataService {
 
    searchTag(list:number, searchText:string){
      this.storage.get('search'+list).then((val)=>{
-       console.log('search'+list+':'+val)
+      // console.log('search'+list+':'+val)
        if(val!=null){
          searchText=val;
        }
