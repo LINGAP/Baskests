@@ -12,38 +12,19 @@
   <ion-grid id='searchbar' padding="0">
     <ion-row align-items-center>
       <ion-col size='6'>
-        <ion-searchbar placeholder = "Search a Tag" [(ngModel)]='searchText' debounce='300' (ionChange)='searchTag()'>
+        <ion-searchbar placeholder = "Search tags( , )" [(ngModel)]='searchText' debounce='500ms' (ionChange)='searchTag()'>
         </ion-searchbar>
       </ion-col>
-      <ion-col size='2'><ion-button size='large' [disabled]='!itemData.undoList'  (click)='undo()' fill="clear" color="dark"><ion-icon name="undo" ></ion-icon></ion-button></ion-col>
-      <ion-col size='2'><ion-button size='large' [disabled]='!itemData.checkSelect(0)' (click)='moveToHistory()' fill="clear" color="dark"><ion-icon name='checkbox' ></ion-icon></ion-button></ion-col>
-      <ion-col size='2'><ion-button size='large' [disabled]='!itemData.checkSelect(0)' (click)='delete()' fill="clear" color="dark"><ion-icon name='trash'></ion-icon></ion-button></ion-col>
+      <ion-col size='2'><ion-button [disabled]='((!itemData.undoList)||(itemData.undoPage!=0))'  (click)='undo()' fill="clear" color="dark"><ion-icon name="undo" size='large' ></ion-icon></ion-button></ion-col>
+      <ion-col size='2'><ion-button [disabled]='!itemData.checkSelect(0)' (click)='moveToHistory()' fill="clear" color="dark"><ion-icon name='checkbox' size='large'></ion-icon></ion-button></ion-col>
+      <ion-col size='2'><ion-button [disabled]='!itemData.checkSelect(0)' (click)='delete()' fill="clear" color="dark"><ion-icon name='trash' size='large'></ion-icon></ion-button></ion-col>
     </ion-row>
   </ion-grid>
 
   <!--actual list-->
   <ion-list >
-    <li  *ngFor='let item of shownItems|keyvalue;trackBy:trackByListType' @itemState >
-    <!-- removed @itemState may need to replace -->
-      <div  *ngIf='item.value.list==0'>
-      <ion-grid >
-        <ion-row (swiperight)='swipeToHistory(item.key)'>
-
-          <ion-col size='2'><ion-checkbox color='light' [(ngModel)]='item.value.selected'></ion-checkbox></ion-col>
-          <ion-col size='6' (tap)='edit(item, 0)'>
-            <span *ngIf='!item.value.editing' >{{item.value.name}}</span>
-            <ion-input *ngIf='item.value.editing' (ionBlur)='save(item)' [(ngModel)]='item.value.name'  inputmode='text'></ion-input>
-          </ion-col>
-
-          <ion-col size='3' style='font-size:2vh;'>
-            <ion-datetime displayFormat="MM/DD/YY" [min]="itemData.__past()" [max]="itemData.__now()" [(ngModel)]='item.value.date' placeholder="yet to buy"></ion-datetime>
-          </ion-col>
-
-          <ion-col size='1' (click)='displayDetail(item)'><ion-icon name="arrow-dropdown" ></ion-icon></ion-col>
-        </ion-row>
-      </ion-grid>
-      <app-expandable-detail [expandItem]='item' [curPage]='page' class='itemDetail'></app-expandable-detail>
-      </div>
+    <li  *ngFor='let item of shownItems|keyvalue;trackBy:trackByListType' @itemState  (swiperight)='swipeToHistory(item.key)' >
+          <app-item [page]='0' [item]='item' ></app-item>
     </li>
   </ion-list>
 

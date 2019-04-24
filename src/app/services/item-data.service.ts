@@ -10,16 +10,25 @@ export class ItemDataService {
   //{[key:string]:{name: newName, list:list, date:newDate,selected:false,expanding:false,tags:tags}}
   expandingItem:any={expanding:true};//dummy
   undoList:any;
+  undoPage:number;
   count:number;//keep track of total number of items, serves as the key for next item.
 
   constructor(public storage: Storage) {
+    // this.storage.clear();
       this.shoppingList= {};
       this.undoList=false;
+      this.undoPage=-1;
       this.count = 0;
       this.storage.get('shoppingList').then((val)=>{
         console.log(val)
         if(val!=null){
           this.shoppingList=val;
+        }
+      })
+      this.storage.get('count').then((val)=>{
+        console.log(val)
+        if(val!=null){
+          this.count=val;
         }
       }
     )
@@ -49,6 +58,9 @@ export class ItemDataService {
       }
       this.displayDetail(this.shoppingList[key]);
     }
+
+    this.storage.set('shoppingList',this.shoppingList);
+    this.storage.set('count',this.count);
   }
 
   //If an item exists, grab it to the current page
@@ -74,11 +86,14 @@ export class ItemDataService {
   delete(list:number){
     this.__validateList(list);
     this.undoList=Object.assign({},this.shoppingList);
+    this.undoPage=list;
     for(var i in this.shoppingList){
       if(this.shoppingList[i].selected && this.shoppingList[i].list==list){
         delete this.shoppingList[i];
       }
     }
+
+    this.storage.set('shoppingList',this.shoppingList);
    }
 
    //move selected items to another page given current page
@@ -87,6 +102,7 @@ export class ItemDataService {
      var that=this;
      var promise=new Promise(function(resolve, reject){
        that.undoList=Object.assign({},that.shoppingList);resolve(that.undoList);
+       that.undoPage=curList;
        console.log(that.undoList)
      });
 
@@ -104,6 +120,7 @@ export class ItemDataService {
      })
 
      console.log(this.shoppingList)
+     this.storage.set('shoppingList',this.shoppingList);
    }
 
    __copy(){
@@ -114,6 +131,8 @@ export class ItemDataService {
    __swipe(key:string,destiList:number){
      this.shoppingList[key].list=destiList;
      this.shoppingList[key].selected=false;
+
+     this.storage.set('shoppingList',this.shoppingList);
    }
 
    __undo(){
@@ -121,6 +140,7 @@ export class ItemDataService {
        if(this.undoList==false) throw 'undoList is empty!'
        this.shoppingList=Object.assign({},this.undoList);
        this.undoList=false;
+       this.undoPage=-1;
         console.log('finish')
         console.log(this.shoppingList)
      }catch(err){
@@ -135,18 +155,16 @@ export class ItemDataService {
 
    //update an item on its newName/newDate/change on tags
    updateItem(key:string,
-              newName:string=null,
-              newDate:string=null,
               newTag:string=null,
               delTag:string=null){
      let item=this.shoppingList[key];
-     if(newName){item.name=newName;}
-     if(newDate){item.date=newDate;}
      if(newTag){item.tags.push(newTag);}
      if(delTag){
        var index=item.tags.indexOf(delTag);
        item.tags.splice(index,1);
      }
+
+     this.storage.set('shoppingList',this.shoppingList);
    }
 
    //check if any items are selected on the current page
@@ -171,19 +189,46 @@ export class ItemDataService {
      return (now.getFullYear()-5).toString();
    }
 
+
    searchTag(list:number, searchText:string){
+     this.storage.get('search'+list).then((val)=>{
+      // console.log('search'+list+':'+val)
+       if(val!=null){
+         searchText=val;
+       }
+     }
+   )
+
+
      if (searchText == '') return this.shoppingList;
-     else {
-       var searchTextLower = searchText.toLowerCase();
-       let results = {};
-       for (let key in this.shoppingList){
-         if (this.shoppingList[key].tags.includes(searchTextLower) && this.shoppingList[key].list==list){
-           results[key] = this.shoppingList[key]
+
+     var searchTags = searchText.split(',');
+     if(searchTags[searchTags.length-1]==''){searchTags.pop();}
+
+     let results = {};
+     for (var key in this.shoppingList){//loop items
+       var tags=this.shoppingList[key].tags;
+       var check=0;
+       for(var si=0;si<searchTags.length;si++){//loop target tags
+         var stag=searchTags[si].trim();
+
+         for(var tag of tags){//loop item tags
+           if((tag.indexOf(stag)==0 || tag[tag.indexOf(stag)-1]==' ')
+           && this.shoppingList[key].list==list){
+             check=check|(1<<si);
+           }
          }
        }
-       return results;
+       if(((1<<(searchTags.length))-1)==check){//if all target tags are hit, add this item
+         results[key]=this.shoppingList[key];
+       }
      }
+
+     this.storage.set('search'+list,searchText);
+     return results;
    }
+
+
 
 
 }

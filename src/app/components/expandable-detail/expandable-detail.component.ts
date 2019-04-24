@@ -1,5 +1,4 @@
-import { Component, OnInit, Inject, Input} from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { Component, OnInit,  Input} from '@angular/core';
 import { ItemDataService } from '../../services/item-data.service'
 
 @Component({
@@ -17,23 +16,17 @@ export class ExpandableDetailComponent implements OnInit {
   constructor(private itemData:ItemDataService) {
   }
 
-  ngOnInit() {this.newTag='';
-  var inputField=document.querySelector("ion-input");
-  inputField.setFocus();}
+  ngOnInit() {this.newTag='';}
 
   addTag(){
     if(this.newTag.trim()!=''){
-      this.itemData.updateItem(this.item.key,null,null,this.newTag);
+      this.itemData.updateItem(this.item.key,this.newTag);
       this.newTag='';
     }
   }
 
   deleteTag(tag){
-    this.itemData.updateItem(this.item.key,null,null,null,tag);
+    this.itemData.updateItem(this.item.key,null,tag);
   }
 
-  //modify this to pass in datepicker value
-  changeDate(newDate){
-    this.itemData.updateItem(this.item.key,null,newDate);
-  }
 }
