@@ -15,7 +15,7 @@
         <ion-searchbar placeholder = "Search tags( , )" [(ngModel)]='searchText' debounce='500ms' (ionChange)='searchTag()'>
         </ion-searchbar>
       </ion-col>
-      <ion-col size='2'><ion-button [disabled]='!itemData.undoList'  (click)='undo()' fill="clear" color="dark"><ion-icon name="undo" size='large' ></ion-icon></ion-button></ion-col>
+      <ion-col size='2'><ion-button [disabled]='(!itemData.undoList)&&(itemData.undoPage!=1)'  (click)='undo()' fill="clear" color="dark"><ion-icon name="undo" size='large' ></ion-icon></ion-button></ion-col>
       <ion-col size='2'><ion-button [disabled]='!itemData.checkSelect(1)' (click)='moveToShoppingList()' fill="clear" color="dark"><ion-icon name='checkbox' size="large"></ion-icon></ion-button></ion-col>
       <ion-col size='2'><ion-button [disabled]='!itemData.checkSelect(1)' (click)='delete()' fill="clear" color="dark"><ion-icon name='trash' size="large"></ion-icon></ion-button></ion-col>
     </ion-row>

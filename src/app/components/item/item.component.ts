@@ -17,6 +17,7 @@ export class ItemComponent implements OnInit {
   }
 
   save(item){
+    this.itemData.updateItem(item.key);
     item.value.editing=false;
   }
 
