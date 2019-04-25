@@ -36,17 +36,6 @@ export class AboutUsPage implements OnInit {
     this.newItem='';
   }
 
-  delete(){
-    this.itemData.delete(1);
-    if(this.searchText.trim()!=''){
-      this.searchTag();
-    }
-  }
-
-
-   moveToShoppingList(){
-     this.itemData.massMoveItem(1);
-   }
 
    swipeToshoppingList(key){
      this.itemData.__swipe(key,0);
@@ -56,14 +45,6 @@ export class AboutUsPage implements OnInit {
      return item.key+item.value.list;
    }
 
-
-   searchTag(){
-     this.itemData.searchTag(1,this.searchText.trim());
-   }
-
-   undo(){
-     this.itemData.__undo();
-   }
 
   async createDish(){
      const modal = await this.modalController.create({

@@ -57,18 +57,6 @@ export class Tab1Page {
     }
   }
 
- //delete selected items
- delete(){
-   this.itemData.delete(0);
-   if(this.searchText.trim()!=''){
-      this.searchTag();
-   }
-  }
-
-
-  moveToHistory(){
-    this.itemData.massMoveItem(0);
-  }
 
   async swipeToHistory(key){
     this.itemData.__swipe(key,1);
@@ -80,13 +68,7 @@ export class Tab1Page {
   }
 
 
-  searchTag(){
-     this.itemData.searchTag(0,this.searchText.trim());
-  }
 
-  undo(){
-    this.itemData.__undo();
-  }
 
 
 }

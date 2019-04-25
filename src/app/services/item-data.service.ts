@@ -14,7 +14,7 @@ export class ItemDataService {
   count:number;//keep track of total number of items, serves as the key for next item.
 
   constructor(public storage: Storage) {
-     //this.storage.clear();
+      this.storage.clear();
       this.shoppingList= {};
       this.undoList=false;
       this.undoPage=-1;
@@ -100,14 +100,11 @@ export class ItemDataService {
   massMoveItem(curList:number){
      this.__validateList(curList);
      var that=this;
-     var promise=new Promise(function(resolve, reject){
-       that.undoList=Object.assign({},that.shoppingList);resolve(that.undoList);
-       that.undoPage=curList;
-       console.log(that.undoList)
-     });
 
+     that.undoList=Object.assign({},that.shoppingList);
+     that.undoPage=curList;
+     console.log("in massMoveItem promise, that.undoList is", that.undoList)
 
-     promise.then(function(r) {
      for(var key in that.shoppingList){
        if(that.shoppingList[key].selected && that.shoppingList[key].list==curList){
          let dest=Math.abs(curList-1);
@@ -117,9 +114,8 @@ export class ItemDataService {
          }
        }
      }
-     })
 
-     console.log(this.shoppingList)
+     console.log("this.shoppingList", this.shoppingList)
      this.storage.set('shoppingList',this.shoppingList);
    }
 
@@ -141,8 +137,6 @@ export class ItemDataService {
        this.shoppingList=Object.assign({},this.undoList);
        this.undoList=false;
        this.undoPage=-1;
-        console.log('finish')
-        console.log(this.shoppingList)
      }catch(err){
        console.log('err when undo '+err)
      }
@@ -220,9 +214,7 @@ export class ItemDataService {
        }
      }
 
-     console.log('text is:' +searchText)
      if(searchText==''){
-       console.log(this.shoppingList)
        for(var key in this.shoppingList){
          this.shoppingList[key].show=true;
        }
