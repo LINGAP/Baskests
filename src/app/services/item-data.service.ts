@@ -194,7 +194,7 @@ export class ItemDataService {
    )
 
      var searchTags = searchText.split(',');
-     if(searchTags[searchTags.length-1]==''){searchTags.pop();}
+     searchTags=searchTags.filter(i=>i!=='');
 
      for (var key in this.shoppingList){//loop items
        var tags=this.shoppingList[key].tags;

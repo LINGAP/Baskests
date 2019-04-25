@@ -8,7 +8,8 @@ import { ItemDataService } from '../../services/item-data.service'
 export class SearchBarComponent implements OnInit {
     @Input('page') page;
     searchText:string;
-  constructor(private itemData:ItemDataService) {}
+  constructor(private itemData:ItemDataService) {
+  }
 
   ngOnInit() {}
 
@@ -29,5 +30,10 @@ export class SearchBarComponent implements OnInit {
 
    undo(){
      this.itemData.__undo();
+   }
+
+   buttonIcon(){
+     var url= this.page==0? '../../assets/icon/Pantry Icon.svg':'../../assets/icon/Shopping List Icon.svg';
+     return url;
    }
 }
