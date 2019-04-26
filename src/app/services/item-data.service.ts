@@ -50,11 +50,13 @@ export class ItemDataService {
     this.__validateList(list);
     newName=newName.trim();
     if(newName.length!=0){
-      var key=this.__grabExist(newName, list);
+      var key=this.__grabExist(newName);
       if(key==null){
         key=this.count.toString();
         this.shoppingList[key]=this.shoppingList[key]={name: newName, list:list, date: newDate,selected:false,expanding:false, tags:tags, show:true};
         this.count += 1;
+      }else{
+        this.shoppingList[key].list = list;
       }
       this.displayDetail(this.shoppingList[key]);
     }
@@ -64,10 +66,9 @@ export class ItemDataService {
   }
 
   //If an item exists, grab it to the current page
-  __grabExist(newInput: string, list: number){
+  __grabExist(newInput: string){
     for(var key in this.shoppingList){
       if(this.shoppingList[key].name.toLowerCase() === newInput.toLowerCase()){
-        this.shoppingList[key].list = list;
         return key;
       }
     }
@@ -149,9 +150,11 @@ export class ItemDataService {
 
    //update an item on its newName/newDate/change on tags
    updateItem(key:string,
+              newName:string=null,
               newTag:string=null,
               delTag:string=null){
      let item=this.shoppingList[key];
+     if(newName){item.name=newName;}
      if(newTag){item.tags.push(newTag);}
      if(delTag){
        var index=item.tags.indexOf(delTag);

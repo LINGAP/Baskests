@@ -54,7 +54,7 @@ export class SearchBarComponent implements OnInit {
    }
 
    buttonIcon(){
-     var url= this.page==0? '../../assets/icon/Pantry Icon.svg':'../../assets/icon/Shopping List Icon.svg';
+     var url= this.page==0? '../../assets/icon/Pantry Icon.svg':'../../assets/icon/ios-shopping.svg';
      return url;
    }
 }

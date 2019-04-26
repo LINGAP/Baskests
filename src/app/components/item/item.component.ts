@@ -1,5 +1,6 @@
 import { Component,   Input, OnInit } from '@angular/core';
-import { ItemDataService } from '../../services/item-data.service'
+import { ItemDataService } from '../../services/item-data.service';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
@@ -8,17 +9,34 @@ import { ItemDataService } from '../../services/item-data.service'
 export class ItemComponent implements OnInit {
   @Input('page') page;
   @Input('item') item;
-  constructor(private itemData:ItemDataService) { }
+  newName:string;
+  constructor(private itemData:ItemDataService,public alertController: AlertController) { }
 
   ngOnInit() {}
 
   async edit(item){
+    this.newName=item.value.name;
     item.value.editing = true;
   }
 
-  save(item){
-    this.itemData.updateItem(item.key);
-    item.value.editing=false;
+  async save(item){
+    if(this.itemData.__grabExist(this.newName)){
+      const alert = await this.alertController.create({
+       header: 'Warning!',
+       message: this.newName+' already exists!',
+       buttons: [{
+           text: 'Okay',
+           cssClass: 'secondary',
+         }
+       ]
+     });
+     await alert.present();
+     this.newName=item.value.name;
+    }
+    else{
+      this.itemData.updateItem(item.key,this.newName);
+    }
+      item.value.editing=false;
   }
 
   //expand detail
