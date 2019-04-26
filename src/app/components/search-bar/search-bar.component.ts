@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ItemDataService } from '../../services/item-data.service'
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
@@ -8,15 +10,34 @@ import { ItemDataService } from '../../services/item-data.service'
 export class SearchBarComponent implements OnInit {
     @Input('page') page;
     searchText:string;
-  constructor(private itemData:ItemDataService) {
+  constructor(private itemData:ItemDataService, public alertController: AlertController) {
   }
 
   ngOnInit() {}
 
 
   //delete selected items
-  delete(){
-    this.itemData.delete(this.page);
+  async delete(){
+    const alert = await this.alertController.create({
+     header: 'Confirm!',
+     message: 'Delete the selected items?',
+     buttons: [{
+         text: 'Confirm',
+         role:'confirm',
+         cssClass: 'secondary',
+         handler: () => {
+           this.itemData.delete(this.page);
+         }
+       },
+       {
+         text: 'Cancel',
+         role: 'cancel',
+         cssClass: 'secondary',
+       }
+     ]
+   });
+   await alert.present();
+
    }
 
 
