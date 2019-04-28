@@ -20,13 +20,13 @@ export class ExpandableDetailComponent implements OnInit {
 
   addTag(){
     if(this.newTag.trim()!=''){
-      this.itemData.updateItem(this.item.key,this.newTag);
+      this.itemData.updateItem(this.item.key,null,this.newTag);
       this.newTag='';
     }
   }
 
   deleteTag(tag){
-    this.itemData.updateItem(this.item.key,null,tag);
+    this.itemData.updateItem(this.item.key,null,null,tag);
   }
 
 }
