@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ItemDataService } from '../../services/item-data.service'
 import { AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-search-bar',
@@ -10,10 +11,16 @@ import { AlertController } from '@ionic/angular';
 export class SearchBarComponent implements OnInit {
     @Input('page') page;
     searchText:string;
-  constructor(private itemData:ItemDataService, public alertController: AlertController) {
+  constructor(private itemData:ItemDataService, public alertController: AlertController, public storage:Storage) {
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.storage.get(this.page+"search").then((val)=>{
+      if(val!=null){
+        this.searchText=val;
+      }
+    })
+  }
 
 
   //delete selected items
@@ -39,7 +46,6 @@ export class SearchBarComponent implements OnInit {
    await alert.present();
 
    }
-
 
    move(){
      this.itemData.massMoveItem(this.page);

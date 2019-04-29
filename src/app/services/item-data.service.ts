@@ -102,9 +102,9 @@ export class ItemDataService {
      this.__validateList(curList);
      var that=this;
 
-     that.undoList=Object.assign({},that.shoppingList);
+     // that.undoList=Object.assign({},that.shoppingList);
      that.undoPage=curList;
-     console.log("in massMoveItem promise, that.undoList is", that.undoList)
+
 
      for(var key in that.shoppingList){
        if(that.shoppingList[key].selected && that.shoppingList[key].list==curList){
@@ -116,7 +116,6 @@ export class ItemDataService {
        }
      }
 
-     console.log("this.shoppingList", this.shoppingList)
      this.storage.set('shoppingList',this.shoppingList);
    }
 
@@ -196,8 +195,11 @@ export class ItemDataService {
      }
    )
 
+
+
      var searchTags = searchText.split(',');
      searchTags=searchTags.filter(i=>i!=='');
+
 
      for (var key in this.shoppingList){//loop items
        var tags=this.shoppingList[key].tags;
@@ -212,8 +214,11 @@ export class ItemDataService {
            }
          }
        }
+
        if(((1<<(searchTags.length))-1)!=check){//if all target tags are hit, add this item
          this.shoppingList[key].show=false;
+       }else{
+         this.shoppingList[key].show=true;
        }
      }
 
@@ -223,7 +228,7 @@ export class ItemDataService {
        }
      }
 
-     this.storage.set('search'+list,searchText);
+     this.storage.set(list+'search', searchText);
 
    }
 
