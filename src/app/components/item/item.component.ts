@@ -20,7 +20,8 @@ export class ItemComponent implements OnInit {
   }
 
   async save(item){
-    if(this.itemData.__grabExist(this.newName)){
+    let existed=this.itemData.__grabExist(this.newName);
+    if( (existed !=null) && (existed != item.key)){
       const alert = await this.alertController.create({
        header: 'Warning!',
        message: this.newName+' already exists!',
@@ -32,7 +33,19 @@ export class ItemComponent implements OnInit {
      });
      await alert.present();
      this.newName=item.value.name;
-    }
+   }
+   if( this.newName == ''){
+     const alert = await this.alertController.create({
+      header: 'Warning!',
+      message: 'Name cannot be empty!',
+      buttons: [{
+          text: 'Okay',
+          cssClass: 'secondary',
+        }
+      ]
+    });
+    await alert.present();
+   }
     else{
       this.itemData.updateItem(item.key,this.newName);
     }

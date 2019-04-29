@@ -60,7 +60,7 @@ export class SearchBarComponent implements OnInit {
    }
 
    buttonIcon(){
-     var url= this.page==0? '../../assets/icon/Pantry Icon.svg':'../../assets/icon/ios-shopping.svg';
+     var url= this.page==0? '../../assets/icon/Pantry Icon.svg':'../../assets/icon/md-shopping.svg';
      return url;
    }
 }
