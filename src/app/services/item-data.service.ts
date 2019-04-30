@@ -195,8 +195,6 @@ export class ItemDataService {
      }
    )
 
-
-
      var searchTags = searchText.split(',');
      searchTags=searchTags.filter(i=>i!=='');
 
@@ -205,9 +203,10 @@ export class ItemDataService {
        var tags=this.shoppingList[key].tags;
        var check=0;
        for(var si=0;si<searchTags.length;si++){//loop target tags
-         var stag=searchTags[si].trim();
+         var stag=searchTags[si].trim().toLowerCase();
 
          for(var tag of tags){//loop item tags
+           tag=tag.toLowerCase();
            if((tag.indexOf(stag)==0 || tag[tag.indexOf(stag)-1]==' ')
            && this.shoppingList[key].list==list){
              check=check|(1<<si);
