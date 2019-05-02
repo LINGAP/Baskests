@@ -1,0 +1,7 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "Cart",
+  "bundledWebRuntime": false,
+  "webDir": "www",
+  "npmClient": "npm"
+}

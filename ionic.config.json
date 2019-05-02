@@ -1,7 +1,8 @@
 {
   "name": "Cart",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular",
   "id": "f35473ba"
