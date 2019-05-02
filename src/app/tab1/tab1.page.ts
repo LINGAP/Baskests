@@ -33,12 +33,6 @@ export class Tab1Page {
     this.shownItems = this.itemData.shoppingList;
   }
 
-  //Add a new Item
-  addNewItem(){
-    this.itemData.addNewItem(0,this.newItem);
-    this.newItem='';
-  }
-
   async addNewItemDetail(newItem:string){
     if(newItem!=''){
       const modal = await this.modalController.create({
@@ -59,8 +53,8 @@ export class Tab1Page {
 
 
   async swipeToHistory(key){
-    this.itemData.__swipe(key,1);
     this.itemData.shoppingList[key].date= this.itemData.__updateDate();
+    this.itemData.__swipe(key,1);
   }
 
   trackByListType(index:number,item:any){

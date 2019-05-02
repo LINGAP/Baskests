@@ -20,21 +20,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 export class AboutUsPage implements OnInit {
   ngOnInit() {
   }
-  newItem:any;
-  page:number=1;
-  searchText:string;
-  shownItems:{};
 
-  constructor(public itemData:ItemDataService, public modalController:ModalController){
-    this.newItem='';
-    this.searchText='';
-    this.shownItems = this.itemData.shoppingList;
-  }
-
-  addNewItem(){
-    this.itemData.addNewItem(1,this.newItem);
-    this.newItem='';
-  }
+  constructor(public itemData:ItemDataService, public modalController:ModalController){}
 
 
    swipeToshoppingList(key){
@@ -57,7 +44,6 @@ export class AboutUsPage implements OnInit {
          // this.itemData.addNewItem(0,data.data.newItem,data.data.date,data.data.tagArray);
          // this.newItem='';
        }
-       this.newItem='';
      });
      return await modal.present();
    }
