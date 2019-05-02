@@ -19,12 +19,7 @@
    </ion-fab-button>
  </ion-fab> -->
 
-  <ion-item id="addItem">
-    <ion-item>
-      <ion-label position="floating">Add an item</ion-label>
-      <ion-input autocomplete="on" autofocus="true" [(ngModel)]="newItem" (keyup.enter)='addNewItem()'></ion-input>
-    </ion-item>
-    <ion-icon slot="end" name="add-circle" (click)="addNewItem(newItem)"></ion-icon>
-  </ion-item>
+
+  <app-add-bar [page]='1'></app-add-bar>
 
 </ion-content>
