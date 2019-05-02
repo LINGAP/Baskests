@@ -1,10 +1,10 @@
-#addItem{
+ion-toolbar{
   margin-right: 0;
   position: fixed;
   bottom: 0;
   width: 100%;
 }
-#addItem ion-icon{
+ion-toolbar ion-icon{
   height: 100%;
   width: 5vh;
 }
@@ -18,14 +18,14 @@
     position: relative;
   }
 
-  #addItem{
+  ion-toolbar{
     margin-right: 0;
     position: fixed;
     bottom: 1vh; //!!!!!!!!!!!!!!!!!!!level up for ios
     width: 100%;
   }
 
-  #addItem ion-icon{
+  ion-toolbar ion-icon{
     height: 100%;
     width: 5vh;
   }

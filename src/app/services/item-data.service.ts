@@ -177,7 +177,8 @@ export class ItemDataService {
    __now(){
      let now=new Date();
      var m=(now.getMonth()+1)<10? '0'+(now.getMonth()+1).toString():(now.getMonth()+1).toString();
-     return (now.getFullYear().toString()+'-'+m+'-'+now.getDate().toString());
+     var d=(now.getDate())<10? '0'+now.getDate().toString():now.getDate().toString();
+     return now.getFullYear().toString()+'-'+m.toString()+'-'+d;
    }
 
    __past(){
