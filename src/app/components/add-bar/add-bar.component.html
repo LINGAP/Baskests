@@ -3,8 +3,8 @@
       <ion-label position="floating">Add an item</ion-label>
       <ion-input autocomplete="on"  autofocus="true" [(ngModel)]="newItem" (keyup.enter)='addNewItem()'></ion-input>
 
-      <ion-button slot="end" color='primary' size='small' fill="clear" >
-        <ion-icon name="add-circle" (click)="addNewItem(newItem)">
+      <ion-button slot="end" color='primary' size='large' fill="clear" [disabled]='newItem==""' (click)="addNewItem()">
+        <ion-icon name="add-circle">
         </ion-icon>
       </ion-button>
     </ion-item>

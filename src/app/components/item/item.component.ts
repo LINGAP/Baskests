@@ -57,4 +57,9 @@ export class ItemComponent implements OnInit {
     this.itemData.displayDetail(item.value);
   }
 
+  arrow(){
+    let name = this.item.value.expanding? "arrow-dropup":"arrow-dropdown";
+    return name;
+  }
+
 }
