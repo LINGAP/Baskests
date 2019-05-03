@@ -4,9 +4,18 @@
     overflow: hidden;
   }
 
-  .expanded{
-    height: 6vh;
+  .example-chip-list{
+    width: 100%;
   }
+
+  .expanded{
+    height: 150px;
+  }
+
+  mat-form-field{
+    height: 120px;
+  }
+
 ion-input{
   max-width: 100%;
   background-color: rgb(255,255,255);

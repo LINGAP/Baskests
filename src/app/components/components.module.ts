@@ -7,13 +7,20 @@ import { ExpandableDetailComponent } from './expandable-detail/expandable-detail
 import { AddBarComponent } from './add-bar/add-bar.component'
 import { InputDetailComponent } from './input-detail/input-detail.component'
 import { ComboDetailComponent } from './combo-detail/combo-detail.component'
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [ExpandableDetailComponent, InputDetailComponent, ComboDetailComponent, ItemComponent, SearchBarComponent, AddBarComponent],
   imports: [
     CommonModule,
     IonicModule,
-    FormsModule
+    FormsModule,
+    MatChipsModule,
+    MatIconModule,
+    MatFormFieldModule,
   ],
   exports:[ExpandableDetailComponent, InputDetailComponent, ComboDetailComponent,ItemComponent, SearchBarComponent, AddBarComponent],
   entryComponents:[InputDetailComponent, ComboDetailComponent, SearchBarComponent, AddBarComponent]
