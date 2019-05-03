@@ -4,26 +4,22 @@
     overflow: hidden;
   }
 
-  .example-chip-list{
-    width: 100%;
-  }
-
   .expanded{
     height: 150px;
   }
 
-  mat-form-field{
-    height: 120px;
-  }
-
-ion-input{
-  max-width: 100%;
-  background-color: rgb(255,255,255);
+ input.mat-chip-input{
+  width: 100%;
+  margin-top: 1.2vh;
 }
-  .tags-wrapper li, ion-input{
-   display: inline-block;
-   margin: 0;
-   float: left;
+input.mat-chip-input:focus,input.mat-chip-input:active{
+  border-color:#FFFFFF !important ;
+}
 
-
-  }
+.mat-chip .tag-name {
+  max-width: 30vw;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline-block;
+}

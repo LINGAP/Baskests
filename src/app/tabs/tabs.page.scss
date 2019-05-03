@@ -1,3 +1,9 @@
-.shoot{
-  --color-selected:#ff0000;
+.tab-selected{
+background: #e6e6e6;
+border-radius: 10vw;
+}
+
+ion-tab-bar span{
+  font-size: 2vh;
+  font-weight: bold;
 }

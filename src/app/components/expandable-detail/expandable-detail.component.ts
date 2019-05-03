@@ -28,26 +28,12 @@ export class ExpandableDetailComponent implements OnInit {
 
    // Add our tag
    if ((value || '').trim()) {
-     if(value.length<=40){
+     // if(value.length<=40){
        this.itemData.updateItem(this.item.key,null,value);
        // Reset the input value
        if (input) {
          input.value = '';
        }
-     }else{
-       const alert = await this.alertController.create({
-        header: 'warning!',
-        message: 'The maximum length for a tag is 40 characters!',
-        buttons: [{
-            text: 'Okay',
-            role:'confirm',
-            cssClass: 'secondary',
-            handler: () => {
-            }
-        }]
-      });
-      await alert.present();
-     }
    }
 
 
