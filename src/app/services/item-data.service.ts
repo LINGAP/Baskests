@@ -54,7 +54,7 @@ export class ItemDataService {
       this.displayDetail(this.shoppingList[key]);
     }
 
-    console.log(this.shoppingList)
+    // console.log(this.shoppingList)
 
     this.storage.set('shoppingList',this.shoppingList);
   }

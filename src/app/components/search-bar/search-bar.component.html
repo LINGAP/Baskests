@@ -4,13 +4,17 @@
       <ion-col size='2'>
         <ion-button [disabled]='!itemData.checkSelect(page)' (click)='delete()' fill="clear" color="dark"><ion-icon name='trash' size="large"></ion-icon></ion-button>
       </ion-col>
-      <ion-col size='8'>
+      <ion-col size='6'>
         <ion-searchbar placeholder = "Search tags" [(ngModel)]='searchText' debounce='500ms' (ionChange)='searchTag()'>
         </ion-searchbar>
       </ion-col>
-      
+
       <ion-col size='2'>
         <ion-button [disabled]='!itemData.checkSelect(page)' (click)='move()' fill="clear" color="dark"><ion-icon [src]='buttonIcon()' size="large"></ion-icon></ion-button>
+      </ion-col>
+
+      <ion-col size='2'>
+        <ion-button (click)='openHelpPopup()' fill="clear" color="dark"><ion-icon name="help-circle" size="large"></ion-icon></ion-button>
       </ion-col>
 
     </ion-row>

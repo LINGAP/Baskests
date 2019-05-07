@@ -1,8 +1,8 @@
-<ion-header><app-search-bar [page]='0'></app-search-bar></ion-header>
-<!--search bar-->
+<ion-header>
+  <app-search-bar [page]='0'></app-search-bar>
+</ion-header>
+
 <ion-content>
-
-
     <!--actual list-->
     <ion-list >
       <li  *ngFor='let item of itemData.shoppingList;trackBy:trackByListType' @itemState  (swiperight)='swipeToHistory(item)' >
@@ -12,4 +12,6 @@
 
 </ion-content>
 
-<ion-footer><app-add-bar [page]='0'></app-add-bar></ion-footer>
+<ion-footer>
+  <app-add-bar [page]='0'></app-add-bar>
+</ion-footer>
