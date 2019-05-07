@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ItemDataService } from '../../services/item-data.service'
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { ModalController } from '@ionic/angular';
+import { HelpPopupComponent } from '../help-popup/help-popup.component';
 
 @Component({
   selector: 'app-search-bar',
@@ -11,7 +13,7 @@ import { Storage } from '@ionic/storage';
 export class SearchBarComponent implements OnInit {
     @Input('page') page;
     searchText:string;
-  constructor(private itemData:ItemDataService, public alertController: AlertController, public storage:Storage) {
+  constructor(private itemData:ItemDataService, public alertController: AlertController, public storage:Storage, public modal:ModalController ) {
   }
 
   ngOnInit() {
@@ -63,4 +65,12 @@ export class SearchBarComponent implements OnInit {
      var url= this.page==0? '../../assets/icon/movePantry.svg':'../../assets/icon/moveShopping.svg';
      return url;
    }
+
+   async openHelpPopup(){
+     const helpModal = await this.modal.create({
+       component: HelpPopupComponent
+     });
+     return await helpModal.present();
+   }
+
 }
