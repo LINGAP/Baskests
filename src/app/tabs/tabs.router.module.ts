@@ -8,20 +8,20 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'shopping-tab',
         children: [
           {
             path: '',
-            loadChildren: '../tab1/tab1.module#Tab1PageModule'
+            loadChildren: '../shopping-tab/shopping-tab.module#ShoppingTabPageModule'
           }
         ]
       },
       {
-        path: 'about-us',
+        path: 'pantry-tab',
         children: [
           {
             path: '',
-            loadChildren: '../about-us/about-us.module#AboutUsPageModule'
+            loadChildren: '../pantry-tab/pantry-tab.module#PantryTabPageModule'
           }
         ]
       },
@@ -29,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/shopping-tab',
     pathMatch: 'full'
   }
 ];

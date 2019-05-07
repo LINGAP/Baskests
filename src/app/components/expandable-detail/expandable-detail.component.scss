@@ -1,22 +1,19 @@
-  .expand-wrapper{
-    height: 0;
-    transition: 0.2s linear;
-    overflow: hidden;
-  }
+.expand-wrapper{
+  height: 0;
+  transition: 0.2s linear;
+  overflow: hidden;
+}
 
-  .expanded{
-    height: 150px;
-  }
+.expanded{
+  height: 8vh;
+}
 
- input.mat-chip-input{
+input.mat-chip-input{
   width: 100%;
   margin-top: 1.2vh;
 }
-input.mat-chip-input:focus,input.mat-chip-input:active{
-  border-color:#FFFFFF !important ;
-}
 
-.mat-chip .tag-name {
+.mat-chip .tag-name { //Given by Paul
   max-width: 30vw;
   white-space: nowrap;
   text-overflow: ellipsis;
