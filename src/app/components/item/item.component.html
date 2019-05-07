@@ -12,7 +12,7 @@
         <ion-input *ngIf='item.value.editing' (ionBlur)='save(item)' [(ngModel)]='newName'  inputmode='text'></ion-input>
           </ion-col>
 
-      <ion-col size='4' style='font-size:2vh;'>
+      <ion-col size='4' style='font-size: medium;'>
         <ion-datetime displayFormat="MM/DD/YY" (ionChange)='itemData.updateItem(item.key)' [min]="itemData.__past()" [max]="itemData.__now()" [(ngModel)]='item.value.date' placeholder="last bought"></ion-datetime>
       </ion-col>
 
