@@ -30,19 +30,21 @@ export class SearchBarComponent implements OnInit {
       const alert = await this.alertController.create({
        header: 'Confirm!',
        message: 'Delete the selected items?',
-       buttons: [{
+       buttons: [
+         {
+           text: 'Cancel',
+           role: 'cancel',
+           cssClass: 'secondary',
+         },
+         {
            text: 'Confirm',
            role:'confirm',
            cssClass: 'secondary',
            handler: () => {
              this.itemData.delete(this.page);
            }
-         },
-         {
-           text: 'Cancel',
-           role: 'cancel',
-           cssClass: 'secondary',
          }
+
        ]
      });
      await alert.present();
