@@ -12,11 +12,12 @@ export class ItemComponent implements OnInit {
   newName:string;
   constructor(private itemData:ItemDataService,public alertController: AlertController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   async edit(item){
-    this.newName=item.value.name;
-    item.value.editing = true;
+    this.newName=item.name;
+    item.editing = true;
   }
 
   async save(item){
@@ -32,7 +33,7 @@ export class ItemComponent implements OnInit {
        ]
      });
      await alert.present();
-     this.newName=item.value.name;
+     this.newName=item.name;
    }
    if( this.newName == ''){
      const alert = await this.alertController.create({
@@ -47,18 +48,18 @@ export class ItemComponent implements OnInit {
     await alert.present();
    }
     else{
-      this.itemData.updateItem(item.key,this.newName);
+      this.itemData.updateItem(item,this.newName);
     }
-      item.value.editing=false;
+      item.editing=false;
   }
 
   //expand detail
   async displayDetail(item){
-    this.itemData.displayDetail(item.value);
+    this.itemData.displayDetail(item);
   }
 
   arrow(){
-    let name = this.item.value.expanding? "arrow-dropup":"arrow-dropdown";
+    let name = this.item.expanding? "arrow-dropup":"arrow-dropdown";
     return name;
   }
 

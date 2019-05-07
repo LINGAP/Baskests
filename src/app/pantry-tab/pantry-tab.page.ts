@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController} from '@ionic/angular';
 import { ItemDataService } from '../services/item-data.service'
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -22,7 +21,7 @@ export class PantryTabPage implements OnInit {
   ngOnInit() {
   }
 
-  constructor(public itemData:ItemDataService, public modalController:ModalController){}
+  constructor(public itemData:ItemDataService){}
 
 
    swipeToshoppingList(key){
@@ -30,7 +29,7 @@ export class PantryTabPage implements OnInit {
    }
 
    trackByListType(index:number,item){
-     return item.key+item.value.list;
+     return index+'.'+item.list;
    }
 
 }

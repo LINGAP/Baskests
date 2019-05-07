@@ -1,4 +1,4 @@
-<div class="expand-wrapper" [class.expanded]='item.value.expanding'>
+<div class="expand-wrapper" [class.expanded]='item.expanding'>
   <ion-content>
 
     <input placeholder="New tag..."
@@ -9,7 +9,7 @@
            maxlength='30'>
 
       <mat-chip-list #chipList>
-        <mat-chip *ngFor="let tag of item.value.tags" [selectable]="selectable"
+        <mat-chip *ngFor="let tag of item.tags" [selectable]="selectable"
                  [removable]='true' (removed)="deleteTag(tag)">
           <div class="tag-name"> {{tag}}</div>
           <ion-icon matChipRemove name="close-circle-outline"></ion-icon>

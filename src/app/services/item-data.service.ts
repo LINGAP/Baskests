@@ -11,27 +11,20 @@ export class ItemDataService {
   expandingItem:any={expanding:true};//dummy
   undoList:any;
   undoPage:number;
-  count:number;//keep track of total number of items, serves as the key for next item.
 
   constructor(public storage: Storage) {
       this.storage.clear();
-      this.shoppingList= {};
-      this.undoList=false;
-      this.undoPage=-1;
-      this.count = 0;
+      this.shoppingList= [];
+
+      this.undoList=false;//not used
+      this.undoPage=-1;//not used
+
       this.storage.get('shoppingList').then((val)=>{
-        console.log(val)
         if(val!=null){
           this.shoppingList=val;
         }
       })
-      this.storage.get('count').then((val)=>{
-        console.log(val)
-        if(val!=null){
-          this.count=val;
-        }
-      }
-    )
+
   }
 
   //validating list index to be 1 or 0
@@ -52,17 +45,18 @@ export class ItemDataService {
     if(newName.length!=0){
       var key=this.__grabExist(newName);
       if(key==null){
-        key=this.count.toString();
-        this.shoppingList[key]=this.shoppingList[key]={name: newName, list:list, date: newDate,selected:false,expanding:false, tags:tags, show:true};
-        this.count += 1;
+        key = this.shoppingList.length;
+        this.shoppingList.push({name: newName, list:list, date: newDate,selected:false,expanding:false, tags:tags, show:true});
+
       }else{
         this.shoppingList[key].list = list;
       }
       this.displayDetail(this.shoppingList[key]);
     }
 
+    console.log(this.shoppingList)
+
     this.storage.set('shoppingList',this.shoppingList);
-    this.storage.set('count',this.count);
   }
 
   //If an item exists, grab it to the current page
@@ -86,12 +80,15 @@ export class ItemDataService {
   //delete the selected items given list index
   delete(list:number){
     this.__validateList(list);
-    this.undoList=Object.assign({},this.shoppingList);
-    this.undoPage=list;
-    for(var i in this.shoppingList){
+    // this.undoList=Object.assign({},this.shoppingList);
+    // this.undoPage=list;
+
+    let i=this.shoppingList.length-1;
+    while(i>-1){
       if(this.shoppingList[i].selected && this.shoppingList[i].list==list){
-        delete this.shoppingList[i];
+        this.shoppingList.splice(i,1);
       }
+      i-=1;
     }
 
     this.storage.set('shoppingList',this.shoppingList);
@@ -100,18 +97,17 @@ export class ItemDataService {
    //move selected items to another page given current page
   massMoveItem(curList:number){
      this.__validateList(curList);
-     var that=this;
 
-     // that.undoList=Object.assign({},that.shoppingList);
-     that.undoPage=curList;
+     // this.undoList=Object.assign({},this.shoppingList);
+     // this.undoPage=curList;
 
+     for(var item of this.shoppingList){
 
-     for(var key in that.shoppingList){
-       if(that.shoppingList[key].selected && that.shoppingList[key].list==curList){
+       if(item.selected && item.list==curList){
          let dest=Math.abs(curList-1);
-         that.__swipe(key,dest);
+         this.__swipe(item,dest);
          if(curList==0){
-           that.shoppingList[key].date=that.__updateDate();
+           item.date=this.__updateDate();
          }
        }
      }
@@ -119,14 +115,10 @@ export class ItemDataService {
      this.storage.set('shoppingList',this.shoppingList);
    }
 
-   __copy(){
-     this.undoList = Object.assign({},this.shoppingList);
-   }
+   __swipe(item:any,destiList:number){
 
-   //swipe a single item to another page
-   __swipe(key:string,destiList:number){
-     this.shoppingList[key].list=destiList;
-     this.shoppingList[key].selected=false;
+     item.list=destiList;
+     item.selected=false;
 
      this.storage.set('shoppingList',this.shoppingList);
    }
@@ -148,11 +140,11 @@ export class ItemDataService {
    }
 
    //update an item on its newName/newDate/change on tags
-   updateItem(key:string,
+   updateItem(item:any,
               newName:string=null,
               newTag:string=null,
               delTag:string=null){
-     let item=this.shoppingList[key];
+
      if(newName){item.name=newName;}
      if(newTag){item.tags.push(newTag);}
      if(delTag){
