@@ -4,7 +4,7 @@
   <app-search-bar [page]='0'></app-search-bar>
 
   <!--actual list-->
-  <ion-list >
+  <ion-list class="shopping-list">
     <li  *ngFor='let item of itemData.shoppingList|keyvalue;trackBy:trackByListType' @itemState  (swiperight)='swipeToHistory(item.key)' >
           <app-item [page]='0' [item]='item' ></app-item>
     </li>
