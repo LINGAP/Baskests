@@ -61,6 +61,8 @@ export class ItemDataService {
       this.displayDetail(this.shoppingList[key]);
     }
 
+    // console.log(this.shoppingList)
+
     this.storage.set('shoppingList',this.shoppingList);
     this.storage.set('count',this.count);
   }
