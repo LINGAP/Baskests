@@ -16,31 +16,24 @@ export class ExpandableDetailComponent implements OnInit {
   newTag:any;
   currentHeight:number=0;
   constructor(private itemData:ItemDataService, public alertController: AlertController) {
-    this.unreasonableLength=false;
     this.newTag='';
   }
 
   ngOnInit() {}
 
   async addTag(event: MatChipInputEvent){
-    const input = event.input;
-   const value = event.value;
+     const input = event.input;
+     const value = event.value;
 
-   // Add our tag
-   if ((value || '').trim()) {
-     // if(value.length<=40){
-       this.itemData.updateItem(this.item.key,null,value);
-       // Reset the input value
-       if (input) {
-         input.value = '';
-       }
-   }
+     // Add tag
+     if ((value || '').trim()) {
+         this.itemData.updateItem(this.item.key,null,value);
+     }
 
+     if (input) {
+       input.value = '';
+     }
 
-  }
-
-  addTag2(){
-    this.itemData.updateItem(this.item.key,null,this.newTag);
   }
 
   deleteTag(tag){

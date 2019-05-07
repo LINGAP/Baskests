@@ -1,14 +1,18 @@
 <ion-toolbar color='secondary'>
-<ion-grid id='searchbar' padding="0" >
-  <ion-row align-items-center justify-content-center nowrap>
-    <ion-col size='2'><ion-button [disabled]='!itemData.checkSelect(page)' (click)='delete()' fill="clear" color="dark"><ion-icon name='trash' size="large"></ion-icon></ion-button></ion-col>
-    <ion-col size='8'>
-      <ion-searchbar placeholder = "Search tags" [(ngModel)]='searchText' debounce='500ms' (ionChange)='searchTag()'>
-      </ion-searchbar>
-    </ion-col>
-    <!-- <ion-col size='2'><ion-button [disabled]='((!itemData.undoList)||(itemData.undoPage!=1))'  (click)='undo()' fill="clear" color="dark"><ion-icon name="undo" size='large' ></ion-icon></ion-button></ion-col> -->
-    <ion-col size='2'><ion-button [disabled]='!itemData.checkSelect(page)' (click)='move()' fill="clear" color="dark"><ion-icon [src]='buttonIcon()' size="large"></ion-icon></ion-button></ion-col>
+  <ion-grid id='searchbar' padding="0" >
+    <ion-row align-items-center justify-content-center nowrap>
+      <ion-col size='2'>
+        <ion-button [disabled]='!itemData.checkSelect(page)' (click)='delete()' fill="clear" color="dark"><ion-icon name='trash' size="large"></ion-icon></ion-button>
+      </ion-col>
+      <ion-col size='8'>
+        <ion-searchbar placeholder = "Search tags" [(ngModel)]='searchText' debounce='500ms' (ionChange)='searchTag()'>
+        </ion-searchbar>
+      </ion-col>
+      
+      <ion-col size='2'>
+        <ion-button [disabled]='!itemData.checkSelect(page)' (click)='move()' fill="clear" color="dark"><ion-icon [src]='buttonIcon()' size="large"></ion-icon></ion-button>
+      </ion-col>
 
-  </ion-row>
-</ion-grid>
+    </ion-row>
+  </ion-grid>
 </ion-toolbar>

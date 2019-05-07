@@ -1,30 +1,20 @@
 <div class="expand-wrapper" [class.expanded]='item.value.expanding'>
-  <!-- <ion-content>
-
-      <ion-input placeholder='Add a tag, Enter or Comma to save' autofocus="true" [(ngModel)]='newTag' (keyup.enter)='addTag2()'></ion-input>
-      <li *ngFor='let tag of item.value.tags'>
-      <ion-chip>
-        <ion-label>{{tag}}</ion-label>
-        <ion-icon name="close-circle-outline" (click)='deleteTag(tag)'></ion-icon>
-      </ion-chip>
-      </li>
-
-  </ion-content> -->
   <ion-content>
 
-  <input placeholder="New tag..."
-         [matChipInputFor]="chipList"
-         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-         [matChipInputAddOnBlur]="true"
-         (matChipInputTokenEnd)="addTag($event)"
-         maxlength='40'>
+    <input placeholder="New tag..."
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="true"
+           (matChipInputTokenEnd)="addTag($event)"
+           maxlength='30'>
 
-    <mat-chip-list #chipList class="example-chip-list">
-      <mat-chip *ngFor="let tag of item.value.tags" [selectable]="selectable"
-               [removable]='true' (removed)="deleteTag(tag)">
-        <div class="tag-name"> {{tag}}</div>
-        <ion-icon matChipRemove name="close-circle-outline"></ion-icon>
-      </mat-chip>
-    </mat-chip-list>
-</ion-content>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let tag of item.value.tags" [selectable]="selectable"
+                 [removable]='true' (removed)="deleteTag(tag)">
+          <div class="tag-name"> {{tag}}</div>
+          <ion-icon matChipRemove name="close-circle-outline"></ion-icon>
+        </mat-chip>
+      </mat-chip-list>
+
+  </ion-content>
 </div>

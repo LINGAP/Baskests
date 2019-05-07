@@ -5,24 +5,24 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AboutUsPage } from './about-us.page';
+import { PantryTabPage } from './pantry-tab.page';
 import { ComponentsModule } from '../components/components.module'
 
 const routes: Routes = [
   {
     path: '',
-    component: AboutUsPage
+    component: PantryTabPage
   }
 ];
 
 @NgModule({
   imports: [
-    ComponentsModule,
     CommonModule,
+    ComponentsModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AboutUsPage]
+  declarations: [PantryTabPage]
 })
-export class AboutUsPageModule {}
+export class PantryTabPageModule {}

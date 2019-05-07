@@ -25,26 +25,25 @@ export class SearchBarComponent implements OnInit {
 
   //delete selected items
   async delete(){
-    const alert = await this.alertController.create({
-     header: 'Confirm!',
-     message: 'Delete the selected items?',
-     buttons: [{
-         text: 'Confirm',
-         role:'confirm',
-         cssClass: 'secondary',
-         handler: () => {
-           this.itemData.delete(this.page);
+      const alert = await this.alertController.create({
+       header: 'Confirm!',
+       message: 'Delete the selected items?',
+       buttons: [{
+           text: 'Confirm',
+           role:'confirm',
+           cssClass: 'secondary',
+           handler: () => {
+             this.itemData.delete(this.page);
+           }
+         },
+         {
+           text: 'Cancel',
+           role: 'cancel',
+           cssClass: 'secondary',
          }
-       },
-       {
-         text: 'Cancel',
-         role: 'cancel',
-         cssClass: 'secondary',
-       }
-     ]
-   });
-   await alert.present();
-
+       ]
+     });
+     await alert.present();
    }
 
    move(){
@@ -56,6 +55,7 @@ export class SearchBarComponent implements OnInit {
    }
 
    undo(){
+     // <!-- <ion-col size='2'><ion-button [disabled]='((!itemData.undoList)||(itemData.undoPage!=1))'  (click)='undo()' fill="clear" color="dark"><ion-icon name="undo" size='large' ></ion-icon></ion-button></ion-col> -->
      this.itemData.__undo();
    }
 

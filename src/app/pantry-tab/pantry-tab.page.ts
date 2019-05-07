@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController} from '@ionic/angular';
 import { ItemDataService } from '../services/item-data.service'
-import { ComboDetailComponent } from '../components/combo-detail/combo-detail.component'
+
 import { trigger, state, style, animate, transition } from '@angular/animations';
 @Component({
-  selector: 'app-about-us',
-  templateUrl: './about-us.page.html',
-  styleUrls: ['./about-us.page.scss'],
+  selector: 'app-pantry-tab',
+  templateUrl: './pantry-tab.page.html',
+  styleUrls: ['./pantry-tab.page.scss'],
   animations: [//https://www.joshmorony.com/animating-from-the-void-enter-and-exit-animations-in-ionic/
     //https://www.joshmorony.com/twitter-style-heart-like-animation-with-angular-animations-in-ionic/
     trigger('itemState', [
@@ -17,8 +17,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     ])
     ]
 })
+export class PantryTabPage implements OnInit {
 
-export class AboutUsPage implements OnInit {
   ngOnInit() {
   }
 
@@ -32,22 +32,5 @@ export class AboutUsPage implements OnInit {
    trackByListType(index:number,item){
      return item.key+item.value.list;
    }
-
-
-  // async createDish(){
-  //    const modal = await this.modalController.create({
-  //     component: ComboDetailComponent,
-  //     cssClass: 'combo-detail-modal'
-  //    });
-  //    modal.onDidDismiss().then((data)=>{
-  //      if(data.role=='save'){
-  //        console.log(data.data.materials)
-  //        // this.itemData.addNewItem(0,data.data.newItem,data.data.date,data.data.tagArray);
-  //        // this.newItem='';
-  //      }
-  //    });
-  //    return await modal.present();
-  //  }
-
 
 }
