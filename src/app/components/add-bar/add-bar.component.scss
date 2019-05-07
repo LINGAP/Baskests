@@ -1,27 +1,28 @@
-:host-context(.md){
-
-  ion-toolbar{
-    height: 13%;
-    margin-right: 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding:10px;
-  }
-  ion-toolbar ion-icon{
-    height: 100%;
-    width: 5vh;
-  }
-}
 // idea for using :host-context from
 // https://ionicthemes.com/tutorials/about/ionic-4-tutorial-mastering-web-components-in-ionic-4
 
-:host-context(.ios){
+// :host-context(.md){
+//
+//   ion-toolbar{
+//     height: 10%;
+//     margin-right: 0;
+//     position: relative;
+//     bottom: 0;
+//     width: 100%;
+//     padding:10px;
+//   }
+//   ion-toolbar ion-icon{
+//     height: 100%;
+//     width: 5vh;
+//   }
+// }
+
+// :host-context(.ios){
   ion-toolbar{
-    height: 10%;
+    // height: 5%;
     margin-right: 0;
-    position: fixed;
-    bottom: 10vh;
+    position: relative;
+    bottom: 0;
     width: 100%;
     padding:10px;
   }
@@ -35,4 +36,4 @@
     margin-top: 3vh;
   }
 
-}
+// }
