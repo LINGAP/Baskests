@@ -27,7 +27,7 @@ export class ExpandableDetailComponent implements OnInit {
 
      // Add tag
      if ((value || '').trim()) {
-         this.itemData.updateItem(this.item.key,null,value);
+         this.itemData.updateItem(this.item,null,value);
      }
 
      if (input) {
@@ -37,7 +37,7 @@ export class ExpandableDetailComponent implements OnInit {
   }
 
   deleteTag(tag){
-    this.itemData.updateItem(this.item.key,null,null,tag);
+    this.itemData.updateItem(this.item,null,null,tag);
   }
 
 }
