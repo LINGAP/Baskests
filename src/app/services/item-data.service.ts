@@ -64,6 +64,7 @@ export class ItemDataService {
         return key;
       }
     }
+    return null;
   }
 
   //Making sure at most one item expands at a time
