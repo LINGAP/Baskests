@@ -13,8 +13,8 @@ export class ItemDataService {
   undoPage:number;
 
   constructor(public storage: Storage) {
-      // this.storage.clear();
-      this.shoppingList= {};
+      this.storage.clear();
+      this.shoppingList= [];
       this.undoList=false;
       this.undoPage=-1;
       this.storage.get('shoppingList').then((val)=>{
