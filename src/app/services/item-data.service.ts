@@ -14,7 +14,7 @@ export class ItemDataService {
   count:number;//keep track of total number of items, serves as the key for next item.
 
   constructor(public storage: Storage) {
-      this.storage.clear();
+      // this.storage.clear();
       this.shoppingList= {};
       this.undoList=false;
       this.undoPage=-1;
