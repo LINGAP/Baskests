@@ -17,7 +17,6 @@ export class ItemDataService {
       this.shoppingList= {};
       this.undoList=false;
       this.undoPage=-1;
-      this.count = 0;
       this.storage.get('shoppingList').then((val)=>{
         if(val!=null){
           this.shoppingList=val;
