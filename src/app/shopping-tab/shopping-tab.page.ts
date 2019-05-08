@@ -17,7 +17,7 @@ import "hammerjs";
             animate('500ms ease-in'),
             style({transform: 'translateX(100%)'}),
         ]),
-    ])
+      ])
     ]
 })
 export class ShoppingTabPage implements OnInit {
@@ -52,13 +52,13 @@ export class ShoppingTabPage implements OnInit {
     }
   }
 
-  async swipeToHistory(key){
-    this.itemData.shoppingList[key].date= this.itemData.__updateDate();
-    this.itemData.__swipe(key,1);
+  async swipeToHistory(item){
+
+    item.date = this.itemData.__updateDate();
+    this.itemData.__swipe(item,1);
   }
 
   trackByListType(index:number,item:any){
-    return item.key+item.value.list;
+    return index+'.'+item.list;
   }
-
 }
