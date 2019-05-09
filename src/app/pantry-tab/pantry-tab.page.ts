@@ -17,13 +17,15 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     ]
 })
 export class PantryTabPage implements OnInit {
-
   ngOnInit() {
   }
 
   constructor(public itemData:ItemDataService){}
 
-
+    /**
+  * for item swipe
+  * @param {object} key - the item object
+  */
    swipeToshoppingList(key){
      this.itemData.__swipe(key,0);
    }

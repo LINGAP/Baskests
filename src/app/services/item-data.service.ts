@@ -5,9 +5,8 @@ import { Storage } from '@ionic/storage';
   providedIn: 'root'
 })
 export class ItemDataService {
-  //list = index of Tab: 0->shoppingList; 1->pantrylist
   shoppingList:any;
-  //{[key:string]:{name: newName, list:list, date:newDate,selected:false,expanding:false,tags:tags}}
+
   expandingItem:any={expanding:true};//dummy
   undoList:any;
   undoPage:number;
@@ -52,8 +51,6 @@ export class ItemDataService {
       this.displayDetail(this.shoppingList[key]);
     }
 
-    // console.log(this.shoppingList)
-
     this.storage.set('shoppingList',this.shoppingList);
   }
 
@@ -79,8 +76,6 @@ export class ItemDataService {
   //delete the selected items given list index
   delete(list:number){
     this.__validateList(list);
-    // this.undoList=Object.assign({},this.shoppingList);
-    // this.undoPage=list;
 
     let i=this.shoppingList.length-1;
     while(i>-1){
@@ -96,9 +91,6 @@ export class ItemDataService {
    //move selected items to another page given current page
   massMoveItem(curList:number){
      this.__validateList(curList);
-
-     // this.undoList=Object.assign({},this.shoppingList);
-     // this.undoPage=curList;
 
      for(var item of this.shoppingList){
 
@@ -180,16 +172,13 @@ export class ItemDataService {
 
    searchTag(list:number, searchText:string){
      this.storage.get('search'+list).then((val)=>{
-      // console.log('search'+list+':'+val)
        if(val!=null){
          searchText=val;
        }
-     }
-   )
+     })
 
      var searchTags = searchText.split(',');
-     searchTags=searchTags.filter(i=>i!=='');
-
+     searchTags=searchTags.filter(i=>i!=='');//filter out empty serch entries
 
      for (var key in this.shoppingList){//loop items
        var tags=this.shoppingList[key].tags;
@@ -206,7 +195,7 @@ export class ItemDataService {
          }
        }
 
-       if(((1<<(searchTags.length))-1)!=check){//if all target tags are hit, add this item
+       if(((1<<(searchTags.length))-1)!=check){//if all target tags are hit, show this item
          this.shoppingList[key].show=false;
        }else{
          this.shoppingList[key].show=true;
@@ -220,7 +209,6 @@ export class ItemDataService {
      }
 
      this.storage.set(list+'search', searchText);
-
    }
 
 

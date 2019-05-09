@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController} from '@ionic/angular';
 import { ItemDataService } from '../services/item-data.service'
-import { InputDetailComponent } from '../components/input-detail/input-detail.component'
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { Storage } from '@ionic/storage';
 
 import "hammerjs";
 @Component({
@@ -21,39 +19,18 @@ import "hammerjs";
     ]
 })
 export class ShoppingTabPage implements OnInit {
-  newItem:any;
+  newItem:string;
   searchText:string;
-  shownItems:{};
 
   ngOnInit() {
   }
 
-  constructor(public modalController:ModalController,public itemData:ItemDataService){
+  constructor(public itemData:ItemDataService){
     this.newItem='';
     this.searchText='';
-    this.shownItems = this.itemData.shoppingList;
-  }
-
-  async addNewItemDetail(newItem:string){
-    if(newItem!=''){
-      const modal = await this.modalController.create({
-       component: InputDetailComponent,
-       componentProps: { itemName:newItem },
-       cssClass: 'input-detail-modal'
-      });
-      modal.onDidDismiss().then((data)=>{
-        if(data.role=='save'){
-          this.itemData.addNewItem(0,newItem,data.data.date,data.data.tagArray);
-          this.newItem='';
-        }
-        this.newItem='';
-      });
-      return await modal.present();
-    }
   }
 
   async swipeToHistory(item){
-
     item.date = this.itemData.__updateDate();
     this.itemData.__swipe(item,1);
   }
