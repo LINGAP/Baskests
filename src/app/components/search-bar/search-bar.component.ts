@@ -70,7 +70,8 @@ export class SearchBarComponent implements OnInit {
 
    async openHelpPopup(){
      const helpModal = await this.modal.create({
-       component: HelpPopupComponent
+       component: HelpPopupComponent,
+       cssClass: 'help-popup-modal-css'
      });
      return await helpModal.present();
    }
