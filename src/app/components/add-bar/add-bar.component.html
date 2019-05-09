@@ -4,7 +4,7 @@
       <ion-input autocomplete="on"  autofocus="true" [(ngModel)]="newItem" (keyup.enter)='addNewItem()'></ion-input>
 
       <ion-button slot="end" color='primary' size='large' fill="clear" [disabled]='newItem==""' (click)="addNewItem()">
-        <ion-icon name="add-circle">
+        <ion-icon name="add-circle" color="primary">
         </ion-icon>
       </ion-button>
     </ion-item>
