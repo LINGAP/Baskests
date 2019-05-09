@@ -23,7 +23,7 @@ export class ItemComponent implements OnInit {
 
         setTimeout(() => { //https://forum.ionicframework.com/t/focusing-on-form-input-on-ionic-v4/142701/5
        this.myInput.setFocus();
-    }, 400);
+    }, 100);
 
   }
 
