@@ -5,7 +5,6 @@ import { ItemComponent } from './item/item.component'
 import { SearchBarComponent } from './search-bar/search-bar.component'
 import { ExpandableDetailComponent } from './expandable-detail/expandable-detail.component'
 import { AddBarComponent } from './add-bar/add-bar.component'
-import { InputDetailComponent } from './input-detail/input-detail.component'
 import { ComboDetailComponent } from './combo-detail/combo-detail.component'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HelpPopupComponent } from './help-popup/help-popup.component'
@@ -14,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 @NgModule({
-  declarations: [ExpandableDetailComponent, InputDetailComponent, ComboDetailComponent, ItemComponent, SearchBarComponent, AddBarComponent, HelpPopupComponent],
+  declarations: [ExpandableDetailComponent, ComboDetailComponent, ItemComponent, SearchBarComponent, AddBarComponent, HelpPopupComponent],
   imports: [
     CommonModule,
     IonicModule,
@@ -23,7 +22,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatIconModule,
     MatFormFieldModule,
   ],
-  exports:[ExpandableDetailComponent, InputDetailComponent, ComboDetailComponent,ItemComponent, SearchBarComponent, AddBarComponent, HelpPopupComponent],
-  entryComponents:[InputDetailComponent, ComboDetailComponent, SearchBarComponent, AddBarComponent, HelpPopupComponent]
+  exports:[ExpandableDetailComponent, ComboDetailComponent,ItemComponent, SearchBarComponent, AddBarComponent, HelpPopupComponent],
+  entryComponents:[ ComboDetailComponent, SearchBarComponent, AddBarComponent, HelpPopupComponent]
 })
 export class ComponentsModule { }
