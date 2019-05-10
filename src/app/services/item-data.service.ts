@@ -16,6 +16,14 @@ export class ItemDataService {
         }
       })
 
+      this.storage.get('expanding').then((val)=>{
+            console.log('expanding memory is '+val)
+        if(val != null){
+          console.log('here')
+          this.expandingItem=val;
+        }
+      })
+
   }
 
 
@@ -37,7 +45,6 @@ export class ItemDataService {
       if(key==null){
         key = this.shoppingList.length;
         this.shoppingList.push({name: newName, list:list, date: newDate,selected:false,expanding:false, tags:tags, show:true});
-
       }else{
         this.shoppingList[key].list = list;
       }
@@ -64,6 +71,8 @@ export class ItemDataService {
       this.expandingItem=item;
     }
     item.expanding=!item.expanding;
+
+    this.storage.set('expanding',this.expandingItem);
   }
 
   delete(list:number){
