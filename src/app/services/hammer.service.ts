@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HammerGestureConfig } from "@angular/platform-browser";
 
+//HammerJS is produced by https://hammerjs.github.io/ 
+
 @Injectable({
   providedIn: 'root'
 })
