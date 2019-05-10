@@ -7,9 +7,9 @@
         <ion-checkbox color='light' [(ngModel)]='item.selected'></ion-checkbox>
       </ion-col>
 
-      <ion-col size='6' (tap)='edit(item)'>
-        <span *ngIf='!item.editing' >{{item.name}}</span>
-        <ion-input #input *ngIf='item.editing' (keyup.enter)='save()' (ionBlur)='save()' [(ngModel)]='newName'  inputmode='text'></ion-input>
+      <ion-col size='6' (click)='edit(item)'>
+        <ion-label  *ngIf='!item.editing' >{{item.name}}</ion-label>
+        <ion-input  #input  *ngIf='item.editing' (keyup.enter)='save()' (ionBlur)='save()' [(ngModel)]='newName'  inputmode='text'></ion-input>
           </ion-col>
 
       <ion-col size='4' style='font-size: medium;'>

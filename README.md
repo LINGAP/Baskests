@@ -6,34 +6,20 @@ It is produced by Ling Ma, Meihua Pan, Madison Parrett, and Toshini Sharma.
 
 ## Installation
 
-Baskets was built based on the npm package manager.
-
-Before deploying the project, make sure you have all of the following dependencies installed and environmental setup done:
-[Ionic CLI](https://ionicframework.com/docs/installation/cli) and [Environmental Setup](https://ionicframework.com/docs/installation/environment)
-
-[Android](https://ionicframework.com/docs/installation/android)
-
-[iOS](https://ionicframework.com/docs/installation/ios)
-
 ###### Android
 
-In order to deploy Baskets to an Android device, run the following in the command line. This will ensure that a native version of the project exists if it doesn't already.
+- Make sure you have Ionic [installed](https://ionicframework.com/docs/installation/cli).
+- Make sure you have the Android [environment setup](https://ionicframework.com/docs/installation/android).
+- Run `ionic cordova prepare android` to ensure that a native version of the project exists if it doesn't already.
+- Run `ionic cordova run android --build` to deploy the app to a device
 
-```sh
-ionic cordova prepare android
-```
-
-To deploy the app to a device, run
-
-```sh
-ionic cordova run android --build
-```
 
 ###### iOS
 
-In order to deploy Baskets to an iOS device, first make sure you have [Xcode](https://developer.apple.com/xcode/) installed.
-
-Open the app's **platforms/ios** directory in Xcode. Select a device or target simulator and run. If security permission is needed, go to **Settings > General > Device Management** on the phone to trust the developer account.
+- Make sure you have [Xcode](https://developer.apple.com/xcode/) installed and [set up](https://ionicframework.com/docs/installation/ios).
+- Open the app's **platforms/ios** directory in Xcode.
+- Select a device or target simulator and run.
+- If security permission is needed, go to **Settings > General > Device Management** on the phone to trust the developer account.
 
 
 ## For Developers
