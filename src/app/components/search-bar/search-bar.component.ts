@@ -24,8 +24,6 @@ export class SearchBarComponent implements OnInit {
     })
   }
 
-
-  //delete selected items
   async delete(){
       const alert = await this.alertController.create({
        header: 'Confirm!',
@@ -56,11 +54,6 @@ export class SearchBarComponent implements OnInit {
 
    searchTag(){
       this.itemData.searchTag(this.page,this.searchText.trim());
-   }
-
-   undo(){
-     // <!-- <ion-col size='2'><ion-button [disabled]='((!itemData.undoList)||(itemData.undoPage!=1))'  (click)='undo()' fill="clear" color="dark"><ion-icon name="undo" size='large' ></ion-icon></ion-button></ion-col> -->
-     this.itemData.__undo();
    }
 
    buttonIcon(){
