@@ -1,7 +1,7 @@
 # Baskets
 
 Baskets is an [Ionic](https://ionicframework.com/) app built to make creating and using shopping lists easier.
-It is produced by Ling Ma, Meihua Pan, Madison Parrett, and Toshini Sharma. 
+It is produced by Ling Ma, Meihua Pan, Madison Parrett, and Toshini Sharma.
 
 
 ## Installation
@@ -10,10 +10,12 @@ Baskets was built based on the npm package manager.
 
 Before deploying the project, make sure you have all of the following dependencies installed and environmental setup done:
 [Ionic CLI](https://ionicframework.com/docs/installation/cli) and [Environmental Setup](https://ionicframework.com/docs/installation/environment)
+
 [Android](https://ionicframework.com/docs/installation/android)
+
 [iOS](https://ionicframework.com/docs/installation/ios)
 
-**Android**
+######Android######
 
 In order to deploy Baskets to an Android device, run the following in the command line. This will ensure that a native version of the project exists if it doesn't already.
 
@@ -27,7 +29,16 @@ To deploy the app to a device, run
 ionic cordova run android --build
 ```
 
-**iOS**
+######iOS######
+
+In order to deploy Baskets to an iOS device, first make sure you have [Xcode](https://developer.apple.com/xcode/) installed.
+
+Open the app's **platforms/ios** directory in Xcode. Select a device or target simulator and run. If security permission is needed, go to **Settings > General > Device Management** on the phone to trust the developer account.
+
+
+## For Developers
+
+
 
 ## References
 
