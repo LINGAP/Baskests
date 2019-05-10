@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemDataService } from '../services/item-data.service'
-
 import { trigger, state, style, animate, transition } from '@angular/animations';
+
 @Component({
   selector: 'app-pantry-tab',
   templateUrl: './pantry-tab.page.html',
@@ -22,15 +22,11 @@ export class PantryTabPage implements OnInit {
 
   constructor(public itemData:ItemDataService){}
 
-    /**
-  * for item swipe
-  * @param {object} key - the item object
-  */
-   swipeToshoppingList(key){
+  swipeToshoppingList(key){
      this.itemData.__swipe(key,0);
    }
 
-   trackByListType(index:number,item){
+  trackByListType(index:number,item){
      return index+'.'+item.list;
    }
 
