@@ -15,7 +15,7 @@ Before deploying the project, make sure you have all of the following dependenci
 
 [iOS](https://ionicframework.com/docs/installation/ios)
 
-######Android######
+###### Android
 
 In order to deploy Baskets to an Android device, run the following in the command line. This will ensure that a native version of the project exists if it doesn't already.
 
@@ -29,7 +29,7 @@ To deploy the app to a device, run
 ionic cordova run android --build
 ```
 
-######iOS######
+###### iOS
 
 In order to deploy Baskets to an iOS device, first make sure you have [Xcode](https://developer.apple.com/xcode/) installed.
 
