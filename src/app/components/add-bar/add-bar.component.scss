@@ -1,25 +1,5 @@
-// idea for using :host-context from
-// https://ionicthemes.com/tutorials/about/ionic-4-tutorial-mastering-web-components-in-ionic-4
-
-// :host-context(.md){
-//
-//   ion-toolbar{
-//     height: 10%;
-//     margin-right: 0;
-//     position: relative;
-//     bottom: 0;
-//     width: 100%;
-//     padding:10px;
-//   }
-//   ion-toolbar ion-icon{
-//     height: 100%;
-//     width: 5vh;
-//   }
-// }
-
-// :host-context(.ios){
   ion-toolbar{
-    // height: 10vh;
+
     margin-right: 0;
     position: relative;
     bottom: 0;
@@ -31,6 +11,3 @@
     height: 30px;
     width: 30px;
   }
-
-
-// }

@@ -26,6 +26,8 @@ export class PantryTabPage implements OnInit {
      this.itemData.__swipe(key,0);
    }
 
+  //Ensures that items will only be re-rendered if its index or item list or change,
+  // which means that we aren't constantly having to reload items.
   trackByListType(index:number,item){
      return index+'.'+item.list;
    }
