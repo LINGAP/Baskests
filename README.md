@@ -1,6 +1,7 @@
 # Baskets
 
 Baskets is an [Ionic](https://ionicframework.com/) app built to make creating and using shopping lists easier.
+
 It is produced by Ling Ma, Meihua Pan, Madison Parrett, and Toshini Sharma.
 
 
@@ -16,7 +17,7 @@ It is produced by Ling Ma, Meihua Pan, Madison Parrett, and Toshini Sharma.
 
 - Make sure you have the [Android environment setup](https://ionicframework.com/docs/installation/android).
 - Run `ionic cordova prepare android` to ensure that a native version of the project exists if it doesn't already.
-- Run `ionic cordova run android --build` to deploy the app to a device
+- Run `ionic cordova run android --build` to deploy the app to a device.
 
 ###### iOS
 
