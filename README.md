@@ -4,31 +4,29 @@ Baskets is an [Ionic](https://ionicframework.com/) app built to make creating an
 It is produced by Ling Ma, Meihua Pan, Madison Parrett, and Toshini Sharma.
 
 
+## Before You Start
+- Make sure you have [Ionic](https://ionicframework.com/docs/installation/cli) installed. If not, run `npm install -g ionic`.
+- Make sure you have [Cordova](https://cordova.apache.org/) installed. If not, run `npm install -g cordova`.
+- Download or clone the Baskets repository.
+
+
 ## Installation for Users
-
-###### iOS
-
-- Make sure you have [Xcode](https://developer.apple.com/xcode/) installed and [set up](https://ionicframework.com/docs/installation/ios).
-- Open **Baskets/platforms/ios** directory in Xcode.
-- Select a device or target simulator and run.
-- If security permission is needed, go to **Settings > General > Device Management** on the phone to trust the developer account.
 
 ###### Android
 
-- Make sure you have [Ionic](https://ionicframework.com/docs/installation/cli) installed. If not, run `npm install -g ionic`.
-- Make sure you have [Cordova](https://cordova.apache.org/) installed. If not, run `npm install -g cordova`.
 - Make sure you have the [Android environment setup](https://ionicframework.com/docs/installation/android).
 - Run `ionic cordova prepare android` to ensure that a native version of the project exists if it doesn't already.
 - Run `ionic cordova run android --build` to deploy the app to a device
 
+###### iOS
+
+- Make sure you have [Xcode](https://developer.apple.com/xcode/) installed and [set up](https://ionicframework.com/docs/installation/ios).
+- Run `ionic cordova prepare ios` to ensure that a native version of the project exists if it doesn't already.
+- Open **Baskets/platforms/ios** directory in Xcode.
+- Select a device or target simulator and run.
+- If security permission is needed, go to **Settings > General > Device Management** on the phone to trust the developer account.
 
 ## For Developers
-
-###### To build the entire application from source code:
-
- - Make sure you have [Ionic](https://ionicframework.com/docs/installation/cli) installed. If not, run `npm install -g ionic`.
- - Make sure you have [Cordova](https://cordova.apache.org/) installed. If not, run `npm install -g cordova`.
- - Download or clone the Baskets repository.
 
 ###### To test and run the app:
 
