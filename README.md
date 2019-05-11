@@ -17,13 +17,13 @@ It is produced by Ling Ma, Meihua Pan, Madison Parrett, and Toshini Sharma.
 ###### Android
 
 - Make sure you have the [Android environment setup](https://ionicframework.com/docs/installation/android).
-- Run `ionic cordova prepare android` to ensure that a native version of the project exists if it doesn't already.
+- Go to the app's directory, run `ionic cordova prepare android` to ensure that a native version of the project exists if it doesn't already.
 - Run `ionic cordova run android --build` to deploy the app to a device.
 
 ###### iOS
 
 - Make sure you have [Xcode](https://developer.apple.com/xcode/) installed and [set up](https://ionicframework.com/docs/installation/ios).
-- Run `ionic cordova prepare ios` to ensure that a native version of the project exists if it doesn't already.
+- Go to the app's directory, run `ionic cordova prepare ios` to ensure that a native version of the project exists if it doesn't already.
 - Open **Baskets/platforms/ios** directory in Xcode.
 - Select a device or target simulator and run.
 - If security permission is needed, go to **Settings > General > Device Management** on the phone to trust the developer account.
