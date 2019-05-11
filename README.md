@@ -6,7 +6,7 @@ It is produced by Ling Ma, Meihua Pan, Madison Parrett, and Toshini Sharma.
 
 
 ## Before You Start
-- Make sure you have the latest version of **Node.js** and **npm** are installed. If not, download [here](https://nodejs.org/en/download/).
+- Make sure you have the latest version of [Node.js and npm](https://ionicframework.com/docs/installation/environment) are installed. If not, download [here](https://nodejs.org/en/download/).
 - Make sure you have [Ionic](https://ionicframework.com/docs/installation/cli) installed. If not, run `npm install -g ionic`.
 - Make sure you have [Cordova](https://cordova.apache.org/) installed. If not, run `npm install -g cordova`.
 - Download or clone the Baskets repository.
