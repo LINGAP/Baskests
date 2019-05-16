@@ -17,9 +17,7 @@ export class ItemDataService {
       })
 
       this.storage.get('expanding').then((val)=>{
-            console.log('expanding memory is '+val)
         if(val != null){
-          console.log('here')
           this.expandingItem=val;
         }
       })

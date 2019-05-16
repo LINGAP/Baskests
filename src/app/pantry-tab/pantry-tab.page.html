@@ -3,7 +3,7 @@
 </ion-header>
 
 <ion-content>
-  <!--actual list-->
+  <!--this is the actual list-->
   <ion-list>
     <li  *ngFor='let item of itemData.shoppingList;trackBy:trackByListType' @itemState  (swipeleft)='swipeToshoppingList(item)'>
       <app-item [page]='1' [item]='item' ></app-item>
